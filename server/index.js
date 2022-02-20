@@ -1,19 +1,41 @@
-const express = require("express"); // Setting up Express.
-const app = express(); // Init Express as "app"
-const cors = require("cors"); // Setting up CORS for local developemnt.
-const mongoose = require("mongoose"); // Setting up mongoose MongoDB.
-const User = require("./models/user.model"); // Our User Mongoose Model
-const jwt = require("jsonwebtoken"); // Setting up JSON Web Token for user Auths. Used to determine if a user is legit.
-const bcrypt = require('bcryptjs'); // Used for hashing things a DB.
+// import User from "./models/user.model.js" // Our User Mongoose Model
 
-// Sets corrects headers on the response so we can use CORS on localhost. (Probably not needed in Production.)
-app.use(cors());
+import jwt from "jsonwebtoken" // Setting up JSON Web Token for user Auths. Used to determine if a user is legit.
+import bcrypt from "bcryptjs" // Used for hashing things a DB.
+import express from 'express'; 
+// import bodyParser from 'body-parser';
+import mongoose from 'mongoose' // Setting up mongoose MongoDB.
+import cors from 'cors'; // Setting up CORS for local developemnt.
+
+import testRoutes from './routes/tests.js';
+
+const app = express(); // Init Express as "app"
 
 // Parses any request body as a JSON by default.
 app.use(express.json());
 
+// Sets corrects headers on the response so we can use CORS on localhost. (Probably not needed in Production.)
+app.use(cors());
+
+// Every route in the /rouets/tests.js routes will start with /tests and append with whatever urls are in the /routes/tests.js
+app.use('/tests', testRoutes);
+
+
+const CONNECTION_URL = "mongodb+srv://nx60nwb1yq6VofZZ:swcqmUFo0OSfWnU3@cluster0.21cjg.mongodb.net/project490db?retryWrites=true&w=majority"
+const PORT = process.env.PORT || 5000; // Heroku will automatically populate this process.env.PORT
+
 // Connect to the DB.
-mongoose.connect("mongodb+srv://nx60nwb1yq6VofZZ:swcqmUFo0OSfWnU3@cluster0.21cjg.mongodb.net/project490db?retryWrites=true&w=majority");
+mongoose.connect( CONNECTION_URL , { useNewUrlParser: true, useUnifiedTopology: true} )
+   .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
+   .catch((error) => console.log(error.message));
+
+// mongoose.set('useFindAndModify', false);
+
+
+
+
+
+
 
 // Routes
 app.post("/api/register", async (req, res) => {
@@ -99,6 +121,6 @@ app.get('/api/quote', async (req, res) => {
    }
 })
 
-app.listen(1337, () => {
-   console.log("Server Started on 1337");
-});
+// app.listen(1337, () => {
+//    console.log("Server Started on 1337");
+// });
