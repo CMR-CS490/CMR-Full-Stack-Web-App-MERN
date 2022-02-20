@@ -1,11 +1,18 @@
 import React from "react";
+
+// Components
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
-import Homepage from "./pages/Homepage";
+import Homepage from "./pages/Homepage/Homepage";
+
+// Material UI Styles
+// import useStyles from './pages/Homepage/styles'
 
 const App = () => {
+   // const classes = useStyles();
+
    return (
       <div>
          <div>
