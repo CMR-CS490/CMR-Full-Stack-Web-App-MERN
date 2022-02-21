@@ -10,6 +10,8 @@ import Form from "../../components/Form/Form";
 
 // Images
 import exam from "../../images/exam.png";
+import SideNav from "../../components/SideNav/SideNav";
+import TopNav from "../../components/TopNav/TopNav";
 
 
 const Homepage = () => {
@@ -22,6 +24,8 @@ const Homepage = () => {
 
    return (
       <div>
+         <TopNav />
+         <SideNav />
          <Container>
             <AppBar  position="static" color="inherit">
                <Typography variant="h2" align="center">
