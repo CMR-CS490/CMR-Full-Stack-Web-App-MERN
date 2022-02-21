@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 /*
     username: Unique username for this user.
@@ -8,20 +8,17 @@ const mongoose = require("mongoose");
     role: Teacher/Student.
 */
 
-const User = new mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
     username: { type: String, required: true, unique: true },
-    first_name: {type: String, required: true},
-    last_name: {type: String, required: true},
     password: { type: String, required: true },
     role: {type: String, required: true},
-    quote: { type: String },
     // role: [{student: Boolean, teacher: Boolean}]
   },
   { collection: "user-data" }
 );
 
 // Register our schema with mongoose. This model can be accessed anywhere in our code my calling: mongoose.model('User')
-const model = mongoose.model('UserData', User)
+const User = mongoose.model('UserData', userSchema)
 
-module.exports = model
+export default User;
