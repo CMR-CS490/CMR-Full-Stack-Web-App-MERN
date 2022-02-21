@@ -16,7 +16,7 @@ const Register = () => {
    // Send the username and password to the Backend Server after the user clicks Submit.
    async function registerUser(event) {
       event.preventDefault(); // Disable redirection after Submit button is pressed.
-
+      console.log(role);
       if((username.length * password.length) === 0) {
          document.getElementsByClassName("error")[0].innerHTML = "Please enter a username and password.";
          document.getElementsByClassName("error")[0].style.display = "block";
@@ -25,7 +25,7 @@ const Register = () => {
          document.getElementsByClassName("error")[0].innerHTML = "Passwords do not match";
          document.getElementsByClassName("error")[0].style.display = "block";
          return;
-      } else if (role !== "teacher" || role !== "student") {
+      } else if (role !== "teacher" && role !== "student") {
          document.getElementsByClassName("error")[0].innerHTML = "Please select a role";
          document.getElementsByClassName("error")[0].style.display = "block";
          return;
