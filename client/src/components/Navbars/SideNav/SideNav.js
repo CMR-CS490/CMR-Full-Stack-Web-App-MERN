@@ -10,7 +10,7 @@ const SideNav = () => {
         <div className="sidenav-container">
 
             <MenuIcon className="hamburger" />
-            <a href="/dashboard" className="icon-block">
+            <a href="/homepage" className="icon-block">
                 <span className="icon-caption">Dashboard</span>
                 <HomeIcon className="icon" />
             </a>

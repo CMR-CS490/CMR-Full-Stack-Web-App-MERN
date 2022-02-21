@@ -6,7 +6,7 @@ import Test from "./Test/Test";
 
 import "./Tests.css";
 
-const Tests = () => {
+const Tests = ({currentId, setCurrentId }) => {
    const tests = useSelector((state) => state.tests); // tests are from /reducers/index.js
 
    console.log(tests);
@@ -17,7 +17,7 @@ const Tests = () => {
       <Grid container alignItems="stretch" spacing={3}>
          {tests.map((test) => (
             <Grid key={test._id} item xs={12} sm={6}>
-               <Test test={test} />
+               <Test test={test} setCurrentId={setCurrentId} />
             </Grid>
          ))}
       </Grid>

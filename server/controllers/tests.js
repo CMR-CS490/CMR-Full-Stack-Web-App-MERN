@@ -31,11 +31,11 @@ export const createTest = async (req, res) => {
 
 export const updateTest = async (req, res) => {
    const { id: _id } = req.params; // id is got from URL.
-   const test = req.body; // Send from the frontend form.
+   const test = req.body; // Sent from the frontend form.
 
    if (!(mongoose.Types.ObjectId.isValid(_id))) return res.status(404).send('No Test with that id');
 
-   const updatedTest = await Test.findByIdAndUpdate(_id, post, { new: true });
+   const updatedTest = await Test.findByIdAndUpdate(_id, { ...test, _id }, { new: true });
 
    res.json(updateTest);
 }

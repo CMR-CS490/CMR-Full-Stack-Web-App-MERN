@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, AppBar, Typography, Grow, Grid } from "@mui/material";
 import { useDispatch } from "react-redux";
 
@@ -10,17 +10,19 @@ import Form from "../../components/Form/Form";
 
 // Images
 import exam from "../../images/exam.png";
-import SideNav from "../../components/SideNav/SideNav";
+import SideNav from "../../components/Navbars/SideNav/SideNav";
 import TopNav from "../../components/TopNav/TopNav";
 
 
 const Homepage = () => {
+   // States
+   const [currentId, setCurrentId] = useState(null);
 
    const dispatch = useDispatch();
 
    useEffect(() => {
       dispatch(getTests());
-   }, [dispatch]);
+   }, [currentId, dispatch]);
 
    return (
       <div>
@@ -37,10 +39,10 @@ const Homepage = () => {
                <Container>
                   <Grid container jusitfy="space-between" alignItems="strech" spacing="3">
                      <Grid item xs={12} sm={7}>
-                        <Tests />
+                        <Tests setCurrentId={setCurrentId} />
                      </Grid>
                      <Grid item xs={12} sm={4}>
-                        <Form />
+                        <Form currentId={currentId} setCurrentId={setCurrentId}  />
                      </Grid>
                   </Grid>
                </Container>

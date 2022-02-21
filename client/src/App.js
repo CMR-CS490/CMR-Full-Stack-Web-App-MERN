@@ -20,13 +20,13 @@ const App = () => {
                <Routes>
                   <Route path="/login" exact element={<Login />} />
                   <Route path="/register" exact element={<Register />} />
-                  <Route path="/" exact element={<Homepage />} />
+                  <Route path="/homepage" exact element={<Homepage />} />
                </Routes>
                <Link to="/login">Login</Link>
                <br />
                <Link to="/register">Register</Link>
                <br />
-               <Link to="/">Home</Link>
+               <Link to="/homepage">Home</Link>
             </BrowserRouter>
          </div>
          <div>

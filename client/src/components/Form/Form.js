@@ -4,7 +4,7 @@ import { TextField, Button, Typography, Paper } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import FileBase from "react-file-base64";
 
-import { createTest } from "../../actions/tests";
+import { createTest, updateTest } from "../../actions/tests";
 
 import "./Form.css";
 
@@ -12,7 +12,7 @@ const theme = {};
 
 // Get the current ID
 
-const Form = () => {
+const Form = ({ currentId, setCurrentId }) => {
    // States
    const [testData, setTestData] = useState({
       creator: "",
@@ -21,22 +21,37 @@ const Form = () => {
       description: "",
       selectedFile: "",
    });
-
-   // const test = useSelector((state) => (currentId ? state.test.find((message) => message._id === currentId) : null));
-
-   // useEffect(() => {
-   //    if (test) setTestData(test);
-   // }, [test])
+   const test = useSelector((state) => (currentId ? state.tests.find((t) => t._id === currentId) : null)); // Return one test with the matching id.
 
    const dispatch = useDispatch();
+
+   useEffect(() => {
+      if (test) setTestData(test);
+   }, [test]);
 
    const handleSubmit = (e) => {
       e.preventDefault();
 
-      dispatch(createTest(testData)); // Dispatch createTest from actions with our testData from our state.
+      // Updating a test with a ID.
+      if (currentId) {
+         dispatch(updateTest(currentId, testData));
+      } else {
+         // Creaing a test.
+         dispatch(createTest(testData));
+      }
+      clear();
    };
 
-   const clear = () => {};
+   const clear = () => {
+      setCurrentId(null);
+      setTestData({
+         creator: "",
+         title: "",
+         message: "",
+         description: "",
+         selectedFile: "",
+      });
+   };
 
    return (
       <Paper
@@ -56,7 +71,7 @@ const Form = () => {
                justifyContent: "center",
             }}
          >
-            <Typography variant="h6">Creating a Test</Typography>
+            <Typography variant="h6">{currentId ? "Editing" : "Creating"} a Test</Typography>
             <TextField
                name="title"
                variant="outlined"
