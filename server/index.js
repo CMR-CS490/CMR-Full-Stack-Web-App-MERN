@@ -8,7 +8,7 @@ import mongoose from 'mongoose' // Setting up mongoose MongoDB.
 import cors from 'cors'; // Setting up CORS for local developemnt.
 
 import testRoutes from './routes/tests.js';
-
+import User from './models/user.model.js';
 const app = express(); // Init Express as "app"
 
 // Parses any request body as a JSON by default.
@@ -22,7 +22,7 @@ app.use('/tests', testRoutes);
 
 
 const CONNECTION_URL = "mongodb+srv://nx60nwb1yq6VofZZ:swcqmUFo0OSfWnU3@cluster0.21cjg.mongodb.net/project490db?retryWrites=true&w=majority"
-const PORT = process.env.PORT || 5000; // Heroku will automatically populate this process.env.PORT
+const PORT = process.env.PORT || 5002; // Heroku will automatically populate this process.env.PORT
 
 // Connect to the DB.
 mongoose.connect( CONNECTION_URL , { useNewUrlParser: true, useUnifiedTopology: true} )
@@ -30,9 +30,6 @@ mongoose.connect( CONNECTION_URL , { useNewUrlParser: true, useUnifiedTopology: 
    .catch((error) => console.log(error.message));
 
 // mongoose.set('useFindAndModify', false);
-
-
-
 
 
 
@@ -45,8 +42,6 @@ app.post("/api/register", async (req, res) => {
       // Create the user in the MongoDB Database.
       await User.create({
          username: req.body.username,
-         first_name: req.body.first_name,
-         last_name: req.body.last_name,
          password: newPassword,
          role: req.body.role,
       });
@@ -66,7 +61,7 @@ app.post("/api/login", async (req, res) => {
       // password: req.body.password, Unhashed
    });
 
-   if(!user) { return {status: 'error', error: 'Invalid login' }}
+   if(!user) { return res.json({ status: "error", user: false });}
 
    const isPasswordValid = await bcrypt.compare(req.body.password, user.password)
 
@@ -74,52 +69,9 @@ app.post("/api/login", async (req, res) => {
       // Sign the token with a secret of the private key.
       const token = jwt.sign({ username: user.username }, "secret123");
 
-      return res.json({ status: "ok", user: token });
-   } else {
-      return res.json({ status: "error", user: false });
+      return res.json({ status: "ok", user: token, role: user.role });
    }
 });
-
-// Creation of the Quote
-app.post('/api/quote', async (req, res) => {
-   
-   // Perform authentication first.
-   const token = req.headers['x-access-token']
-
-   try {
-      // Verfies that the token is correct.
-      const decoded = jwt.verify(token, 'secret123')
-      const username = decoded.username;
-
-      // Find the user with the unique username found in the JWT token.
-      const user = await User.updateOne({ username: username }, { $set: { quote: req.body.quote }})
-      return res.json({ status: 'ok' })
-
-   } catch (error) {
-      console.log(error)
-      res.json({ status: 'error', error: 'invalid token' })
-   }
-})
-
-app.get('/api/quote', async (req, res) => {
-   
-   // Perform authentication first.
-   const token = req.headers['x-access-token']
-
-   try {
-      // Verfies that the token is correct.
-      const decoded = jwt.verify(token, 'secret123')
-      const username = decoded.username;
-
-      // Find the user with the unique username found in the JWT token.
-      const user = await User.findOne({ username: username })
-      return res.json({ status: 'ok', username: user.username, quote: user.quote })
-
-   } catch (error) {
-      console.log(error)
-      res.json({ status: 'error', error: 'invalid token' })
-   }
-})
 
 // app.listen(1337, () => {
 //    console.log("Server Started on 1337");
