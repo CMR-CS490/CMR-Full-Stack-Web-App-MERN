@@ -16,3 +16,5 @@ const testSchema = mongooose.Schema({
 const Test = mongooose.model('Test', testSchema);
 
 export default Test
+
+// Question should have a point system next to each question object ID

@@ -14,7 +14,7 @@ export const getTests = () => async (dispatch) => {
 
 export const createTest = (test) => async (dispatch) => {
    try {
-      const { data } = await api.createTests(test);
+      const { data } = await api.createTest(test);
 
       dispatch({ type: "CREATE", payload: data });
    } catch (error) {

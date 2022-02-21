@@ -1,3 +1,5 @@
+import mongoose from 'mongoose';
+
 import Test from "../models/test.js";
 
 export const getTests = async (req, res) => {
@@ -14,7 +16,7 @@ export const getTests = async (req, res) => {
    }
 };
 
-export const createTests = async (req, res) => {
+export const createTest = async (req, res) => {
    const test = req.body;
 
    // Create a new Test object from req.body's data.
@@ -26,3 +28,14 @@ export const createTests = async (req, res) => {
       res.status(409).json({ message: error.message });
    }
 };
+
+export const updateTest = async (req, res) => {
+   const { id: _id } = req.params; // id is got from URL.
+   const test = req.body; // Send from the frontend form.
+
+   if (!(mongoose.Types.ObjectId.isValid(_id))) return res.status(404).send('No Test with that id');
+
+   const updatedTest = await Test.findByIdAndUpdate(_id, post, { new: true });
+
+   res.json(updateTest);
+}
