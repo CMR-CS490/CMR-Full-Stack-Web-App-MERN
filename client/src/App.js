@@ -15,27 +15,6 @@ const App = () => {
    // const classes = useStyles();
 
    return (
-<<<<<<< HEAD
-      <div>
-         <div>
-            <BrowserRouter>
-               <Routes>
-                  <Route path="/login" exact element={<Login />} />
-                  <Route path="/register" exact element={<Register />} />
-                  <Route path="/homepage" exact element={<Homepage />} />
-               </Routes>
-               <Link to="/login">Login</Link>
-               <br />
-               <Link to="/register">Register</Link>
-               <br />
-               <Link to="/homepage">Home</Link>
-            </BrowserRouter>
-         </div>
-         <div>
-            {/* <Dashboard></Dashboard> */}
-         </div>
-      </div>
-=======
 
          <BrowserRouter>
             <Routes>
@@ -47,7 +26,6 @@ const App = () => {
      
 
       
->>>>>>> main
    );
 };
 
