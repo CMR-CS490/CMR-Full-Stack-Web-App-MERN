@@ -5,3 +5,4 @@ const url = 'http://localhost:5002/tests'; // Returns all the tests in the DB.
 
 export const fetchTests = () => axios.get(url);
 export const createTest = (newTest) => axios.post(url, newTest);
+export const updateTest = (id, updatedTest) => axios.patch(`${url}/${id}`, updatedTest) 
