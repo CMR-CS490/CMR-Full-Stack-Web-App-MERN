@@ -21,3 +21,13 @@ export const createTest = (test) => async (dispatch) => {
        console.log(error.message);
    }
 };
+
+export const updateTest = (id, test) => async (dispatch) => {
+   try {
+      const { data } = await api.updateTest(id, test);
+
+      dispatch({ type: 'UPDATE', payload: data});
+   } catch (error) {
+      console.log(error);
+   }
+}
