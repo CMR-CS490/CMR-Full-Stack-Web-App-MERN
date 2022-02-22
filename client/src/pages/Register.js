@@ -47,7 +47,7 @@ const Register = () => {
       console.log({ data });
 
       if (data.status === "ok") {
-         history.push("/login");
+         window.location.href = '/login'
       }
    }
 

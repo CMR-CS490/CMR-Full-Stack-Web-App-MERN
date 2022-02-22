@@ -20,19 +20,25 @@ const Login = () => {
       });
 
       const data = await response.json();
-      console.log(data);
       // Check if the user exists
       if(data.user) {
         localStorage.setItem('token', data.user);
         localStorage.setItem('role', data.role);
-        alert('Login successful')
+        localStorage.setItem('username', data.username);
         //window.location.href = '/dashboard'
       } else {
          document.getElementsByClassName("error")[0].innerHTML = "Invalid Credentials";
          document.getElementsByClassName("error")[0].style.display = "block";
+         return;
       }
-      // console.log(data);
+
+      if(data.role === "student") {
+         window.location.href = '/student'
+      } else if (data.role === "teacher") {
+           window.location.href = '/teacher'
+      }
    }
+   
 
    return (
          <div className="wrapper">
