@@ -1,0 +1,18 @@
+.homepage-container {
+    width: calc(100vw - 70px);
+    position: relative;
+    top: 70px;
+    left: 70px;
+}
+
+.test-title {
+    width: 128px;
+}
+
+.header {
+    padding: 30px;
+    text-align: center;
+    background: clear;
+    color: white;
+    font-size: 30px;
+  }

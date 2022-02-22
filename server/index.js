@@ -65,11 +65,13 @@ app.post("/api/login", async (req, res) => {
 
    const isPasswordValid = await bcrypt.compare(req.body.password, user.password)
 
-   if (user) {
+   if (user && isPasswordValid) {
       // Sign the token with a secret of the private key.
       const token = jwt.sign({ username: user.username }, "secret123");
 
-      return res.json({ status: "ok", user: token, role: user.role });
+      return res.json({ status: "ok", user: token, role: user.role, username: user.username });
+   } else {
+      return res.json({ status: "error", user: false });
    }
 });
 

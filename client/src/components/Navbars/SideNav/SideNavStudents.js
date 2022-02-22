@@ -9,19 +9,14 @@ const SideNav = () => {
         <div className="sidenav-container">
 
             {/* <MenuIcon className="hamburger" /> */}
-            <a href="/teacher" className="icon-block">
+            <a href="/student" className="icon-block">
                 <span className="icon-caption">Dashboard</span>
                 <HomeIcon className="icon" />
             </a>
-            <a href="/teacher/tests" className="icon-block">
+            <a href="/student/assignments" className="icon-block">
                 <span className="icon-caption">Assignment</span>
                 <AssignmentIcon className="icon" />
-            </a>
-            <a href="/teacher/questions" className="icon-block">
-                <span className="icon-caption">Questions</span>
-                <CreateIcon className="icon" />
-            </a>
-            
+            </a>        
         </div>
     )
 }
