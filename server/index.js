@@ -8,6 +8,7 @@ import mongoose from 'mongoose' // Setting up mongoose MongoDB.
 import cors from 'cors'; // Setting up CORS for local developemnt.
 
 import testRoutes from './routes/tests.js';
+import questionRoutes from './routes/questions.js';
 import User from './models/user.model.js';
 const app = express(); // Init Express as "app"
 
@@ -19,7 +20,7 @@ app.use(cors());
 
 // Every route in the /rouets/tests.js routes will start with /tests and append with whatever urls are in the /routes/tests.js
 app.use('/tests', testRoutes);
-
+app.use('/api/questions', questionRoutes);
 
 const CONNECTION_URL = "mongodb+srv://nx60nwb1yq6VofZZ:swcqmUFo0OSfWnU3@cluster0.21cjg.mongodb.net/project490db?retryWrites=true&w=majority"
 const PORT = process.env.PORT || 5002; // Heroku will automatically populate this process.env.PORT

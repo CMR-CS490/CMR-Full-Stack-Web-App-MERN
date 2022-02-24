@@ -4,9 +4,9 @@ import {Card, CardActions, CardContent, Checkbox, Divider, Typography} from '@mu
 import './Question.css';
 import {borderRight} from '@mui/system';
 
-const Question = () => {
+const Question = (props) => {
 	return (
-		<Card display='flex' allignItems='flex-start' elevation='5'>
+		<Card className = "question" display='flex' allignItems='flex-start' elevation='5'>
 			<CardActions sx={{display: 'inline-flex', width:"3%"}}>
 				<div className='checkbox-container'>
 					<Checkbox
@@ -20,19 +20,19 @@ const Question = () => {
 				</div>
 			</CardActions>
 			<CardContent sx={{display: 'inline-flex', justifyContent:"center", width:"92%"}}>
-				<Typography variant='h5'>Question Desciption</Typography>
+				<Typography className = "questionHeader" variant='h5'>{props.question.question}</Typography>
 				<Divider />
 			</CardContent>
 			<CardContent >
 				<Typography color='primary' variant='h6' gutterBottom sx={{display: 'inline-flex', width:"50%", justifyContent: 'left'}}>
-					Question Category
+					Topic: {props.question.topic}
 				</Typography>
 				<Typography variant='h6' gutterBottom sx={{display: 'inline-flex', width:"50%", justifyContent: 'right'}}>
-					Question Difficulty
+					Difficulty: {props.question.difficulty}
 				</Typography>
 			</CardContent>
 		</Card>
 	);
-};
+}
 
 export default Question;

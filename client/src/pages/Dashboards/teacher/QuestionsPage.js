@@ -1,12 +1,19 @@
 import React from 'react';
-
+import {useEffect} from 'react';
 // Components
 import Questions from '../../../components/Questions/Questions';
-
+import {useDispatch} from 'react-redux';
 // MUI
 import {Button} from '@mui/material';
+import {getQuestions} from '../../../actions/questions';
 
 const QuestionsPage = () => {
+
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(getQuestions());
+	}, [dispatch]);
+	
 	return (
 		<div>
 			<div className='button-container'>
@@ -36,7 +43,7 @@ const QuestionsPage = () => {
 				</Button>
 			</div>
       <div className="questions-container">
-        <Questions />
+        <Questions questions/>
       </div>
 		</div>
 	);
