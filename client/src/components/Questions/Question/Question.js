@@ -12,7 +12,7 @@ const Question = () => {
 					<Checkbox
 						sx={{
 							borderRight: 3,
-							borderRadius: 1,
+							borderRadius: 0.1,
 						}}
 					>
 						Test
