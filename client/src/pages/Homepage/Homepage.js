@@ -36,7 +36,8 @@ const Homepage = () => {
 						<Typography variant='h2' align='center'>
 							Exams
 						</Typography>
-						<img className='test-title' src={exam} alt='Exams' />
+						{/* <img className='test-title' src={exam} alt='Exams' /> */}
+						<br />
 					</AppBar>
 					<Grow in>
 						<Container>
