@@ -15,3 +15,16 @@ export const getQuestions = async (req, res) => {
       res.status(404).json({ message: error.message });
    }
 };
+
+export const createQuestion = async (req, res) => {
+   const question = req.body;
+   console.log("Creating Question: ", question);
+   // Create a new Test object from req.body's data.
+   const newQuestion = new Question(question);
+   try {
+      await newQuestion.save(); // Save the test to the Database.
+      res.status(201).json(newQuestion);
+   } catch (error) {
+      res.status(409).json({ message: error.message });
+   }
+};
