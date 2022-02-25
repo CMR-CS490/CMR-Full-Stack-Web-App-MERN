@@ -5,6 +5,7 @@ import './Question.css';
 import {borderRight} from '@mui/system';
 
 const Question = (props) => {
+	console.log("Question Props: ", {props})
 	return (
 		<Card className = "question" display='flex' allignItems='flex-start' elevation='5'>
 			<CardActions sx={{display: 'inline-flex', width:"3%"}}>
@@ -14,8 +15,8 @@ const Question = (props) => {
 							borderRight: 3,
 							borderRadius: 0.1,
 						}}
-					>
-						Test
+						onClick={() => props.setQuestionCheck(oldArray => [...oldArray, props.question._id])}
+						>
 					</Checkbox>
 				</div>
 			</CardActions>
@@ -28,7 +29,7 @@ const Question = (props) => {
 					Topic: {props.question.topic}
 				</Typography>
 				<Typography variant='h6' gutterBottom sx={{display: 'inline-flex', width:"50%", justifyContent: 'right'}}>
-					Difficulty: {props.question.difficulty}
+					Difficulty: {props.question.difficulty} 
 				</Typography>
 			</CardContent>
 		</Card>
