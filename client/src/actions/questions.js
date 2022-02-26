@@ -11,3 +11,13 @@ export const getQuestions = () => async (dispatch) => {
       console.log(error.message);
    }
 };
+
+// export const getQuestions = () => async (dispatch) => {
+//    try {
+//       const { data } = await api.getQuestions();
+
+//       dispatch({ type: "FETCH_ALL", payload: data }); // payload is all our tests
+//    } catch (error) {
+//       console.log(error.message);
+//    }
+// };
