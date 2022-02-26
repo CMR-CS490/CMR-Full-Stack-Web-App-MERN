@@ -1,10 +1,10 @@
-.test-modal-questions-container {
+.questions-modal-container{
    height: 450px;
    overflow: scroll;
    border: transparent;
 }
 
-.create-test-container {
+.create-question-container {
    margin-top: 50px;
    margin-left: 70px;
 }
@@ -37,4 +37,8 @@ select {
 
 input {
    font-weight: bold;
+}
+
+.buttons {
+   width: 90%;
 }

@@ -23,7 +23,7 @@ const Questions = ({questionCheck, setQuestionCheck, checkboxVisible, scoreInput
             <CircularProgress />
          ) : (
             // true
-            questions.map((question) => <Question question={question} questionCheck={questionCheck} setQuestionCheck={setQuestionCheck} checkboxVisible={checkboxVisible} scoreInputVisible={scoreInputVisible} />)
+            questions.map((question) => <Question key={question._id} question={question} questionCheck={questionCheck} setQuestionCheck={setQuestionCheck} checkboxVisible={checkboxVisible} scoreInputVisible={scoreInputVisible} />)
          )}
       </div>
    );

@@ -7,7 +7,7 @@ import Modal from "@mui/material/Modal";
 
 // CSS
 import "./CreateQuestionModal.css";
-
+import { createQuestions } from "../../../actions/questions";
 const style = {
    position: "absolute",
    top: "50%",
@@ -22,7 +22,7 @@ const style = {
 
 // questionCheck is an Array of questions ID's to be displayed. These are the questions to be inserted into this new test.
 
-const CreateTestModal = (questionCheck) => {
+const CreateQuestionModal = () => {
 
 
    // States for Modal opening and closing.
@@ -35,14 +35,27 @@ const CreateTestModal = (questionCheck) => {
    const [question, setQuestion] = useState();
    const [difficulty, setDifficulty] = useState();
    const [functionName, setFunctionName ] = useState();
-   const handleClose = () => {
+
+   const clearForm = () => {
       setTopic("")
       setQuestion("")
       setDifficulty("")
       setFunctionName("")
+   }
+   const handleClose = () => {
+      clearForm();
       setOpen(false)
    };
    const handleSubmit = (e) => {
+      let obj = {
+         "topic" : topic,
+         "question" : question,
+         "difficulty": difficulty,
+         "functionName": functionName
+      };
+      handleClose()
+      console.log(obj);
+      createQuestions(obj);
       e.preventDefault();
    };
 
@@ -67,8 +80,8 @@ const CreateTestModal = (questionCheck) => {
                   Creating a Question
                </Typography>
             
-               <div className="create-test-container">
-                  <div className="test-modal-questions-container">
+               <div className="create-question-container">
+                  <div className="questions-modal-container">
                      <div>
                         <Typography variant="h5" sx={{ mt: 2 }}>
                               Topic
@@ -92,7 +105,7 @@ const CreateTestModal = (questionCheck) => {
                                 defaultValue={difficulty}
                                 onChange = {(e) => setDifficulty(e.target.value)}
                                 className="browser-default custom-select">
-                                <option selected value="Easy">Easy</option>
+                                <option value="Easy">Easy</option>
                                 <option value="Medium">Medium</option>
                                 <option value="Hard">Hard</option>
                             </select>
@@ -105,39 +118,51 @@ const CreateTestModal = (questionCheck) => {
                         <input type="text" required value={functionName} onChange={(e) => setFunctionName(e.target.value)}/>
                      </div>
 
-                      <Typography variant="h5" sx={{ mt: 2 }}>
-                              Test Cases
-                      </Typography> 
-                  </div>
-                
-                  <br></br>
-                  <Button
-                        variant="contained"
-                        color="primary"
-                        size="large"
-                        type="submit"
-                        fullWidth
-                        sx={{
-                           marginBottom: "10px",
-                        }}
-                        onClick={handleSubmit}
-                     >
-                        Create
-                     </Button>
+                     <div>
+                         <Typography variant="h5" sx={{ mt: 2 }}>
+                              Test Case 1
+                         </Typography>
+                        <br></br>
+                       
+                     </div>
 
-                  <Button
-                     variant="contained"
-                     color="secondary"
-                     size="large"
-                     type="submit"
-                     fullWidth
-                     sx={{
-                        marginBottom: "10px",
-                     }}
-                     onClick={handleClose}
-                  >
-                     Close
-                  </Button>
+                     <br></br>
+                     <div className="buttons">
+                        <Button
+                              variant="contained"
+                              color="primary"
+                              size="large"
+                              type="submit"
+                              fullWidth
+                              sx={{
+                                 marginBottom: "10px",
+                              }}
+                              onClick={handleSubmit}
+                           >
+                              Create
+                           </Button>
+
+                        <Button
+                           variant="contained"
+                           color="secondary"
+                           size="large"
+                           type="submit"
+                           fullWidth
+                           sx={{
+                              marginBottom: "10px",
+                           }}
+                           onClick={handleClose}
+                        >
+                           Close
+                        </Button>
+                     </div>
+                    
+
+                  </div>
+
+                  
+                
+                 
                </div>
             </Box>
          </Modal>
@@ -145,4 +170,4 @@ const CreateTestModal = (questionCheck) => {
    );
 };
 
-export default CreateTestModal;
+export default CreateQuestionModal;
