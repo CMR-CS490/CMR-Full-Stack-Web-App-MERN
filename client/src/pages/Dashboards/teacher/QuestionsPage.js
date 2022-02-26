@@ -5,6 +5,7 @@ import { getQuestions } from "../../../actions/questions";
 // Components
 import Questions from "../../../components/Questions/Questions";
 import CreateTestModal from "../../../components/Modals/CreateTestModal/CreateTestModal";
+import CreateQuestionModal from "../../../components/Modals/CreateQuestionModal/CreateQuestionModal";
 // MUI
 import { Button } from "@mui/material";
 //CSS
@@ -30,19 +31,7 @@ const QuestionsPage = () => {
       <div className="button-questions-container">
          <div className="button-container">
             <CreateTestModal questionCheck={questionCheck} />
-            <Button
-               variant="contained"
-               color="secondary"
-               size="large"
-               type="submit"
-               fullWidth
-               sx={{
-                  marginBottom: "10px",
-               }}
-               onClick={() => {}}
-            >
-               Create a Question
-            </Button>
+            <CreateQuestionModal questionCheck={questionCheck} />
          </div>
          <div className="questions-container">
             <Questions questionCheck={questionCheck} setQuestionCheck={setQuestionCheck}/>

@@ -74,7 +74,7 @@ const CreateTestModal = (questionCheck) => {
          >
             Create a Test
          </Button>
-         <Modal open={open} onClose={handleClose}>
+         <Modal open={open}>
             <Box sx={style}>
                <Typography variant="h3" component="h2">
                   Creating a Test
@@ -99,6 +99,19 @@ const CreateTestModal = (questionCheck) => {
                      onClick={handleOpen}
                   >
                      Create a Test
+                  </Button>
+                  <Button
+                     variant="contained"
+                     color="secondary"
+                     size="large"
+                     type="submit"
+                     fullWidth
+                     sx={{
+                        marginBottom: "10px",
+                     }}
+                     onClick={handleClose}
+                  >
+                     Close
                   </Button>
                </div>
             </Box>

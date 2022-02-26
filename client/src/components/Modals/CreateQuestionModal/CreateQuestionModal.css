@@ -1,0 +1,44 @@
+.questions-modal-container{
+   height: 450px;
+   overflow: scroll;
+   border: transparent;
+}
+
+.create-question-container {
+   margin-top: 50px;
+   margin-left: 70px;
+}
+
+select {
+   width: 90%;
+   min-width: 15ch;
+   
+   border: 1px solid var(--select-border);
+   border-radius: 0.25em;
+   padding: 0.5em 0.5em;
+   font-size: 1.25rem;
+   cursor: pointer;
+   line-height: 1.1;
+   background-color: #fff;
+   background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+ }
+
+.question textarea {
+   height: 150px;
+   width: 90%;
+   resize: none;
+   padding-left: 0px;
+   font-size: 18px;
+}
+
+.question {
+   padding: 0;
+}
+
+input {
+   font-weight: bold;
+}
+
+.buttons {
+   width: 90%;
+}
