@@ -10,7 +10,7 @@ import Form from '../../components/Form/Form';
 
 // Images
 import exam from '../../images/exam.png';
-import SideNav from '../../components/Navbars/SideNav/SideNav';
+import SideNav from '../../components/Navbars/SideNav/SideNavTeachers';
 import TopNav from '../../components/Navbars/TopNav/TopNav';
 
 // CSS

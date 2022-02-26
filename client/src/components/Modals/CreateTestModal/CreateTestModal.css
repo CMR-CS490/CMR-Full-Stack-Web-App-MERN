@@ -1,0 +1,10 @@
+.test-modal-questions-container {
+   height: 400px;
+   overflow: scroll;
+   border: black;
+   border-style: groove;
+}
+
+.create-test-container {
+   margin-top: 50px;
+}

@@ -3,6 +3,15 @@
     padding: '0.5em';
 }
 
+.score-container {
+    
+}
+
+/* .checkbox-container-hide {
+    visibility: hidden; 
+} */
+
+
 .question {
     padding: 1em;
     margin: 0.5em 0em;

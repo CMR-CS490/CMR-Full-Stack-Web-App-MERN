@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Container, AppBar, Typography, Grow, Grid} from '@mui/material';
 import {useDispatch} from 'react-redux';
-import SideNav from '../../components/Navbars/SideNav/SideNav';
+import SideNav from '../../components/Navbars/SideNav/SideNavTeachers';
 import TopNav from '../../components/Navbars/TopNav/TopNav';
 
 // Pages

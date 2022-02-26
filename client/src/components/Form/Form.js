@@ -12,46 +12,36 @@ const theme = {};
 
 // Get the current ID
 
-const Form = ({ currentId, setCurrentId }) => {
-   // States
-   const [testData, setTestData] = useState({
-      creator: "",
-      title: "",
-      message: "",
-      description: "",
-      selectedFile: "",
-   });
-   const test = useSelector((state) => (currentId ? state.tests.find((t) => t._id === currentId) : null)); // Return one test with the matching id.
+const Form = ({ currentId, setCurrentId, testData, setTestData}) => {
+   // // States
+   // const [testData, setTestData] = useState({
+   //    creator: "",
+   //    title: "",
+   //    message: "",
+   //    description: "",
+   //    selectedFile: "",
+   // });
 
-   const dispatch = useDispatch();
+   // const test = useSelector((state) => (currentId ? state.tests.find((t) => t._id === currentId) : null)); // Return one test with the matching id.
 
-   useEffect(() => {
-      if (test) setTestData(test);
-   }, [test]);
+   // const dispatch = useDispatch();
 
-   const handleSubmit = (e) => {
-      e.preventDefault();
+   // useEffect(() => {
+   //    if (test) setTestData(test);
+   // }, [test]);
 
-      // Updating a test with a ID.
-      if (currentId) {
-         dispatch(updateTest(currentId, testData));
-      } else {
-         // Creaing a test.
-         dispatch(createTest(testData));
-      }
-      clear();
-   };
+   // const handleSubmit = (e) => {
+   //    e.preventDefault();
 
-   const clear = () => {
-      setCurrentId(null);
-      setTestData({
-         creator: "",
-         title: "",
-         message: "",
-         description: "",
-         selectedFile: "",
-      });
-   };
+   //    // Updating a test with a ID.
+   //    if (currentId) {
+   //       dispatch(updateTest(currentId, testData));
+   //    } else {
+   //       // Creaing a test.
+   //       dispatch(createTest(testData));
+   //    }
+   //    clear();
+   // };
 
    return (
       <Paper
@@ -61,23 +51,13 @@ const Form = ({ currentId, setCurrentId }) => {
             padding: 2,
          }}
       >
-         <form
-            autoComplete="off"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{
-               display: "flex",
-               flexWrap: "wrap",
-               justifyContent: "center",
-            }}
-         >
-            <Typography variant="h6">{currentId ? "Editing" : "Creating"} a Test</Typography>
+            {/* <Typography variant="h6">{currentId ? "Editing" : "Creating"} a Test</Typography> */}
             <TextField
                name="title"
                variant="outlined"
                label="Title"
-               fullWidth
-               value={testData.title}
+               
+               // value={testData.title}
                onChange={(e) => setTestData({ ...testData, title: e.target.value })}
                // className="textfield-title"
             />
@@ -85,8 +65,8 @@ const Form = ({ currentId, setCurrentId }) => {
                name="creator"
                variant="outlined"
                label="Creator"
-               fullWidth
-               value={testData.creator}
+               
+               // value={testData.creator}
                onChange={(e) => setTestData({ ...testData, creator: e.target.value })}
                // className="textfield-creator"
             />
@@ -94,8 +74,8 @@ const Form = ({ currentId, setCurrentId }) => {
                name="description"
                variant="outlined"
                label="Description"
-               fullWidth
-               value={testData.description}
+               
+               // value={testData.description}
                onChange={(e) => setTestData({ ...testData, description: e.target.value })}
                // className="textfield-description"
             />
@@ -110,22 +90,6 @@ const Form = ({ currentId, setCurrentId }) => {
                   }}
                />
             </div>
-            <Button
-               variant="contained"
-               color="primary"
-               size="large"
-               type="submit"
-               fullWidth
-               sx={{
-                  marginBottom: "10px",
-               }}
-            >
-               Submit
-            </Button>
-            <Button variant="contained" color="secondary" size="small" onClick={clear} fullWidth>
-               Clear
-            </Button>
-         </form>
       </Paper>
    );
 };
