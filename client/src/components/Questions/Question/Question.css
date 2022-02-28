@@ -4,6 +4,7 @@
 }
 
 .score-container {
+    width: 100%;
     
 }
 
@@ -12,7 +13,8 @@
 } */
 
 
-.question {
+.question-card {
     padding: 1em;
     margin: 0.5em 0em;
+    min-height: 179px;
 }

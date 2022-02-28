@@ -25,6 +25,7 @@ const style = {
    border: "2px solid #000",
    boxShadow: 24,
    p: 4,
+   height: "80%"
 };
 
 // questionCheck is an Array of questions ID's to be displayed. These are the questions to be inserted into this new test.

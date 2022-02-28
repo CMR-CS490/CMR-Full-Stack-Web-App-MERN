@@ -30,7 +30,8 @@ const QuestionsPage = () => {
    return (
       <div className="button-questions-container">
          <div className="button-container">
-            <CreateTestModal questionCheck={questionCheck} />
+            {/* prop quectionCheck is an array of id's of the selected questions to be added to the Test. */}
+            <CreateTestModal questionCheck={questionCheck} /> 
             <CreateQuestionModal questionCheck={questionCheck} />
          </div>
          <div className="questions-container">
