@@ -33,7 +33,7 @@ const CreateQuestionModal = () => {
    //input fields
 
    const [questionData, setQuestionData] = useState ({
-		topic: '', question: '', difficulty: '', functionName: '', testcases: {}
+		topic: '', question: '', difficulty: '', functionName: '', testcases: [{input: '', output: ''}]
 	})
 
    const clearForm = () => {
@@ -88,14 +88,14 @@ const CreateQuestionModal = () => {
                               Topic
                          </Typography>
                         <br></br>
-                        <input type="text" required value={questionData.topic} onChange={(e) => setQuestionData({ ...questionData, topic: e.target.value })}/>
+                        <input type="text"required value={questionData.topic} onChange={(e) => setQuestionData({ ...questionData, topic: e.target.value })}/>
                      </div>
                      <div className="question">
                         <Typography variant="h5" sx={{ mt: 2 }}>
                               Question
                          </Typography>
                         <br></br>
-                        <textarea type="text" cols="40" rows="5" required value={questionData.question} onChange={(e) => setQuestionData({...questionData, question: e.target.value})}/>
+                        <textarea required type="text" cols="40" rows="5" required value={questionData.question} onChange={(e) => setQuestionData({...questionData, question: e.target.value})}/>
                      </div>
                      <div>
                         <Typography variant="h5" sx={{ mt: 2 }}>
@@ -124,11 +124,21 @@ const CreateQuestionModal = () => {
                          <Typography variant="h5" sx={{ mt: 2 }}>
                               Test Case 1
                          </Typography>
+                         <div className= "test-case" value={questionData.testCase}>
+                           <span className= "input">
+                                 Input:
+                                 <input type="text" value={questionData.testCase}></input>
+                           </span>
+                   
+                           <span className="output">
+                                 Output: 
+                                 <input type="text"></input>
+                           </span>  
+                         </div>
                         <br></br>
+                        
                        
                      </div>
-
-                     <br></br>
                      <div className="buttons">
                         <Button
                               variant="contained"
@@ -137,6 +147,7 @@ const CreateQuestionModal = () => {
                               type="submit"
                               fullWidth
                               sx={{
+                                 marginTop: "10px",
                                  marginBottom: "10px",
                               }}
                               onClick={handleSubmit}

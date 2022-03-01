@@ -50,3 +50,25 @@ input {
    display: none;
    font-size: 20px;
 }
+.test-case {
+   width: 90%;
+}
+.test-case input{
+   all: unset;
+   font-weight: bold;
+   font-size:20px;
+   background-color: #f6f6f6;
+   padding: 0.5em 0.5em;
+   margin: 0.5em 1em;
+}
+
+.test-case .input{
+   postition: relative;
+   float: left;
+}
+
+
+.test-case .output{
+   postition: relative;
+   float: right;
+}

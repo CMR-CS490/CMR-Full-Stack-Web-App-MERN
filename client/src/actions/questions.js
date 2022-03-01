@@ -15,7 +15,7 @@ export const createQuestion = (question) => async (dispatch) => {
    try {
       const { data } = await api.createQuestion(question);
 
-      //dispatch({ type: "CREATE", payload: data });
+      dispatch({ type: "CREATE", payload: data });
    } catch (error) {
        console.log(error.message);
    }
