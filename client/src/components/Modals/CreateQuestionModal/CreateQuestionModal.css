@@ -42,3 +42,11 @@ input {
 .buttons {
    width: 90%;
 }
+
+.error {
+   padding-top: 0.5em;
+   color: red;
+   font-weight: bold;
+   display: none;
+   font-size: 20px;
+}

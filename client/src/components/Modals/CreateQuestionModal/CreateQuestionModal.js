@@ -4,10 +4,10 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-
+import {useDispatch, useSelector} from 'react-redux'
 // CSS
 import "./CreateQuestionModal.css";
-import { createQuestions } from "../../../actions/questions";
+import { createQuestion } from "../../../actions/questions";
 const style = {
    position: "absolute",
    top: "50%",
@@ -29,34 +29,33 @@ const CreateQuestionModal = () => {
    const [open, setOpen] = React.useState(false);
    const handleOpen = () => setOpen(true);
   
-
+   const dispatch = useDispatch();
    //input fields
-   const [topic, setTopic] = useState();
-   const [question, setQuestion] = useState();
-   const [difficulty, setDifficulty] = useState();
-   const [functionName, setFunctionName ] = useState();
+
+   const [questionData, setQuestionData] = useState ({
+		topic: '', question: '', difficulty: '', functionName: '', testcases: {}
+	})
 
    const clearForm = () => {
-      setTopic("")
-      setQuestion("")
-      setDifficulty("")
-      setFunctionName("")
+      setQuestionData({topic: '', question: '', difficulty: '', testcases: {} , functionName: ''})
    }
    const handleClose = () => {
       clearForm();
       setOpen(false)
    };
    const handleSubmit = (e) => {
-      let obj = {
-         "topic" : topic,
-         "question" : question,
-         "difficulty": difficulty,
-         "functionName": functionName
-      };
-      handleClose()
-      console.log(obj);
-      createQuestions(obj);
-      e.preventDefault();
+     console.log(questionData);
+   
+     if(questionData.topic.length == 0 || questionData.question.length == 0 || questionData.difficulty.length == 0 
+      || questionData.functionName.length == 0) {
+         document.getElementsByClassName("error")[0].innerHTML = "Please fill out all fields";
+         document.getElementsByClassName("error")[0].style.display = "block";
+         return;
+      }
+      document.getElementsByClassName("error")[0].style.display = "none";
+      dispatch(createQuestion(questionData));
+      clearForm();
+      setOpen(false)
    };
 
    return (
@@ -79,7 +78,9 @@ const CreateQuestionModal = () => {
                <Typography variant="h3" component="h2">
                   Creating a Question
                </Typography>
-            
+               <div className="error">
+                  <h3>Error</h3>
+               </div>
                <div className="create-question-container">
                   <div className="questions-modal-container">
                      <div>
@@ -87,14 +88,14 @@ const CreateQuestionModal = () => {
                               Topic
                          </Typography>
                         <br></br>
-                        <input type="text" required value={topic} onChange={(e) => setTopic(e.target.value)}/>
+                        <input type="text" required value={questionData.topic} onChange={(e) => setQuestionData({ ...questionData, topic: e.target.value })}/>
                      </div>
                      <div className="question">
                         <Typography variant="h5" sx={{ mt: 2 }}>
                               Question
                          </Typography>
                         <br></br>
-                        <textarea type="text" cols="40" rows="5" required value={question} onChange={(e) => setQuestion(e.target.value)}/>
+                        <textarea type="text" cols="40" rows="5" required value={questionData.question} onChange={(e) => setQuestionData({...questionData, question: e.target.value})}/>
                      </div>
                      <div>
                         <Typography variant="h5" sx={{ mt: 2 }}>
@@ -102,9 +103,10 @@ const CreateQuestionModal = () => {
                          </Typography>
                         <br></br>
                         <select
-                                defaultValue={difficulty}
-                                onChange = {(e) => setDifficulty(e.target.value)}
+                                defaultValue={questionData.difficulty}
+                                onChange = {(e) => setQuestionData({...questionData, difficulty: e.target.value})}
                                 className="browser-default custom-select">
+                                <option value="">-</option>
                                 <option value="Easy">Easy</option>
                                 <option value="Medium">Medium</option>
                                 <option value="Hard">Hard</option>
@@ -115,7 +117,7 @@ const CreateQuestionModal = () => {
                               Function Name
                          </Typography>
                         <br></br>
-                        <input type="text" required value={functionName} onChange={(e) => setFunctionName(e.target.value)}/>
+                        <input type="text" required value={questionData.functionName} onChange={(e) => setQuestionData({...questionData, functionName: e.target.value})}/>
                      </div>
 
                      <div>

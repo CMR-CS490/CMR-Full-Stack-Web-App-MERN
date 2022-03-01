@@ -11,7 +11,7 @@ export const getQuestions = () => async (dispatch) => {
       console.log(error.message);
    }
 };
-export const createQuestions = (question) => async (dispatch) => {
+export const createQuestion = (question) => async (dispatch) => {
    try {
       const { data } = await api.createQuestion(question);
 
