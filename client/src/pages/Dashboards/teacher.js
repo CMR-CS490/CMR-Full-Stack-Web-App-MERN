@@ -15,11 +15,15 @@ const Homepage = () => {
 	const [currentId, setCurrentId] = useState(null);
 
 	const dispatch = useDispatch();
-
+	let loggedIn = false;
 	useEffect(() => {
 		if(localStorage.getItem("role") !== "teacher" ) {
-			window.location.href = '/login'
+			window.location.href = '/login';
+		} 
+		if(localStorage.getItem("role") === "student") {
+			window.location.href = '/student';
 		}
+		loggedIn = true;
 	}, []);
 
 	let currentRoute = window.location.href;
@@ -32,6 +36,7 @@ const Homepage = () => {
 	}
 	
 	return (
+		
 		<div>
 			<TopNav />
 			<SideNav />
