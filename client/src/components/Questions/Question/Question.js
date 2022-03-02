@@ -21,7 +21,22 @@ const Question = (props) => {
 		}
 		console.log(styleCheckbox)
 	}
+	const handleCheckbox = () => {
+		let found = false;
+		props.questionCheck.map((question) => {
+			if(question === props.question._id) {
+				found = true;
+			}
+		})
 
+		if(found) {
+			props.setQuestionCheck(props.questionCheck.filter(item => item !== props.question._id));
+		} else {
+			props.setQuestionCheck([...props.questionCheck, props.question._id]);	
+		}
+
+
+	};
 	
 	return (
 		<Card className = "question-card" display='flex' allignItems='flex-start' elevation='5'>
@@ -33,7 +48,7 @@ const Question = (props) => {
 							borderRight: 3,
 							borderRadius: 0.1,
 						}}
-						onClick={() => props.setQuestionCheck(oldArray => [...oldArray, props.question._id])}
+						onClick={handleCheckbox}
 						>
 					</Checkbox>
 				</div>

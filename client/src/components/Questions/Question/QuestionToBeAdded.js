@@ -19,10 +19,19 @@ const QuestionToBeAdded = ({question, questionData, setQuestionData}) => {
 
 
    // Sending data back to the daddy prop after every input.
-   // useEffect(() => {
-   //    // setQuestionData( ...questionData, singleQuestionScoreData);
-   //    // setQuestionData(singleQuestionScoreData);
-   // }, [singleQuestionScoreData])
+   useEffect(() => {
+      let found = false; 
+      questionData.map((question) => {
+         if(question.question_id === question_id_value) {
+            question.question_score = singleQuestionScoreData.question_score;
+            found = true;
+         }
+      }) 
+      
+      if(!found)
+         setQuestionData( [...questionData, singleQuestionScoreData]);
+      // setQuestionData(singleQuestionScoreData);
+   }, [singleQuestionScoreData])
 
    
 

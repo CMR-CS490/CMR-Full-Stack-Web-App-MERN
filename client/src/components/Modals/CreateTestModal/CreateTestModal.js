@@ -49,7 +49,7 @@ const CreateTestModal = ({questionCheck}) => {
       selectedFile: "",
    });
 
-   const [questionData, setQuestionData] = useState([{question_id: '', question_score: ''}]);
+   const [questionData, setQuestionData] = useState([]);
 
    // States for Modal opening and closing.
    const [open, setOpen] = React.useState(false);
@@ -58,6 +58,7 @@ const CreateTestModal = ({questionCheck}) => {
 
    const handleSubmit = (e) => {
       e.preventDefault();
+      console.log("Question Data =>",questionData);
    };
 
    return (
@@ -97,7 +98,7 @@ const CreateTestModal = ({questionCheck}) => {
                      sx={{
                         marginBottom: "10px",
                      }}
-                     onClick={handleOpen}
+                     onClick={handleSubmit}
                   >
                      Create a Test
                   </Button>
