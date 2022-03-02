@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getQuestions } from "../../../actions/questions";
+import { createTest } from "../../../actions/tests";
 
 // MUI
 import Box from "@mui/material/Box";
@@ -47,6 +48,8 @@ const CreateTestModal = ({questionCheck}) => {
       title: "",
       description: "",
       selectedFile: "",
+      questions:[],
+      visible: false
    });
 
    const [questionData, setQuestionData] = useState([]);
@@ -58,7 +61,8 @@ const CreateTestModal = ({questionCheck}) => {
 
    const handleSubmit = (e) => {
       e.preventDefault();
-      console.log("Question Data =>",questionData);
+      dispatch(createTest(testData, questionData));
+      handleClose();
    };
 
    return (
