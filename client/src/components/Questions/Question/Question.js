@@ -24,7 +24,7 @@ const Question = (props) => {
 
 	
 	return (
-		<Card className = "question" display='flex' allignItems='flex-start' elevation='5'>
+		<Card className = "question-card" display='flex' allignItems='flex-start' elevation='5'>
 			<CardActions sx={{display: 'inline-flex', width:"3%"}}>
 				<div className={checkBoxClassName} style={styleCheckbox}>
 					{console.log(styleCheckbox)}

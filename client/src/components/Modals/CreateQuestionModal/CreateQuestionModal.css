@@ -1,5 +1,5 @@
 .questions-modal-container{
-   height: 450px;
+   height: 100%;
    overflow: scroll;
    border: transparent;
 }
@@ -7,6 +7,7 @@
 .create-question-container {
    margin-top: 50px;
    margin-left: 70px;
+   height: 85%;
 }
 
 select {

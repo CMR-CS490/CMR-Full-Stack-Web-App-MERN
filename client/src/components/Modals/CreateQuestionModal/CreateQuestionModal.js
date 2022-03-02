@@ -1,4 +1,4 @@
-import React, {useState}from "react";
+import React, { useState } from "react";
 // MUI
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -21,16 +21,16 @@ const style = {
    border: "2px solid #000",
    boxShadow: 24,
    p: 4,
+   height: "80%",
 };
 
 // questionCheck is an Array of questions ID's to be displayed. These are the questions to be inserted into this new test.
 
 const CreateQuestionModal = () => {
-
-
    // States for Modal opening and closing.
    const [open, setOpen] = React.useState(false);
    const handleOpen = () => setOpen(true);
+
   
    const dispatch = useDispatch();
    //input fields
@@ -60,6 +60,7 @@ const CreateQuestionModal = () => {
    };
 
    const handleSubmit = (e) => {
+
    
      if(questionData.topic.length == 0 || questionData.question.length == 0 || questionData.difficulty.length == 0 
       || questionData.functionName.length == 0) {
@@ -77,41 +78,50 @@ const CreateQuestionModal = () => {
       dispatch(createQuestion(questionData, testcases));
       clearForm();
       setOpen(false)
+
    };
 
    return (
       <div>
+
          <ModalsButton color="secondary" action={handleOpen} text="Create Question"></ModalsButton>
-         
+        
          <Modal open={open}>
             <Box sx={style}>
                <Typography variant="h3" component="h2">
                   Creating a Question
                </Typography>
+
                <div className="error">
                   <h3>Error</h3>
                </div>
+
                <div className="create-question-container">
                   <div className="questions-modal-container">
                      <div>
                         <Typography variant="h5" sx={{ mt: 2 }}>
-                              Topic
-                         </Typography>
+                           Topic
+                        </Typography>
                         <br></br>
+
                         <input type="text"required value={questionData.topic} onChange={(e) => setQuestionData({ ...questionData, topic: e.target.value })}/>
+
                      </div>
                      <div className="question">
                         <Typography variant="h5" sx={{ mt: 2 }}>
-                              Question
-                         </Typography>
+                           Question
+                        </Typography>
                         <br></br>
+
                         <textarea required type="text" cols="40" rows="5" required value={questionData.question} onChange={(e) => setQuestionData({...questionData, question: e.target.value})}/>
+
                      </div>
                      <div className="difficulty">
                         <Typography variant="h5" sx={{ mt: 2 }}>
-                              Difficulty
-                         </Typography>
+                           Difficulty
+                        </Typography>
                         <br></br>
+
                         <select
                                 defaultValue={questionData.difficulty}
                                 onChange = {(e) => setQuestionData({...questionData, difficulty: e.target.value})}
@@ -145,7 +155,7 @@ const CreateQuestionModal = () => {
                                  <input type="text" value={testcase.output} onChange={(e) => setTestcase({...testcase, output: e.target.value})}></input>
                            </span>
                          </div>
-                      
+                     
                      </div>
                      <div className="test-case-action">
                         <button onClick={addTestCase}>Add Test Case</button>
@@ -162,7 +172,7 @@ const CreateQuestionModal = () => {
                         <ModalsButton color="secondary" action={handleClose} text="Cancel"></ModalsButton>
                      </div>
                   </div>             
-                 
+               
                </div>
             </Box>
          </Modal>
