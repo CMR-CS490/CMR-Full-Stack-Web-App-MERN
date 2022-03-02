@@ -3,7 +3,7 @@ import axios from 'axios'
 // Local: http://localhost:5002/
 // Production: https://cmr-autograder.herokuapp.com/
 // URL pointing to backend route.
-const url = 'http://localhost:5002/';
+export const url = 'http://localhost:5002/';
 
 export const fetchTests = () => axios.get(`${url}tests`);
 export const createTest = (newTest) => axios.post(`${url}tests`, newTest);
