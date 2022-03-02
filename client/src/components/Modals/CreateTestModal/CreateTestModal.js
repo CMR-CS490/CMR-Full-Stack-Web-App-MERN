@@ -25,11 +25,12 @@ const style = {
    border: "2px solid #000",
    boxShadow: 24,
    p: 4,
+   height: "80%"
 };
 
 // questionCheck is an Array of questions ID's to be displayed. These are the questions to be inserted into this new test.
 
-const CreateTestModal = (questionCheck) => {
+const CreateTestModal = ({questionCheck}) => {
    console.log("%cComponent CreateTestModal", "color:red;", "questionCheck: ", questionCheck);
 
    const dispatch = useDispatch();
@@ -48,7 +49,7 @@ const CreateTestModal = (questionCheck) => {
       selectedFile: "",
    });
 
-   const [questionData, setQuestionData] = useState({});
+   const [questionData, setQuestionData] = useState([{question_id: '', question_score: ''}]);
 
    // States for Modal opening and closing.
    const [open, setOpen] = React.useState(false);
@@ -79,12 +80,12 @@ const CreateTestModal = (questionCheck) => {
                <Typography variant="h3" component="h2">
                   Creating a Test
                </Typography>
-               <Form currentId={currentId} setCurrentId={setCurrentId} testData={testData} setTestData={setTestData} />
+               <Form currentId={currentId} setCurrentId={setCurrentId} testData={testData} setTestData={setTestData} questionCheck={questionCheck} />
                <Typography variant="h5" sx={{ mt: 2 }}>
                   Questions to be added.
                </Typography>
                <div className="test-modal-questions-container">
-                  <QuestionsToBeAdded questionData={questionData} setQuestionData={setQuestionData} />
+                  <QuestionsToBeAdded questionData={questionData} setQuestionData={setQuestionData} questionCheck={questionCheck}  />
                </div>
                <div className="create-test-container">
                   <Button

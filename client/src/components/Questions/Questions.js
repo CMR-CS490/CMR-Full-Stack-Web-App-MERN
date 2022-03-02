@@ -15,9 +15,9 @@ const Questions = ({questionCheck, setQuestionCheck, checkboxVisible, scoreInput
 
    return (
       <div>
-         <button onClick={console.log("Questions Props: ", {questionCheck}, {setQuestionCheck})}>
+         {/* <button onClick={console.log("Questions Props: ", {questionCheck}, {setQuestionCheck})}>
             test
-         </button>
+         </button> */}
          {!questions.length ? (
             // false
             <CircularProgress />
