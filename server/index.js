@@ -6,11 +6,13 @@ import express from 'express';
 // import bodyParser from 'body-parser';
 import mongoose from 'mongoose' // Setting up mongoose MongoDB.
 import cors from 'cors'; // Setting up CORS for local developemnt.
+import dotenv from 'dotenv' // Access to ENV variables
 
 import testRoutes from './routes/tests.js';
 import questionRoutes from './routes/questions.js';
 import User from './models/user.model.js';
 const app = express(); // Init Express as "app"
+dotenv.config();
 
 // Parses any request body as a JSON by default.
 app.use(express.json());
@@ -22,12 +24,15 @@ app.use(cors());
 app.use('/tests', testRoutes);
 app.use('/api/questions', questionRoutes);
 
-const CONNECTION_URL = "mongodb+srv://nx60nwb1yq6VofZZ:swcqmUFo0OSfWnU3@cluster0.21cjg.mongodb.net/project490db?retryWrites=true&w=majority"
-const PORT = process.env.PORT || 5002; // Heroku will automatically populate this process.env.PORT
+app.get('/', (req, res) => {
+   res.send('CMR 490 API')
+});
+
+// const PORT = process.env.PORT || 5002; // Heroku will automatically populate this process.env.PORT
 
 // Connect to the DB.
-mongoose.connect( CONNECTION_URL , { useNewUrlParser: true, useUnifiedTopology: true} )
-   .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
+mongoose.connect( process.env.CONNECTION_URL , { useNewUrlParser: true, useUnifiedTopology: true} )
+   .then(() => app.listen((process.env.PORT || 5002), () => console.log('Server running on port: ', (process.env.PORT || 5002))))
    .catch((error) => console.log(error.message));
 
 // mongoose.set('useFindAndModify', false);

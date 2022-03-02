@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login/styles.css";
 
+import { url } from '../api/index.js'
+
 const Register = () => {
    // Hooks
    const history = useNavigate();
@@ -31,7 +33,7 @@ const Register = () => {
          return;
       }
 
-      const response = await fetch("http://localhost:5002/api/register", {
+      const response = await fetch(`${url}api/register`, {
          method: "POST",
          headers: {
             "Content-Type": "application/json",

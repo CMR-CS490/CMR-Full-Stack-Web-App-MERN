@@ -1,5 +1,8 @@
 import { useState } from "react";
 import './styles.css';
+
+import { url } from '../../api/index.js'
+
 const Login = () => {
    // State
    const [username, setUsername] = useState("");
@@ -8,7 +11,7 @@ const Login = () => {
    // Send the username and password to the Backend Server after the user clicks Submit.
    async function loginUser(event) {
       event.preventDefault(); // Disable redirection after Submit button is pressed.
-      const response = await fetch("http://localhost:5002/api/login", {
+      const response = await fetch(`${url}api/login`, {
          method: "POST",
          headers: {
             "Content-Type": "application/json",
