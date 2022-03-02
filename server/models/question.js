@@ -5,7 +5,7 @@ const questionSchema = mongooose.Schema({
     question: String,
     difficulty: String,
     functionName: String,
-    testcase: [{ input: String, output: String}],
+    testcases: [{ input: String, output: String}],
 });
 
 const question = mongooose.model('questions', questionSchema);
