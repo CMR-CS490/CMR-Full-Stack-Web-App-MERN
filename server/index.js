@@ -28,11 +28,11 @@ app.get('/', (req, res) => {
    res.send('CMR 490 API')
 });
 
-const PORT = process.env.PORT || 5002; // Heroku will automatically populate this process.env.PORT
+// const PORT = process.env.PORT || 5002; // Heroku will automatically populate this process.env.PORT
 
 // Connect to the DB.
 mongoose.connect( process.env.CONNECTION_URL , { useNewUrlParser: true, useUnifiedTopology: true} )
-   .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
+   .then(() => app.listen((process.env.PORT || 5002), () => console.log('Server running on port: ', (process.env.PORT || 5002))))
    .catch((error) => console.log(error.message));
 
 // mongoose.set('useFindAndModify', false);
