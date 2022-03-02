@@ -31,7 +31,7 @@ const QuestionsPage = () => {
       <div className="button-questions-container">
          <div className="button-container">
             <CreateTestModal questionCheck={questionCheck} />
-            <CreateQuestionModal questionCheck={questionCheck} />
+            <CreateQuestionModal/>
          </div>
          <div className="questions-container">
             <Questions questionCheck={questionCheck} setQuestionCheck={setQuestionCheck}/>
