@@ -9,16 +9,24 @@ const QuestionToBeAdded = ({question, questionData, setQuestionData}) => {
 
    console.log("%cComponent QuestionToBeAdded", "color:pink;", "question: ", question , "questionData: ", questionData, "setQuestionData: ", setQuestionData)
 
-   let question_id = question._id;
-   console.log("%cQuestion ID: ", "color:red;", question_id);
+   let question_id_value = question._id;
+   // console.log("%cQuestion ID: ", "color:red;", question_id);
 
    // State for the scores
-   const [singleQuestionScoreData, setSingleQuestionScoreData] = useState({question_id: ''});
+   const [singleQuestionScoreData, setSingleQuestionScoreData] = useState({question_id: `${question_id_value}`, question_score: ''});
+
+   // const [questionData, setQuestionData] = useState([{question_id: '', question_score: ''}]);
+
 
    // Sending data back to the daddy prop after every input.
-   useEffect(() => {
-      setQuestionData(singleQuestionScoreData);
-   }, [singleQuestionScoreData])
+   // useEffect(() => {
+   //    // setQuestionData( ...questionData, singleQuestionScoreData);
+   //    // setQuestionData(singleQuestionScoreData);
+   // }, [singleQuestionScoreData])
+
+   
+
+   
 
    // handleChange(event) {    props.setQuestionData({value: event.target.value});  }
 
@@ -37,7 +45,7 @@ const QuestionToBeAdded = ({question, questionData, setQuestionData}) => {
                {/* {question._id} */}
                <CardActions sx={{ display: "inline-flex", width: "30%", justifyContent: "center"}}>
             <div className="score-container">
-               <TextField name="title" label="Score" value={singleQuestionScoreData.question_id} fullWidth onChange={(e) => setSingleQuestionScoreData({question_id: e.target.value})} />
+               <TextField name="title" label="Score" value={singleQuestionScoreData.question_score} fullWidth onChange={(e) => setSingleQuestionScoreData({ ...singleQuestionScoreData, question_score: e.target.value})} />
             </div>
          </CardActions>
             </Typography>
