@@ -7,11 +7,11 @@ import {useSelector} from 'react-redux';
 const Questions = ({questionData, setQuestionData, questionCheck}) => {
 	// Reducer
 	const questions = useSelector((state) => state.questions);
-	console.log('QuestionsToBeAdded: ', {questions});
-	console.log('Questions to filter', questionCheck);
+	// console.log('QuestionsToBeAdded: ', {questions});
+	// console.log('Questions to filter', questionCheck);
 
 	// questionsFiltered // Array that we pop to from questions array of objects.
-	console.log('questions objects');
+	// console.log('questions objects');
 // "Addition"
    let questionsFiltered;
    let questionsFilteredStep2 = [];
@@ -23,7 +23,7 @@ const Questions = ({questionData, setQuestionData, questionCheck}) => {
 
    
 
-	console.log('questionsFilteredstep2: ', questionsFilteredStep2);
+	// console.log('questionsFilteredstep2: ', questionsFilteredStep2);
 
 	// for (const singleQuestion in questions) {
 	//    console.log("Single Questions:", singleQuestion)
