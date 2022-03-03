@@ -16,6 +16,22 @@ export const getTests = async (req, res) => {
    }
 };
 
+export const getTest = async (req, res) => {
+   try {
+      const { id: testID } = req.params;
+      // Get all of the tests/exams in the DB.
+      const test = await Test.find({_id: testID});
+
+      console.log("Sending test with id: ", testID , ":", {test});
+
+      // Send an array of all the tests.
+      res.status(200).json(test);
+   } catch (error) {
+      res.status(404).json({ message: error.message });
+   }
+};
+
+
 
 export const getStudentTests = async (req, res) => {
    try {
