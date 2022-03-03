@@ -9,6 +9,8 @@ import Register from "./pages/Register";
 import StudentDashboard from "./pages/Dashboards/student";
 import TeacherDashboard from "./pages/Dashboards/teacher";
 
+
+
 // Material UI Styles
 // import useStyles from './pages/Homepage/styles'
 document.title = "AutoGrader"
@@ -25,6 +27,7 @@ const App = () => {
                <Route path="/teacher/:page" element={<TeacherDashboard/>} />
                <Route path="/" exact element={<TeacherDashboard />} />
                <Route path="/student/:page" element={<StudentDashboard/>} />
+               <Route path="/student/test/:id" element={<StudentDashboard/>} />
                {/* <Route path="/" exact element={<Homepage />} /> */}
             </Routes>
          </BrowserRouter>

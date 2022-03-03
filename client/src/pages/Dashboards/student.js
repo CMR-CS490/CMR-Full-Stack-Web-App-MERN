@@ -7,7 +7,7 @@ import TopNav from '../../components/Navbars/TopNav/TopNav';
 
 // Pages
 import AssignmentsPage from './student/AssignmentsPage'
-
+import TakeTestPage from "./student/TakeTestPage";
 // CSS
 import './dashboard.css'
 
@@ -19,8 +19,8 @@ const Homepage = () => {
 
 
 	if(localStorage.getItem("role") != "student" ) {
-		window.location.href = '/login'
-		return;
+		return (window.location.href = '/login');
+		
 	}
 	
 
@@ -31,6 +31,10 @@ const Homepage = () => {
 	let pageComponent
 	if (page === "ASSIGNMENTS") {
 		pageComponent = <AssignmentsPage />
+	} else if (page.includes("TEST/")) {
+		let testID = page.substring(page.indexOf("/")+1);
+		page = "Taking Test"
+		pageComponent = <TakeTestPage testID = {testID}/>;
 	}
 	
 	return (

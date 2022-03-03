@@ -22,8 +22,8 @@ const AssignmentsPage = () => {
 		dispatch(getStudentTests());
 	}, [dispatch]);
 
-	const onButtonClick = (testID) => {
-		console.log(testID);
+	const onButtonClick = (test) => {
+		window.location.href = `/student/test/${test._id}`;
 	}
 	return (
 		<div className='assignments-container'>
