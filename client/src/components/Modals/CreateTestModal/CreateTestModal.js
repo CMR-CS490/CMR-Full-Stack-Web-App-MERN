@@ -32,7 +32,7 @@ const style = {
 // questionCheck is an Array of questions ID's to be displayed. These are the questions to be inserted into this new test.
 
 const CreateTestModal = ({questionCheck}) => {
-   console.log("%cComponent CreateTestModal", "color:red;", "questionCheck: ", questionCheck);
+   // console.log("%cComponent CreateTestModal", "color:red;", "questionCheck: ", questionCheck);
 
    const dispatch = useDispatch();
   

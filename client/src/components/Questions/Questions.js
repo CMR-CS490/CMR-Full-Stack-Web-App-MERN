@@ -9,9 +9,9 @@ const Questions = ({questionCheck, setQuestionCheck, checkboxVisible, scoreInput
    
    // Reducer
    const questions = useSelector((state) => state.questions);
-   console.log("Questions: ", { questions }, );
+   // console.log("Questions: ", { questions }, );
    
-   console.log("%cComponent Questions", "color:green;", "questionCheck: ", questionCheck, "questions array: ", questions, "checkboxVisible: ", checkboxVisible, "scoreInputVisible: ", scoreInputVisible)
+   // console.log("%cComponent Questions", "color:green;", "questionCheck: ", questionCheck, "questions array: ", questions, "checkboxVisible: ", checkboxVisible, "scoreInputVisible: ", scoreInputVisible)
 
    return (
       <div>

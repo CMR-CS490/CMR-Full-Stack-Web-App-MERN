@@ -9,7 +9,7 @@ import "./Tests.css";
 const Tests = ({currentId, setCurrentId }) => {
    const tests = useSelector((state) => state.tests); // tests are from /reducers/index.js
 
-   console.log(tests);
+   // console.log(tests);
 
    return !tests.length ? (
       <CircularProgress /> // If there are no tests in the DB, return a circular loading screen.)

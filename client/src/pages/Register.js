@@ -18,7 +18,7 @@ const Register = () => {
    // Send the username and password to the Backend Server after the user clicks Submit.
    async function registerUser(event) {
       event.preventDefault(); // Disable redirection after Submit button is pressed.
-      console.log(role);
+      // console.log(role);
       if((username.length * password.length) === 0) {
          document.getElementsByClassName("error")[0].innerHTML = "Please enter a username and password.";
          document.getElementsByClassName("error")[0].style.display = "block";
@@ -46,7 +46,7 @@ const Register = () => {
       });
 
       const data = await response.json();
-      console.log({ data });
+      // console.log({ data });
 
       if (data.status === "ok") {
          window.location.href = '/login'
