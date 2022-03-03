@@ -6,7 +6,6 @@ import { useDispatch } from 'react-redux';
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register";
 //import Dashboard from "./pages/Dashboard";
-import Homepage from "./pages/Homepage/Homepage";
 import StudentDashboard from "./pages/Dashboards/student";
 import TeacherDashboard from "./pages/Dashboards/teacher";
 
