@@ -10,10 +10,10 @@ import {getTests} from '../../../actions/tests';
 import Tests from '../../../components/Tests/Tests';
 
 // CSS
-import './AssignmentsPage.css';
+import './TestsPage.css';
 
 // This page is for students. They can see tests that they need to take.
-const AssignmentsPage = () => {
+const TestsPage = () => {
 
     const dispatch = useDispatch();
 
@@ -21,9 +21,10 @@ const AssignmentsPage = () => {
 		dispatch(getTests());
 	}, [dispatch]);
 
-	const onButtonClick = (testID) => {
+	const onVisibilityChange = (testID) => {
 		console.log(testID);
-	}
+	};
+
 	return (
 		<div className='assignments-container'>
 			<Container>
@@ -31,7 +32,7 @@ const AssignmentsPage = () => {
 					<Container>
 						<Grid container jusitfy='space-between' alignItems='strech' spacing='3'>
 							<Grid item xs={12} sm={12}>
-								<Tests buttonName = "Start Exam" onButtonClick={onButtonClick}/>
+								<Tests buttonName= "Publish" onButtonClick = {onVisibilityChange}/>
 							</Grid>
 						</Grid>
 					</Container>
@@ -41,4 +42,4 @@ const AssignmentsPage = () => {
 	);
 };
 
-export default AssignmentsPage;
+export default TestsPage;
