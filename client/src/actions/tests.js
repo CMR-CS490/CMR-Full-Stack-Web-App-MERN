@@ -12,6 +12,16 @@ export const getTests = () => async (dispatch) => {
    }
 };
 
+export const getStudentTests = () => async (dispatch) => {
+   try {
+      const { data } = await api.fetchStudentTests();
+
+      dispatch({ type: "FETCH_ALL", payload: data }); // payload is all our tests
+   } catch (error) {
+      console.log(error.message);
+   }
+};
+
 export const createTest = (test, questionsData) => async (dispatch) => {
    try {
       test.questions = questionsData;

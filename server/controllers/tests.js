@@ -16,6 +16,21 @@ export const getTests = async (req, res) => {
    }
 };
 
+
+export const getStudentTests = async (req, res) => {
+   try {
+      // Get all of the tests/exams in the DB.
+      const tests = await Test.find({visible: true});
+
+      console.log("Sending all Visible tests in the DB: ", { tests });
+
+      // Send an array of all the tests.
+      res.status(200).json(tests);
+   } catch (error) {
+      res.status(404).json({ message: error.message });
+   }
+};
+
 export const createTest = async (req, res) => {
    const test = req.body;
 

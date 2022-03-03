@@ -4,7 +4,8 @@ import {useDispatch} from 'react-redux';
 import {Container, AppBar, Typography, Grow, Grid} from '@mui/material';
 
 // Actions
-import {getTests} from '../../../actions/tests';
+import {getStudentTests} from '../../../actions/tests';
+
 
 // Components
 import Tests from '../../../components/Tests/Tests';
@@ -18,7 +19,7 @@ const AssignmentsPage = () => {
     const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(getTests());
+		dispatch(getStudentTests());
 	}, [dispatch]);
 
 	const onButtonClick = (testID) => {
