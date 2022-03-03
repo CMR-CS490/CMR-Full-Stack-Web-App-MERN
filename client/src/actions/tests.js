@@ -12,8 +12,9 @@ export const getTests = () => async (dispatch) => {
    }
 };
 
-export const createTest = (test) => async (dispatch) => {
+export const createTest = (test, questionsData) => async (dispatch) => {
    try {
+      test.questions = questionsData;
       const { data } = await api.createTest(test);
 
       dispatch({ type: "CREATE", payload: data });

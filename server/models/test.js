@@ -6,7 +6,7 @@ const testSchema = mongooose.Schema({
     creator: String,
     selectedFile: String,
     visible: Boolean,
-    questions: [{ type : Object, ref: 'question' }],
+    questions: [{ question_id : String, question_score: String}],
     createdAt: {
         type: Date,
         default: new Date()

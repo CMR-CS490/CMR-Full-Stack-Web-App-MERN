@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(cors());
 
 // Every route in the /rouets/tests.js routes will start with /tests and append with whatever urls are in the /routes/tests.js
-app.use('/tests', testRoutes);
+app.use('/api/tests', testRoutes);
 app.use('/api/questions', questionRoutes);
 
 app.get('/', (req, res) => {
