@@ -17,11 +17,12 @@ const Homepage = () => {
 
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-		if(localStorage.getItem("role") != "student" ) {
-			window.location.href = '/login'
-		}
-	}, []);
+
+	if(localStorage.getItem("role") != "student" ) {
+		window.location.href = '/login'
+		return;
+	}
+	
 
 	let currentRoute = window.location.href;
 	let page = currentRoute.substring(currentRoute.indexOf("/student") + 9).toUpperCase();
