@@ -5,6 +5,9 @@ import {useDispatch} from 'react-redux';
 import SideNav from '../../components/Navbars/SideNav/SideNavStudents';
 import TopNav from '../../components/Navbars/TopNav/TopNav';
 
+// Pages
+import AssignmentsPage from './student/AssignmentsPage'
+
 // CSS
 import './dashboard.css'
 
@@ -23,7 +26,11 @@ const Homepage = () => {
 	let currentRoute = window.location.href;
 	let page = currentRoute.substring(currentRoute.indexOf("/student") + 9).toUpperCase();
 	if(page.length == 0) page = "DASHBOARD";
-	
+
+	let pageComponent
+	if (page === "ASSIGNMENTS") {
+		pageComponent = <AssignmentsPage />
+	}
 	
 	return (
 		<div>
@@ -33,6 +40,9 @@ const Homepage = () => {
 				<Container>
 				 	<div className='header'>
 					 	<h1>{page}</h1>
+					</div>
+					<div>
+						{pageComponent}
 					</div>
 				</Container>
 			</div>

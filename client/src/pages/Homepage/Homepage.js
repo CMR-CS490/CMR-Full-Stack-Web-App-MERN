@@ -6,7 +6,7 @@ import {getTests} from '../../actions/tests';
 
 // Components
 import Tests from '../../components/Tests/Tests';
-import Form from '../../components/Form/Form';
+import TestForm from '../../components/TestForm/TestForm';
 
 // Images
 import exam from '../../images/exam.png';
@@ -46,7 +46,7 @@ const Homepage = () => {
 									<Tests setCurrentId={setCurrentId} />
 								</Grid>
 								<Grid item xs={12} sm={4}>
-									<Form currentId={currentId} setCurrentId={setCurrentId} />
+									<TestForm currentId={currentId} setCurrentId={setCurrentId} />
 								</Grid>
 							</Grid>
 						</Container>
