@@ -6,7 +6,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 import './Test.css';
 
-const Test = ({test, setCurrentId}) => {
+const Test = ({test, buttonName, onButtonClick}) => {
 	return (
 		<Card sx={{maxWidth: 345}}>
 			{/* <CardMedia image={test.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} title={test.title} /> */}
@@ -44,9 +44,9 @@ const Test = ({test, setCurrentId}) => {
 					sx={{
 						marginBottom: '10px',
 					}}
-					onClick={() => {}}
+					onClick={() => {onButtonClick(test._id)}}
 				>
-					Start Exam
+					{buttonName}
 				</Button>
 			</CardActions>
 		</Card>

@@ -6,7 +6,7 @@ import TopNav from '../../components/Navbars/TopNav/TopNav';
 
 // Pages
 import QuestionsPage from './teacher/QuestionsPage';
-
+import TestsPage from './teacher/TestsPage'
 // CSS
 import './dashboard.css'
 
@@ -33,6 +33,8 @@ const Homepage = () => {
 	let pageComponent
 	if (page === "QUESTIONS") {
 		pageComponent = <QuestionsPage />
+	} else if (page === "TESTS") {
+		pageComponent = <TestsPage />
 	}
 	
 	return (
