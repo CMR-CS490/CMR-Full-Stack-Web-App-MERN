@@ -7,7 +7,7 @@ export const url = 'http://localhost:5002/';
 
 export const fetchTests = () => axios.get(`${url}api/tests`);
 export const createTest = (newTest) => axios.post(`${url}api/tests`, newTest);
-export const updateTest = (id, updatedTest) => axios.patch(`${url}tests/${id}`, updatedTest);
+export const updateTest = (id, updatedTest) => axios.patch(`${url}api/tests/${id}`, updatedTest);
 export const getQuestions = () => axios.get(`${url}api/questions`);
 export const createQuestion = (newQuestion) => axios.post(`${url}api/questions`, newQuestion);  
 
