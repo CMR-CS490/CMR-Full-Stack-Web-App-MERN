@@ -35,9 +35,7 @@ const CreateTestModal = ({questionCheck}) => {
    console.log("%cComponent CreateTestModal", "color:red;", "questionCheck: ", questionCheck);
 
    const dispatch = useDispatch();
-   useEffect(() => {
-      dispatch(getQuestions());
-   }, [dispatch]);
+  
 
    //  console.log("%cComponent CreateTestModal", "color:red;", "questions: ", questions)
 
@@ -56,13 +54,42 @@ const CreateTestModal = ({questionCheck}) => {
 
    // States for Modal opening and closing.
    const [open, setOpen] = React.useState(false);
-   const handleOpen = () => setOpen(true);
+   const handleOpen = () => {
+      if(questionCheck.length !== 0) {
+         setOpen(true);
+      }
+      
+   };
    const handleClose = () => setOpen(false);
 
    const handleSubmit = (e) => {
       e.preventDefault();
+
+      if(testData.creator.length === 0 || testData.title.length === 0 || testData.description.length === 0 ) {
+            document.getElementsByClassName("error")[0].innerHTML = "Please fill out all fields";
+            document.getElementsByClassName("error")[0].style.display = "block";
+            return;
+      }
+
+      let question_score_error = false;
+      questionData.map( (question)=> {
+         if(question.question_score.length=== 0 || question.question_score === '') {
+            question_score_error = true;    
+         }
+      });
+
+      if(question_score_error) {
+         document.getElementsByClassName("error")[0].innerHTML = "Please fill out scores for each question";
+         document.getElementsByClassName("error")[0].style.display = "block";
+         return; 
+      }
+
+      document.getElementsByClassName("error")[0].style.display = "none";
+
+
       dispatch(createTest(testData, questionData));
       handleClose();
+      window.location.reload();
    };
 
    return (
@@ -85,6 +112,10 @@ const CreateTestModal = ({questionCheck}) => {
                <Typography variant="h3" component="h2">
                   Creating a Test
                </Typography>
+               <div className="error">
+                  <h3>Error</h3>
+               </div>
+               <TestForm currentId={currentId} setCurrentId={setCurrentId} testData={testData} setTestData={setTestData} questionCheck={questionCheck} />
                <TestForm currentId={currentId} setCurrentId={setCurrentId} testData={testData} setTestData={setTestData} questionCheck={questionCheck} />
                <Typography variant="h5" sx={{ mt: 2 }}>
                   Questions to be added.
