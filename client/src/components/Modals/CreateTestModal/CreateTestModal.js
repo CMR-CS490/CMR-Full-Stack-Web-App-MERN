@@ -11,7 +11,7 @@ import Modal from "@mui/material/Modal";
 
 // Components
 import QuestionsToBeAdded from "../../Questions/QuestionsToBeAdded";
-import Form from "../../Form/Form";
+import TestForm from "../../TestForm/TestForm";
 
 // CSS
 import "./CreateTestModal.css";
@@ -115,7 +115,8 @@ const CreateTestModal = ({questionCheck}) => {
                <div className="error">
                   <h3>Error</h3>
                </div>
-               <Form currentId={currentId} setCurrentId={setCurrentId} testData={testData} setTestData={setTestData} questionCheck={questionCheck} />
+               <TestForm currentId={currentId} setCurrentId={setCurrentId} testData={testData} setTestData={setTestData} questionCheck={questionCheck} />
+               <TestForm currentId={currentId} setCurrentId={setCurrentId} testData={testData} setTestData={setTestData} questionCheck={questionCheck} />
                <Typography variant="h5" sx={{ mt: 2 }}>
                   Questions to be added.
                </Typography>

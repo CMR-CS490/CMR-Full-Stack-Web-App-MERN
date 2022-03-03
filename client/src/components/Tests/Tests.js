@@ -14,9 +14,9 @@ const Tests = ({currentId, setCurrentId }) => {
    return !tests.length ? (
       <CircularProgress /> // If there are no tests in the DB, return a circular loading screen.)
    ) : (
-      <Grid container alignItems="stretch" spacing={3}>
+      <Grid container alignItems="stretch" spacing={1}>
          {tests.map((test) => (
-            <Grid key={test._id} item xs={12} sm={6}>
+            <Grid key={test._id} item xs={12} sm={4}>
                <Test test={test} setCurrentId={setCurrentId} />
             </Grid>
          ))}

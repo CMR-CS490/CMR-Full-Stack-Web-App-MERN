@@ -6,13 +6,13 @@ import FileBase from "react-file-base64";
 
 import { createTest, updateTest } from "../../actions/tests";
 
-import "./Form.css";
+import "./TestForm.css";
 
 const theme = {};
 
 // Get the current ID
 
-const Form = ({ currentId, setCurrentId, testData, setTestData}) => {
+const TestForm = ({ currentId, setCurrentId, testData, setTestData}) => {
    // // States
    // const [testData, setTestData] = useState({
    //    creator: "",
@@ -94,4 +94,4 @@ const Form = ({ currentId, setCurrentId, testData, setTestData}) => {
    );
 };
 
-export default Form;
+export default TestForm;
