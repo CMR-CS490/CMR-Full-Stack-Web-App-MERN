@@ -7,7 +7,7 @@ import { borderRight } from "@mui/system";
 const QuestionToBeAdded = ({question, questionData, setQuestionData}) => {
    // console.log("QuestionToBeAdded Props: ", { props });
 
-   console.log("%cComponent QuestionToBeAdded", "color:pink;", "question: ", question , "questionData: ", questionData, "setQuestionData: ", setQuestionData)
+   // console.log("%cComponent QuestionToBeAdded", "color:pink;", "question: ", question , "questionData: ", questionData, "setQuestionData: ", setQuestionData)
 
    let question_id_value = question._id;
    // console.log("%cQuestion ID: ", "color:red;", question_id);

@@ -5,9 +5,9 @@ import './Question.css';
 import {borderRight} from '@mui/system';
 
 const Question = (props) => {
-	console.log("Question Props: ", {props})
+	// console.log("Question Props: ", {props})
 
-	console.log("%cComponent Question", "color:lightgreen;", "questionCheck: ", props.questionCheck, "checkboxVisible: ", props.checkboxVisible, "scoreInputVisible: ", props.scoreInputVisible)
+	// console.log("%cComponent Question", "color:lightgreen;", "questionCheck: ", props.questionCheck, "checkboxVisible: ", props.checkboxVisible, "scoreInputVisible: ", props.scoreInputVisible)
 
 	const [checkboxVisible, setcheckboxVisible] = useState(props.checkboxVisible);
 	const [scoreInputVisible, setscoreInputVisible] = useState(props.scoreInputVisible);
@@ -19,7 +19,7 @@ const Question = (props) => {
 		const styleCheckbox = {
 			visibility: "hidden"
 		}
-		console.log(styleCheckbox)
+		// console.log(styleCheckbox)
 	}
 	const handleCheckbox = () => {
 		let found = false;
@@ -42,7 +42,7 @@ const Question = (props) => {
 		<Card className = "question-card" display='flex' allignItems='flex-start' elevation='5'>
 			<CardActions sx={{display: 'inline-flex', width:"3%"}}>
 				<div className={checkBoxClassName} style={styleCheckbox}>
-					{console.log(styleCheckbox)}
+					{/* {console.log(styleCheckbox)} */}
 					<Checkbox
 						sx={{
 							borderRight: 3,
