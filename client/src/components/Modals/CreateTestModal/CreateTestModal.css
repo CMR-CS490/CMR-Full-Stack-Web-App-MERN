@@ -8,3 +8,11 @@
 .create-test-container {
    margin-top: 50px;
 }
+
+.error {
+   padding-top: 0.5em;
+   color: red;
+   font-weight: bold;
+   display: none;
+   font-size: 20px;
+}
