@@ -33,7 +33,7 @@ const Homepage = () => {
 		pageComponent = <AssignmentsPage />
 	} else if (page.includes("TEST/")) {
 		let testID = page.substring(page.indexOf("/")+1);
-		page = "Taking Test"
+		page = ""
 		pageComponent = <TakeTestPage testID = {testID}/>;
 	}
 	
