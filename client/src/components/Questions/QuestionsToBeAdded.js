@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import QuestionToBeAdded from './Question/QuestionToBeAdded';
 import {CircularProgress} from '@mui/material';
-//API
+
+//Redux Store
 import {useSelector} from 'react-redux';
 
 const Questions = ({questionData, setQuestionData, questionCheck}) => {
