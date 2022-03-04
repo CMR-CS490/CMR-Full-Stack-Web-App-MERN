@@ -11,6 +11,18 @@ export const getQuestions = () => async (dispatch) => {
       console.log(error.message);
    }
 };
+
+export const getQuestion = (questionID) => async (dispatch) => {
+   try {
+      const { data } = await api.getQuestion(questionID);
+
+      dispatch({ type: "FETCH_ALL", payload: data });
+   } catch (error) {
+      console.log(error.message);
+   }
+};
+
+
 export const createQuestion = (question, testcases) => async (dispatch) => {
    try {
       question.testcases = testcases;
@@ -22,3 +34,5 @@ export const createQuestion = (question, testcases) => async (dispatch) => {
        console.log(error.message);
    }
 };
+
+
