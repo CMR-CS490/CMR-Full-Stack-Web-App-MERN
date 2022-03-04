@@ -9,7 +9,6 @@ import { getQuestions } from "../../../actions/questions";
 
 // Components
 import ModalsButton from "../../../components/Modals/ModalsButton";
-import TestDetails from "../../../components/TakingTest/TestDetails/TestDetails";
 import TakingTestQuestions from "../../../components/TakingTest/TestDetails/TakingTestQuestions/TakingTestQuestions";
 
 // CSS
