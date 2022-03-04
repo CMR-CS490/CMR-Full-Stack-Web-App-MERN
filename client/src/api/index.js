@@ -12,7 +12,7 @@ export const createTest = (newTest) => axios.post(`${url}api/tests`, newTest);
 export const updateTest = (id, updatedTest) => axios.patch(`${url}api/tests/${id}`, updatedTest);
 
 
-
+export const getQuestion = (id) => axios.get(`${url}api/questions/${id}`);
 export const getQuestions = () => axios.get(`${url}api/questions`);
 export const createQuestion = (newQuestion) => axios.post(`${url}api/questions`, newQuestion);  
 
