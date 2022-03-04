@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect } from "react";
 import moment from 'moment';
 import {Card, CardActions, CardContent, CardMedia, Button, Typography, Divider} from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -7,6 +7,14 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import './Test.css';
 
 const Test = ({test, buttonName, onButtonClick}) => {
+	if(buttonName === 'Publish') {
+		if(test.visible) {
+			buttonName = "Unpublish";
+		} else {
+			buttonName = "Publish";
+		}
+	}
+
 	return (
 		<Card sx={{maxWidth: 345}}>
 			{/* <CardMedia image={test.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} title={test.title} /> */}
@@ -44,7 +52,7 @@ const Test = ({test, buttonName, onButtonClick}) => {
 					sx={{
 						marginBottom: '10px',
 					}}
-					onClick={() => {onButtonClick(test._id)}}
+					onClick={() => {onButtonClick(test)}}
 				>
 					{buttonName}
 				</Button>

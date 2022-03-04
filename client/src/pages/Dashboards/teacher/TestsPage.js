@@ -4,7 +4,7 @@ import {useDispatch} from 'react-redux';
 import {Container, AppBar, Typography, Grow, Grid} from '@mui/material';
 
 // Actions
-import {getTests} from '../../../actions/tests';
+import {getTests, updateTest} from '../../../actions/tests';
 
 // Components
 import Tests from '../../../components/Tests/Tests';
@@ -22,7 +22,9 @@ const TestsPage = () => {
 	}, [dispatch]);
 
 	const onVisibilityChange = (testID) => {
-		console.log(testID);
+		let newTest = testID;
+		newTest.visible = !newTest.visible;
+		dispatch(updateTest(newTest._id,newTest));
 	};
 
 	return (

@@ -12,6 +12,7 @@ import Modal from "@mui/material/Modal";
 // Components
 import QuestionsToBeAdded from "../../Questions/QuestionsToBeAdded";
 import TestForm from "../../TestForm/TestForm";
+import ModalsButton from "../ModalsButton.js";
 
 // CSS
 import "./CreateTestModal.css";
@@ -94,19 +95,8 @@ const CreateTestModal = ({questionCheck}) => {
 
    return (
       <div>
-         <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            type="submit"
-            fullWidth
-            sx={{
-               marginBottom: "10px",
-            }}
-            onClick={handleOpen}
-         >
-            Create a Test
-         </Button>
+
+         <ModalsButton text="Create a Test" action={handleOpen} color="primary"></ModalsButton>
          <Modal open={open}>
             <Box sx={style}>
                <Typography variant="h3" component="h2">
@@ -116,7 +106,6 @@ const CreateTestModal = ({questionCheck}) => {
                   <h3>Error</h3>
                </div>
                <TestForm currentId={currentId} setCurrentId={setCurrentId} testData={testData} setTestData={setTestData} questionCheck={questionCheck} />
-               <TestForm currentId={currentId} setCurrentId={setCurrentId} testData={testData} setTestData={setTestData} questionCheck={questionCheck} />
                <Typography variant="h5" sx={{ mt: 2 }}>
                   Questions to be added.
                </Typography>
@@ -124,32 +113,8 @@ const CreateTestModal = ({questionCheck}) => {
                   <QuestionsToBeAdded questionData={questionData} setQuestionData={setQuestionData} questionCheck={questionCheck}  />
                </div>
                <div className="create-test-container">
-                  <Button
-                     variant="contained"
-                     color="primary"
-                     size="large"
-                     type="submit"
-                     fullWidth
-                     sx={{
-                        marginBottom: "10px",
-                     }}
-                     onClick={handleSubmit}
-                  >
-                     Create a Test
-                  </Button>
-                  <Button
-                     variant="contained"
-                     color="secondary"
-                     size="large"
-                     type="submit"
-                     fullWidth
-                     sx={{
-                        marginBottom: "10px",
-                     }}
-                     onClick={handleClose}
-                  >
-                     Close
-                  </Button>
+                  <ModalsButton text="Create a Test" action={handleSubmit} color="primary"></ModalsButton>
+                  <ModalsButton text="Close" action={handleClose} color="secondary"></ModalsButton>
                </div>
             </Box>
          </Modal>

@@ -15,16 +15,18 @@ const Homepage = () => {
 	const [currentId, setCurrentId] = useState(null);
 
 	const dispatch = useDispatch();
-	let loggedIn = false;
-	useEffect(() => {
-		if(localStorage.getItem("role") !== "teacher" ) {
-			window.location.href = '/login';
-		} 
-		if(localStorage.getItem("role") === "student") {
-			window.location.href = '/student';
-		}
-		loggedIn = true;
-	}, []);
+
+	
+	if(localStorage.getItem("role") !== "teacher" ) {
+		window.location.href = '/login';
+		return;
+	} 
+	if(localStorage.getItem("role") === "student") {
+		window.location.href = '/student';
+		return;
+	}
+
+	
 
 	let currentRoute = window.location.href;
 	let page = currentRoute.substring(currentRoute.indexOf("/teacher") + 9).toUpperCase();

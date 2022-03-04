@@ -7,7 +7,7 @@ import TopNav from '../../components/Navbars/TopNav/TopNav';
 
 // Pages
 import AssignmentsPage from './student/AssignmentsPage'
-
+import TakeTestPage from "./student/TakeTestPage";
 // CSS
 import './dashboard.css'
 
@@ -17,11 +17,12 @@ const Homepage = () => {
 
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-		if(localStorage.getItem("role") != "student" ) {
-			window.location.href = '/login'
-		}
-	}, []);
+
+	if(localStorage.getItem("role") != "student" ) {
+		return (window.location.href = '/login');
+		
+	}
+	
 
 	let currentRoute = window.location.href;
 	let page = currentRoute.substring(currentRoute.indexOf("/student") + 9).toUpperCase();
@@ -30,6 +31,10 @@ const Homepage = () => {
 	let pageComponent
 	if (page === "ASSIGNMENTS") {
 		pageComponent = <AssignmentsPage />
+	} else if (page.includes("TEST/")) {
+		let testID = page.substring(page.indexOf("/")+1);
+		page = "Taking Test"
+		pageComponent = <TakeTestPage testID = {testID}/>;
 	}
 	
 	return (

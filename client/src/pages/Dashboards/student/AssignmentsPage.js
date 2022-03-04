@@ -4,7 +4,8 @@ import {useDispatch} from 'react-redux';
 import {Container, AppBar, Typography, Grow, Grid} from '@mui/material';
 
 // Actions
-import {getTests} from '../../../actions/tests';
+import {getStudentTests} from '../../../actions/tests';
+
 
 // Components
 import Tests from '../../../components/Tests/Tests';
@@ -18,11 +19,11 @@ const AssignmentsPage = () => {
     const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(getTests());
+		dispatch(getStudentTests());
 	}, [dispatch]);
 
-	const onButtonClick = (testID) => {
-		console.log(testID);
+	const onButtonClick = (test) => {
+		window.location.href = `/student/test/${test._id}`;
 	}
 	return (
 		<div className='assignments-container'>
