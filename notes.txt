@@ -1,2 +1,21 @@
 Create Question: Topic, category, difficulty, and prompt, 
 Create Test: Test name
+
+
+TestTaken:
+
+{
+	username: String,
+	testID: String,
+	questions: [{questionID: String. response: String}]
+
+}
+
+
+TestResults:
+{
+	username: String,
+	testID: String,
+	questions: {[questionID: String, grade: String, comment: String]}
+
+}
