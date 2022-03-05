@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Card, CardContent, Divider, Container, AppBar, Typography, Grow, Grid } from "@mui/material";
 
 // CSS
 import "./TakingTestQuestion.css";
+import { getQuestion } from "../../../../../actions/questions";
 
 const TakingTestQuestion = ({ question, index, questionData, setQuestionData }) => {
    let question_id_value = question.question_id;
@@ -12,18 +14,30 @@ const TakingTestQuestion = ({ question, index, questionData, setQuestionData }) 
    // State for keeping track of the user's input for one question.
    const [singleQuestionInputData, setSingleQuestionInputData] = useState({ question_id: `${question_id_value}`, question_input: "" });
 
+   // Use Redux
+   const dispatch = useDispatch();
+
       // Sending data back to the daddy prop after every input.
       useEffect(() => {
+         // Used for sending the data back to the TakeTestPage Component's state for submission.
          let found = false; 
          questionData.map((question) => {
             if(question.question_id === question_id_value) {
+               question.question_input = singleQuestionInputData.question_input;
                found = true;
             }
          }) 
-         
          if(!found)
             setQuestionData( [...questionData, singleQuestionInputData]);
-      }, [singleQuestionInputData])
+
+         // Rendering the question description using /actions
+         // dispatch(getQuestion(question_id_value))
+      }, [dispatch, singleQuestionInputData])
+
+      // Get question data from the redux store.
+      // const questionState = useSelector((state) => state.tests[0]);
+      // console.log("questionState: ", questionState);
+
 
    return (
       <div className="card-seperator">
