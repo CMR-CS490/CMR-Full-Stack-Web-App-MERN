@@ -11,7 +11,7 @@ import { getQuestions } from "../../../../api";
 
 const TakingTestQuestions = ({ questionData, setQuestionData }) => {
    // const dispatch = useDispatch();
-
+   const dispatch = useDispatch();
    // Getting question from the store.
 
    const [isLoading, setLoading] = useState(true);
@@ -32,6 +32,9 @@ const TakingTestQuestions = ({ questionData, setQuestionData }) => {
    // To avoid crashing.
    if (test) {
       questionsArray = test.questions;
+      questionsArray.map( (question) => {
+         dispatch(getQuestion(question.question_id));
+      })
    } else {
       questionsArray= []
    }
