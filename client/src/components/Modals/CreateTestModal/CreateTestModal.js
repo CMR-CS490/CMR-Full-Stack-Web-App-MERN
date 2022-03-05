@@ -79,6 +79,7 @@ const CreateTestModal = ({questionCheck}) => {
          }
       });
 
+      // Score Validation checking.
       if(question_score_error) {
          document.getElementsByClassName("error")[0].innerHTML = "Please fill out scores for each question";
          document.getElementsByClassName("error")[0].style.display = "block";

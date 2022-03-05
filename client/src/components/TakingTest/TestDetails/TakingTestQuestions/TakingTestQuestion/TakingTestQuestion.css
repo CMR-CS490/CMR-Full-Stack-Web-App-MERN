@@ -1,0 +1,78 @@
+.card-seperator {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.taking-test-question-card{
+    padding-bottom: 1rem;
+}
+
+.question-number-points-container {
+    background-color: #F0F0F0;
+    width: 100%;
+    display:flex;
+    justify-content: space-between;
+    height: 3.5rem;
+    
+}
+.question-number {
+    font-size: 1.2rem;
+    font-weight: 700;
+    /* display: inline-flex; */
+    /* justify-content: left; */
+    width: 100px;
+    padding: 0.5rem;
+    margin-top: .5rem;
+}
+
+.question-points{
+    font-size: 1.2rem;
+    /* display: inline-flex; */
+    /* justify-content: right; */
+    width: 100px;
+    padding: 0.5rem;
+    text-align: right;
+    margin-top: .5rem;
+}
+
+.question-description {
+    padding-bottom: 10px;
+}
+
+.console-container {
+    width: 97%;
+    /* margin: auto; */
+}
+
+textarea.console {
+    text-align: left !important;
+    background-color: black !important;
+    background-image: black !important;
+    height: 100px;
+    width: 100%;
+    margin: 0 !important;
+    /* overflow: scroll !important; */
+    padding: 1rem !important;
+    color: white !important;
+    font: 1.3rem Inconsolata, monospace !important ;
+    text-shadow: 0 0 5px #c8c8c8 !important;
+}
+textarea.console::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(255, 255, 255, 0.15) 1px, transparent 1px, transparent 2px);
+    pointer-events: none;
+}
+.textarea::selection {
+    background: #0080ff;
+    text-shadow: none;
+}
+
+
+pre {
+    margin: 0;
+}

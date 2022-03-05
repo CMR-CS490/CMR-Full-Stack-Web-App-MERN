@@ -1,0 +1,31 @@
+.taking-test-title {
+   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+   font-weight: 400;
+   font-size: 3rem;
+   line-height: 1.167;
+   letter-spacing: 0em;
+   text-align: center;
+   /* margin-bottom: 0.35em; */
+}
+
+.taking-test-description-container {
+   margin-top: 10px;
+}
+
+.taking-test-description {
+   padding: 10px;
+}
+
+.taking-test-creator {
+   padding: 10px;
+   margin-top: 10px;
+}
+
+.taking-test-questions-length {
+   margin-top: 5px;
+}
+
+.creator-question-length-container {
+   display: flex;
+   justify-content: space-between;
+}
