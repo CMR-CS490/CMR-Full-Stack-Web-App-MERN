@@ -18,22 +18,24 @@ const TakingTestQuestions = ({ questionData, setQuestionData }) => {
 
    const test = useSelector((state) => state.tests[0]); // Obtain the array of questions to be outputed.
 
+   let questionsArray = [];
    useEffect(() => {
       if (test) {
+         // questionsArray = test.questions;
+         console.log("questionsArray: ", questionsArray);
          setLoading(false);
       }
-   }, [isLoading]);
+   }, [isLoading, test]);
 
    console.log("Test from store: ", test);
-   // console.log("%cComponent: TakingTestQuestions", "color:pink", "questions: ", test.questions);
-   const questionsArray = test.questions;
 
-   // let questions = useSelector((state) => state.questions);
-   // console.log("questions: ", questions);
-
-   if (isLoading) {
-      return <div>Loading...</div>;
+   // To avoid crashing.
+   if (test) {
+      questionsArray = test.questions;
+   } else {
+      questionsArray= []
    }
+   // questionsArray = test.questions;
 
    return (
       <div>
@@ -78,6 +80,15 @@ const TakingTestQuestions = ({ questionData, setQuestionData }) => {
    //          {/* {testQuestions.map((question) => <TakingTestQuestion key={question._id} question={question} />)} */}
    //       </div>
    //    );
+   // }
+
+      // console.log("%cComponent: TakingTestQuestions", "color:pink", "questions: ", test.questions);
+
+   // let questions = useSelector((state) => state.questions);
+   // console.log("questions: ", questions);
+
+   // if (isLoading) {
+   //    return <div>Loading...</div>;
    // }
 };
 
