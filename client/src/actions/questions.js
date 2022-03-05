@@ -6,6 +6,8 @@ export const getQuestions = () => async (dispatch) => {
    try {
       const { data } = await api.getQuestions();
 
+      console.log("Gettings questions from /actions: ", data);
+
       dispatch({ type: "FETCH_ALL", payload: data }); // payload is all our tests
    } catch (error) {
       console.log(error.message);
