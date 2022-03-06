@@ -4,8 +4,9 @@ import Answer from "../models/answer.js";
 
 export const getStudentAnswers = async (req, res) => {
    try {
-      // Get all of the tests/exams in the DB.
-      const studentAnswers = await Answer.find();
+      // Get all of the tests/exams in the DB
+      const { id: testID } = req.params;
+      const studentAnswers = await Answer.find({test_id: testID});
 
       console.log("Sending all Visible tests Answers in the DB: ", { studentAnswers });
 
