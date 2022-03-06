@@ -8,7 +8,7 @@ export const getQuestions = () => async (dispatch) => {
 
       console.log("Gettings questions from /actions: ", data);
 
-      dispatch({ type: "FETCH_ALL", payload: data }); // payload is all our tests
+      dispatch({ type: "FETCH_ALL_QUESTION", payload: data }); // payload is all our tests
    } catch (error) {
       console.log(error.message);
    }
@@ -18,7 +18,7 @@ export const getQuestion = (questionID) => async (dispatch) => {
    try {
       const { data } = await api.getQuestion(questionID);
 
-      dispatch({ type: "FETCH_ALL", payload: data });
+      dispatch({ type: "FETCH_QUESTION", payload: data[0] });
    } catch (error) {
       console.log(error.message);
    }
@@ -31,7 +31,7 @@ export const createQuestion = (question, testcases) => async (dispatch) => {
       console.log(question);
       const { data } = await api.createQuestion(question);
 
-      dispatch({ type: "CREATE", payload: data });
+      dispatch({ type: "CREATE_QUESTION", payload: data });
    } catch (error) {
        console.log(error.message);
    }

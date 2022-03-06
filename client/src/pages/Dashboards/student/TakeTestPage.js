@@ -23,7 +23,6 @@ const TakeTestPage = ({ testID }) => {
    const dispatch = useDispatch();
    useEffect(() => {
       dispatch(getTest(testID));
-      dispatch(getQuestions);
    }, [dispatch]);
 
    // State for keeping track of the user's input for each question.

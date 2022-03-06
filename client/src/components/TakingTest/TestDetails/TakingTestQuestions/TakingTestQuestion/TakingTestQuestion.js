@@ -35,10 +35,14 @@ const TakingTestQuestion = ({ question, index, questionData, setQuestionData }) 
       }, [dispatch, singleQuestionInputData])
 
       // Get question data from the redux store.
-      // const questionState = useSelector((state) => state.tests[0]);
+      const questionState = useSelector((state) => state.questions);
       // console.log("questionState: ", questionState);
-
-
+      let questionInfo = questionState.filter((question) => question._id === question_id_value)[0];
+    
+      
+   if (!questionInfo) {
+      return <p>loading</p>;
+   } 
    return (
       <div className="card-seperator">
          <Card className="taking-test-question-card" display="flex" allignItems="flex-start" elevation="5">
@@ -49,8 +53,7 @@ const TakingTestQuestion = ({ question, index, questionData, setQuestionData }) 
             <Divider />
             <br />
             <Typography className="question-description" variant="h5" align="center">
-               This where we will write the question description. This where we will write the question description. This where we will write the
-               question description.
+               {questionInfo.question}
             </Typography>
             <div className="console-container">
                <textarea className="console" type="text" value={singleQuestionInputData.question_input} onChange={(e) => setSingleQuestionInputData({ ...singleQuestionInputData, question_input: e.target.value})} />
