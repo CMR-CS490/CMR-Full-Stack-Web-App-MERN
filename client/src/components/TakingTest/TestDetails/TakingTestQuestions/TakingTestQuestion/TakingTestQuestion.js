@@ -12,7 +12,7 @@ const TakingTestQuestion = ({ question, index, questionData, setQuestionData }) 
    // console.log(question_id_value)
 
    // State for keeping track of the user's input for one question.
-   const [singleQuestionInputData, setSingleQuestionInputData] = useState({ question_id: `${question_id_value}`, question_input: "" });
+   const [singleQuestionInputData, setSingleQuestionInputData] = useState({ question_id: `${question_id_value}`, answer: "" });
 
    // Use Redux
    const dispatch = useDispatch();
@@ -23,7 +23,7 @@ const TakingTestQuestion = ({ question, index, questionData, setQuestionData }) 
          let found = false; 
          questionData.map((question) => {
             if(question.question_id === question_id_value) {
-               question.question_input = singleQuestionInputData.question_input;
+               question.answer = singleQuestionInputData.answer;
                found = true;
             }
          }) 
@@ -38,7 +38,15 @@ const TakingTestQuestion = ({ question, index, questionData, setQuestionData }) 
       const questionState = useSelector((state) => state.questions);
       // console.log("questionState: ", questionState);
       let questionInfo = questionState.filter((question) => question._id === question_id_value)[0];
-    
+      
+      const keyDown = ((e) => {
+         if(e.key === 'Tab') {
+            e.preventDefault();
+            setSingleQuestionInputData({ ...singleQuestionInputData, answer: e.target.value += "\t"}) 
+         }
+      });
+
+
       
    if (!questionInfo) {
       return <p>loading</p>;
@@ -56,7 +64,7 @@ const TakingTestQuestion = ({ question, index, questionData, setQuestionData }) 
                {questionInfo.question}
             </Typography>
             <div className="console-container">
-               <textarea className="console" type="text" value={singleQuestionInputData.question_input} onChange={(e) => setSingleQuestionInputData({ ...singleQuestionInputData, question_input: e.target.value})} />
+               <textarea className="console" type="text" value={singleQuestionInputData.answer} onKeyDown={keyDown} onChange={(e) => setSingleQuestionInputData({ ...singleQuestionInputData, answer: e.target.value})} />
             </div>
          </Card>
       </div>

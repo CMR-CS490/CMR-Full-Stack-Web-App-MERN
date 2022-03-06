@@ -10,7 +10,11 @@ import dotenv from 'dotenv' // Access to ENV variables
 
 import testRoutes from './routes/tests.js';
 import questionRoutes from './routes/questions.js';
+import answerRoutes from './routes/answers.js';
+
 import User from './models/user.model.js';
+
+
 const app = express(); // Init Express as "app"
 dotenv.config();
 
@@ -23,6 +27,7 @@ app.use(cors());
 // Every route in the /rouets/tests.js routes will start with /tests and append with whatever urls are in the /routes/tests.js
 app.use('/api/tests', testRoutes);
 app.use('/api/questions', questionRoutes);
+app.use('/api/answers', answerRoutes);
 
 app.get('/', (req, res) => {
    res.send('CMR 490 API')

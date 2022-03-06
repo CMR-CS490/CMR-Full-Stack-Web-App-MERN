@@ -10,8 +10,9 @@ const testSchema = mongooose.Schema({
     createdAt: {
         type: Date,
         default: new Date()
-    },
-});
+    }},
+    { collection: "tests" }
+);
 
 const Test = mongooose.model('Test', testSchema);
 
