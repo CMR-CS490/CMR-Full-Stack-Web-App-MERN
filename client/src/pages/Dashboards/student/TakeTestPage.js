@@ -9,6 +9,7 @@ import axios from "axios";
 // Actions
 import { getTest } from "../../../actions/tests";
 import { getQuestions } from "../../../actions/questions";
+import { createAnswer } from "../../../actions/answers";
 
 // Components
 import ModalsButton from "../../../components/Modals/ModalsButton";
@@ -34,7 +35,14 @@ const TakeTestPage = ({ testID }) => {
    // A student clicks submit when they have answered all the questions. (Or left some blank.)
 
    function handleSubmit() {
-      console.log("uwu");
+      let testAnswers = {test_id : testID, username: localStorage.getItem('username'), questions: questionData}
+      dispatch(createAnswer(testAnswers));
+      window.location.href = "/student/assignments";
+      console.log(testAnswers);
+
+   }
+   function handleCancel() {
+      window.location.href = "/student/assignments";
    }
 
    return (
@@ -47,6 +55,7 @@ const TakeTestPage = ({ testID }) => {
             />
          </div>
          <ModalsButton text="Submit Test" action={handleSubmit} color="primary"></ModalsButton>
+         <ModalsButton text="Cancel" action={handleCancel} color="secondary"></ModalsButton>
       </div>
    );
 };
