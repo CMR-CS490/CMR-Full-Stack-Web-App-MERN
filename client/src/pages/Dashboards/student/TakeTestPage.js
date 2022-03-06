@@ -38,7 +38,7 @@ const TakeTestPage = ({ testID }) => {
       let testAnswers = {test_id : testID, username: localStorage.getItem('username'), questions: questionData}
       dispatch(createAnswer(testAnswers));
       window.location.href = "/student/assignments";
-      console.log(testAnswers);
+     
 
    }
    function handleCancel() {

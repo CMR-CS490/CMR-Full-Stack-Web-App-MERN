@@ -3,7 +3,7 @@ import mongooose from "mongoose";
 const testAnswerSchema = mongooose.Schema({
     username: String,
     test_id: String,
-    questions: [{ question_id : String, answer: String}],
+    questions: [{ question_id : String, answer: String, points: String}],
     createdAt: {
         type: Date,
         default: new Date()
