@@ -7,6 +7,7 @@ import TopNav from '../../components/Navbars/TopNav/TopNav';
 // Pages
 import QuestionsPage from './teacher/QuestionsPage';
 import TestsPage from './teacher/TestsPage'
+import TestDetailsPage from './teacher/TestDetailsPage'
 // CSS
 import './dashboard.css'
 
@@ -32,11 +33,18 @@ const Homepage = () => {
 	let page = currentRoute.substring(currentRoute.indexOf("/teacher") + 9).toUpperCase();
 	if(page.length == 0) page = "DASHBOARD";
 
+	let testID = "";
+	if(page.includes("TEST") && page.indexOf("/") > 0) {
+		testID = page.substring(page.indexOf("/") + 1);
+	}
 	let pageComponent
 	if (page === "QUESTIONS") {
 		pageComponent = <QuestionsPage />
 	} else if (page === "TESTS") {
 		pageComponent = <TestsPage />
+	} else if (testID.length > 0) {
+		page = "TEST DETAILS";
+		pageComponent = <TestDetailsPage testID = {testID}/>
 	}
 	
 	return (

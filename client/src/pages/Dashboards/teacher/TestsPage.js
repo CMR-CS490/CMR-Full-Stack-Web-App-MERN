@@ -28,7 +28,7 @@ const TestsPage = () => {
 	};
 
 	const onButtonClick2 = (testID) => {
-		console.log(testID)
+		window.location.href = `/teacher/tests/${testID._id}`;
 	}
 
 	return (
