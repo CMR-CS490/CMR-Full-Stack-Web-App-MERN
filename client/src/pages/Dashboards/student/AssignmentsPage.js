@@ -22,9 +22,15 @@ const AssignmentsPage = () => {
 		dispatch(getStudentTests());
 	}, [dispatch]);
 
-	const onButtonClick = (test) => {
+	const onButtonClick1 = (test) => {
 		window.location.href = `/student/test/${test._id}`;
 	}
+
+	// For viewing the score of the exam.
+	const onButtonClick2 = (test) => {
+		window.location.href = `/student/test/scores/${test._id}`;
+	}
+
 	return (
 		<div className='assignments-container'>
 			<Container>
@@ -32,7 +38,7 @@ const AssignmentsPage = () => {
 					<Container>
 						<Grid container jusitfy='space-between' alignItems='strech' spacing='3'>
 							<Grid item xs={12} sm={12}>
-								<Tests buttonName = "Start Exam" onButtonClick={onButtonClick}/>
+								<Tests buttonName1 = "Start Exam" buttonName2 = "View Score" onButtonClick1={onButtonClick1} onButtonClick2={onButtonClick2}/>
 							</Grid>
 						</Grid>
 					</Container>
