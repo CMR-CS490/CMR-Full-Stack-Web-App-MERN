@@ -25,6 +25,8 @@ const App = () => {
                <Route path="/student" element={<StudentDashboard/>} />
                <Route path="/teacher" element={<TeacherDashboard/>} />
                <Route path="/teacher/:page" element={<TeacherDashboard/>} />
+               <Route path="/teacher/tests/:id" element={<TeacherDashboard/>} />
+
                <Route path="/" exact element={<TeacherDashboard />} />
                <Route path="/student/:page" element={<StudentDashboard/>} />
                <Route path="/student/test/:id" element={<StudentDashboard/>} />
