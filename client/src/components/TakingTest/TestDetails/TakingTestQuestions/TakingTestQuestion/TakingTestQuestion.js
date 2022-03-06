@@ -12,7 +12,7 @@ const TakingTestQuestion = ({ question, index, questionData, setQuestionData }) 
    // console.log(question_id_value)
 
    // State for keeping track of the user's input for one question.
-   const [singleQuestionInputData, setSingleQuestionInputData] = useState({ question_id: `${question_id_value}`, answer: "" });
+   const [singleQuestionInputData, setSingleQuestionInputData] = useState({ question_id: `${question_id_value}`, answer: "", points: question.question_score});
 
    // Use Redux
    const dispatch = useDispatch();
