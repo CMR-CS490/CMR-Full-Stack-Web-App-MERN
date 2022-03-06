@@ -27,6 +27,10 @@ const TestsPage = () => {
 		dispatch(updateTest(newTest._id,newTest));
 	};
 
+	const onButtonClick2 = (testID) => {
+		console.log(testID)
+	}
+
 	return (
 		<div className='assignments-container'>
 			<Container>
@@ -34,7 +38,7 @@ const TestsPage = () => {
 					<Container>
 						<Grid container jusitfy='space-between' alignItems='strech' spacing='3'>
 							<Grid item xs={12} sm={12}>
-								<Tests buttonName= "Publish" onButtonClick = {onVisibilityChange}/>
+								<Tests buttonName1 = "Publish" buttonName2 = "Submissions" onButtonClick1={onVisibilityChange} onButtonClick2={onButtonClick2} />
 							</Grid>
 						</Grid>
 					</Container>

@@ -6,12 +6,12 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 import './Test.css';
 
-const Test = ({test, buttonName, onButtonClick}) => {
-	if(buttonName === 'Publish') {
+const Test = ({test, buttonName1, buttonName2, onButtonClick1, onButtonClick2}) => {
+	if(buttonName1 === 'Publish') {
 		if(test.visible) {
-			buttonName = "Unpublish";
+			buttonName1 = "Unpublish";
 		} else {
-			buttonName = "Publish";
+			buttonName1 = "Publish";
 		}
 	}
 
@@ -52,9 +52,22 @@ const Test = ({test, buttonName, onButtonClick}) => {
 					sx={{
 						marginBottom: '10px',
 					}}
-					onClick={() => {onButtonClick(test)}}
+					onClick={() => {onButtonClick1(test)}}
 				>
-					{buttonName}
+					{buttonName1}
+				</Button>
+				<Button
+					variant='contained'
+					color='primary'
+					size='large'
+					type='submit'
+					fullWidth
+					sx={{
+						marginBottom: '10px',
+					}}
+					onClick={() => {onButtonClick2(test)}}
+				>
+					{buttonName2}
 				</Button>
 			</CardActions>
 		</Card>
