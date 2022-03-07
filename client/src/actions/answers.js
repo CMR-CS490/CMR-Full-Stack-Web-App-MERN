@@ -22,3 +22,13 @@ export const getAnswers = (testID) => async (dispatch) => {
 		console.log(error.message);
 	}
  };
+
+ export const getAnswer= (answerID) => async (dispatch) => {
+	try {
+		const { data } = await api.getAnswer(answerID);
+ 
+		dispatch({ type: "FETCH_ALL_ANSWERS", payload: data });
+	} catch (error) {
+		console.log(error.message);
+	}
+ };

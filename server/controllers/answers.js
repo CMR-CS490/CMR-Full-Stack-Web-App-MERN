@@ -30,3 +30,17 @@ export const createAnswer = async (req, res) => {
    }
 };
 
+export const getAnswer = async (req, res) => {
+   try {
+      // Get all of the tests/exams in the DB
+      const { id: answerID } = req.params;
+      const studentAnswer = await Answer.find({_id: answerID});
+
+      console.log("Sending all particular test Answer: ", { studentAnswer });
+
+      // Send an array of all the tests.
+      res.status(200).json(studentAnswer);
+   } catch (error) {
+      res.status(404).json({ message: error.message });
+   }
+};
