@@ -50,7 +50,7 @@ const Test = ({test, buttonName1, buttonName2, onButtonClick1, onButtonClick2}) 
 				</Button>
 				<Button
 					variant='contained'
-					color='primary'
+					color='secondary'
 					size='large'
 					type='submit'
 					fullWidth
