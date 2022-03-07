@@ -11,7 +11,7 @@ import dotenv from 'dotenv' // Access to ENV variables
 import testRoutes from './routes/tests.js';
 import questionRoutes from './routes/questions.js';
 import answerRoutes from './routes/answers.js';
-
+import gradeRoutes from './routes/grade.js';
 import User from './models/user.model.js';
 
 
@@ -28,6 +28,7 @@ app.use(cors());
 app.use('/api/tests', testRoutes);
 app.use('/api/questions', questionRoutes);
 app.use('/api/answers', answerRoutes);
+app.use('/api/grade', gradeRoutes);
 
 app.get('/', (req, res) => {
    res.send('CMR 490 API')
