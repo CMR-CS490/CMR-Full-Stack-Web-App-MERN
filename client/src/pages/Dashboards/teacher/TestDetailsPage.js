@@ -23,22 +23,27 @@ const TestDetailsPage = ({ testID }) => {
    // Get answer data from Redux Store.
    const answers = useSelector((state) => state.answers);
 
-   // State for keep track of the selected checkboxed questions.
-   const [questionCheck, setQuestionCheck] = useState([]);
+   // State for keeping track of the ID of the answer (Exam of one student).
+   // const [answerID, setAnswerID] = useState([]);
 
    // // States for popup modals.
    // const [displayTestModal, setDisplayTestModal] = useState({visible: false})
    // const [displayQuestionModal, setDisplayQuestionModal] = useState({visible: false})
 
-   const onButtonClick1 = (test) => {
-		window.location.href = `/teacher/tests/results/${testID}`;
-	}
+   // View Results Button
+   const onButtonClick1 = (answerID) => {
+      console.log(answerID)
+      window.location.href = `/teacher/tests/results/${answerID}`;
+   };
+
+   // Autograde Button 
+   const onButtonClick2 = () => {
+      console.log("Autograde");
+   };
 
    return !answers.length ? (
-         // If there are no answers in the DB.)
-      <p> 
-         There are currently no exams submitted for this exam.
-         </p>
+      // If there are no answers in the DB.)
+      <p>There are currently no exams submitted for this exam.</p>
    ) : (
       <div className="test-details-container">
          <TestDetails />
@@ -47,7 +52,7 @@ const TestDetailsPage = ({ testID }) => {
             <Grow in>
                <Container>
                   <Grid container jusitfy="space-between" alignItems="strech" spacing="3">
-                     <Students buttonName1 = "View Results" onButtonClick1={onButtonClick1} />
+                     <Students buttonName1="View Results" onButtonClick1={onButtonClick1} buttonName2="AutoGrade" onButtonClick2={onButtonClick2} />
                      {/* <Tests buttonName1="Start Exam" buttonName2="View Score" onButtonClick1={onButtonClick1} onButtonClick2={onButtonClick2} /> */}
                   </Grid>
                </Container>

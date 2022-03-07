@@ -8,6 +8,7 @@ import TopNav from '../../components/Navbars/TopNav/TopNav';
 import QuestionsPage from './teacher/QuestionsPage';
 import TestsPage from './teacher/TestsPage'
 import TestDetailsPage from './teacher/TestDetailsPage'
+import TestResultsPage from './teacher/TestResultsPage';
 // CSS
 import './dashboard.css'
 
@@ -31,21 +32,30 @@ const Homepage = () => {
 
 	let currentRoute = window.location.href;
 	let page = currentRoute.substring(currentRoute.indexOf("/teacher") + 9).toUpperCase();
+	console.log(page)
 	if(page.length == 0) page = "DASHBOARD";
 
 	let testID = "";
 	if(page.includes("TEST") && page.indexOf("/") > 0) {
 		testID = page.substring(page.indexOf("/") + 1);
 	}
+	let answerID = ""
+	if(page.includes("TESTS/RESULTS") && page.indexOf("/") > 0) {
+		answerID = page.substring(page.indexOf("/") + 9);
+		// console.log("from teacher.js: answerID: ", answerID);
+	}
 	let pageComponent
 	if (page === "QUESTIONS") {
 		pageComponent = <QuestionsPage />
 	} else if (page === "TESTS") {
 		pageComponent = <TestsPage />
+	} else if (page.includes("TESTS/RESULTS")) {
+		page = "TEST RESULTS"
+		pageComponent = <TestResultsPage answerID = {answerID} />
 	} else if (testID.length > 0) {
 		page = "TEST DETAILS";
 		pageComponent = <TestDetailsPage testID = {testID}/>
-	}
+	} 
 	
 	return (
 		
