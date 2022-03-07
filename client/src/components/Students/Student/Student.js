@@ -2,13 +2,13 @@ import React from 'react'
 import {Card, CardActions, CardContent, CardMedia, Button, Typography, Divider} from '@mui/material';
 import './Student.css';
 
-const Student = () => {
+const Student = ({answer, onButtonClick1, buttonName1}) => {
   return (
     <Card sx={{maxWidth: 345}}>
     <Typography variant='h3' align='center' gutterBottom>
-        idk
+        {answer.username}
     </Typography>
-    <div>
+    {/* <div>
         <CardContent>
             <Typography variant='subtitle1' gutterBottom>
                 something
@@ -19,7 +19,7 @@ const Student = () => {
         <Typography variant='body2' align='right' color='textSecondary'>
             who took it
         </Typography>
-    </div>
+    </div> */}
     <CardActions>
         <Button
             variant='contained'
@@ -30,9 +30,9 @@ const Student = () => {
             sx={{
                 marginBottom: '10px',
             }}
-            onClick={() => {}}
+            onClick={() => {onButtonClick1()}}
         >
-            View Results
+            {buttonName1}
         </Button>
     </CardActions>
 </Card>
