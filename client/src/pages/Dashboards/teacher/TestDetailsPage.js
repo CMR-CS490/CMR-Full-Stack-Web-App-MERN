@@ -1,32 +1,63 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { getAmswers, getAnswers } from "../../../actions/answers";
+import React, { useState, useEffect } from "react";
+import { Container, AppBar, Typography, Grow, Grid } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { getTest } from "../../../actions/tests";
+import { getAnswers } from "../../../actions/answers";
+
 // Components
+import TestDetails from "./../../../components/TakingTest/TestDetails/TestDetails";
+import Students from "./../../../components/Students/Students";
+
 // MUI
 import { Button } from "@mui/material";
 //CSS
-import "./QuestionsPage.css";
+import "./TestDetailsPage.css";
 
-const TestDetailsPage = ({testID}) => {
-
+const TestDetailsPage = ({ testID }) => {
    const dispatch = useDispatch();
    useEffect(() => {
-     dispatch(getAnswers(testID));
+      dispatch(getTest(testID));
+      dispatch(getAnswers(testID));
    }, [dispatch]);
 
-   
+   // Get answer data from Redux Store.
+   const answers = useSelector((state) => state.answers);
 
-   // State for keep track of the selected checkboxed questions.
-   const [questionCheck, setQuestionCheck] = useState([]);
+   // State for keeping track of the ID of the answer (Exam of one student).
+   // const [answerID, setAnswerID] = useState([]);
 
    // // States for popup modals.
    // const [displayTestModal, setDisplayTestModal] = useState({visible: false})
    // const [displayQuestionModal, setDisplayQuestionModal] = useState({visible: false})
 
-   return (
-      <div className="test-details">
-         <h1> LOADED </h1>
+   // View Results Button
+   const onButtonClick1 = (answerID) => {
+      console.log(answerID)
+      window.location.href = `/teacher/tests/results/${answerID}`;
+   };
+
+   // Autograde Button 
+   const onButtonClick2 = () => {
+      console.log("Autograde");
+   };
+
+   return !answers.length ? (
+      // If there are no answers in the DB.)
+      <p>There are currently no exams submitted for this exam.</p>
+   ) : (
+      <div className="test-details-container">
+         <TestDetails />
+         <br />
+         <Container>
+            <Grow in>
+               <Container>
+                  <Grid container jusitfy="space-between" alignItems="strech" spacing="3">
+                     <Students buttonName1="View Results" onButtonClick1={onButtonClick1} buttonName2="AutoGrade" onButtonClick2={onButtonClick2} />
+                     {/* <Tests buttonName1="Start Exam" buttonName2="View Score" onButtonClick1={onButtonClick1} onButtonClick2={onButtonClick2} /> */}
+                  </Grid>
+               </Container>
+            </Grow>
+         </Container>
       </div>
    );
 };
