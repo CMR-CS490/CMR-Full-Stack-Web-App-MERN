@@ -8,20 +8,17 @@ import fs from "fs"
 import { PythonShell } from "python-shell";
 
 const runTestCase = async (content) => {
-   fs.writeFile('./function.py', content, err => {
-      if (err) {
-         console.error(err)
-         return
-      }
-      //file written successfully
-   })
+    fs.writeFileSync('./function.py', content)
 
-    PythonShell.run("function.py", null, function(err, results){
-      console.log(content);
-      console.log("Results: ", results);
-      console.log("Python script finished");
-      return results
-   })
+    return new Promise((resolve, reject) => {
+        PythonShell.run("function.py", null, function(err, results){
+            if(err) {
+                return reject(err)
+            }
+
+            return resolve(results)
+        })
+    })
 }
 
 export const gradeTest = async (req, res) => {
@@ -34,13 +31,7 @@ export const gradeTest = async (req, res) => {
       const content = "def SUB (num1, num2):\n\treturn num1 - num2\nprint(SUB(5,1))"
       const output = await runTestCase(content);
       console.log("OUTPUT: ", output);
-      // const answers = await Answer.find({test_id: testID});
-      // answers.map(answer => {
-      //    let questions = answer.questions;
-      //    questions.map(question => {
-      //      let questionData =  Question.find({_id: question.question_id}); 
-      //    })
-      // });
+     
       
       
       // Send an array of all the tests.
@@ -49,3 +40,15 @@ export const gradeTest = async (req, res) => {
       res.status(404).json({ message: error.message });
    }
 };
+
+
+
+
+
+ // const answers = await Answer.find({test_id: testID});
+      // answers.map(answer => {
+      //    let questions = answer.questions;
+      //    questions.map(question => {
+      //      let questionData = await  Question.find({_id: question.question_id}); 
+      //    })
+      // });

@@ -73,10 +73,12 @@ const CreateTestModal = ({questionCheck}) => {
       }
 
       let question_score_error = false;
+      let total = 0;
       questionData.map( (question)=> {
          if(question.question_score.length=== 0 || question.question_score === '') {
             question_score_error = true;    
          }
+         total += question.question_score;
       });
 
       // Score Validation checking.
@@ -86,8 +88,13 @@ const CreateTestModal = ({questionCheck}) => {
          return; 
       }
 
-      document.getElementsByClassName("error")[0].style.display = "none";
+      if(total != 100) {
+         document.getElementsByClassName("error")[0].innerHTML = "Please make sure all scores equal to 100";
+         document.getElementsByClassName("error")[0].style.display = "block";
+         return;  
+      }
 
+      document.getElementsByClassName("error")[0].style.display = "none";
 
       dispatch(createTest(testData, questionData));
       handleClose();

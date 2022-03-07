@@ -8,9 +8,11 @@ const scoreSchema = mongooose.Schema({
             question_id : {
                 functionName: Boolean,
                 testcases: [
-                    { testCaseNumber: String, testcase: String, pass: Boolean}
-                ]
+                    {testcase: String, pass: Boolean}
+                ],
+                comments: String,
             }
+            
         }
     ],
     createdAt: {
