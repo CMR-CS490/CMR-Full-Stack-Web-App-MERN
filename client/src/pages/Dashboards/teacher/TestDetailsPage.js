@@ -31,15 +31,13 @@ const TestDetailsPage = ({ testID }) => {
    // const [displayQuestionModal, setDisplayQuestionModal] = useState({visible: false})
 
    // View Results Button
-   const onButtonClick1 = (answerID) => {
-      console.log(answerID)
+   const onButtonClick1 = (answerID, testID, username) => {
+      console.log("Answer_ID:", answerID, "Test_ID:", testID, "Username:", username);
+      localStorage.setItem("selectedUser", username);
+      localStorage.setItem("selectedTestID", testID);
       window.location.href = `/teacher/tests/results/${answerID}`;
    };
 
-   // Autograde Button 
-   const onButtonClick2 = () => {
-      console.log("Autograde");
-   };
 
    return !answers.length ? (
       // If there are no answers in the DB.)
@@ -52,7 +50,7 @@ const TestDetailsPage = ({ testID }) => {
             <Grow in>
                <Container>
                   <Grid container jusitfy="space-between" alignItems="strech" spacing="3">
-                     <Students buttonName1="View Results" onButtonClick1={onButtonClick1} buttonName2="AutoGrade" onButtonClick2={onButtonClick2} />
+                     <Students buttonName1="View Results" onButtonClick1={onButtonClick1} />
                      {/* <Tests buttonName1="Start Exam" buttonName2="View Score" onButtonClick1={onButtonClick1} onButtonClick2={onButtonClick2} /> */}
                   </Grid>
                </Container>
