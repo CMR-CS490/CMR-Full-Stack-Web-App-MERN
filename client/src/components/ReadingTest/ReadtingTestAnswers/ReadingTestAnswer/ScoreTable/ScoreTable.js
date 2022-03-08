@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import {Card, Typography, TextField} from "@mui/material"
 
@@ -12,12 +12,21 @@ import { useSelector } from "react-redux";
 import "./ScoreTable.css";
 
 // questionID is passed from ReadtingTestAsnwer.js
-const ScoreTable = ({ questionID }) => {
+const ScoreTable = ({ questionID, questionInfo}) => {
+
+   console.log("qinfo: ", questionInfo)
+   
+   
    // This variable makes it so the fields are able to be editable.
-   let isEditible = true; // True if the role is a teacher, false if its a student.
+   let isEditible = (localStorage.getItem("role") === "teacher") // True if the role is a teacher, false if its a student.
+    
 
+   useEffect(() => {
+      // setComment(comment)
+   }, [])
+   
    // const [scoreData, setScoreData] = useState()
-
+   
    const columns = [
       { field: "id", headerName: "ID", width: 90, hide: true, GridColDef: false },
       {
@@ -39,21 +48,29 @@ const ScoreTable = ({ questionID }) => {
          headerName: "Score",
          type: "number",
          flex: 0.2,
+         editable: false,
+         sortable: false,
+      },
+      {
+         field: "updatedScore",
+         headerName: "Updated Score",
+         type: "number",
+         flex: 0.2,
          editable: isEditible,
          sortable: false,
       },
    ];
-
+   
    // The first and and last rows will always be (Function Name) and (Comments/Total Score)
    // The middle columns will be based on the number of test cases.
-
+   
    // const rows = [
    //    { id: 1, questionNumber: "Function Name", questionDescription: "The function name is correct.", score: 50 },
    //    { id: 2, questionNumber: "Test Case 1", questionDescription: "Testing(2, 3)", score: 25 },
    //    { id: 3, questionNumber: "Test Case 2", questionDescription: "Testing(3, 3)", score: 25 },
    //    { id: 4, questionNumber: "Comments", questionDescription: "Write comments here", score: "Total" },
    // ];
-
+   
    const scores = useSelector((state) => state.scores);
    console.log("%cscores: ", "color:yellow", scores)
    const scoresArray = scores[0].scores; // Turn the redux state to an array of scores.
@@ -70,6 +87,8 @@ const ScoreTable = ({ questionID }) => {
       }
    }
 
+   const [comment, setComment] = useState(`${scoreData.comments}`);
+   
    let counter = 1;
    const rows = [];
 
@@ -82,6 +101,7 @@ const ScoreTable = ({ questionID }) => {
       questionNumber: "Function Name",
       questionDescription: scoreData.functionNameScore == 5 ? "The function name is correct." : "The function name is incorrect.",
       score: scoreData.functionNameScore,
+      updatedScore: scoreData.functionNameScore,
    });
    counter++;
    totalScore += parseInt(scoreData.functionNameScore);
@@ -93,16 +113,18 @@ const ScoreTable = ({ questionID }) => {
          questionNumber: `Test Case ${i + 1}`,
          questionDescription: scoreData.testcases[i].testcase,
          score: scoreData.testcases[i].score,
+         updatedScore: scoreData.testcases[i].score
       });
       counter++;
       totalScore += parseInt(scoreData.testcases[i].score);
    }
 
-   const [comment, setComment] = useState(" ");
    // 3. Pass in the comment and total score
 
-   rows.push({ id: counter, questionNumber: "Total Scores", questionDescription: " ", score: totalScore });
+   rows.push({ id: counter, questionNumber: "Total Scores", questionDescription: " ", score: totalScore, updatedScore: totalScore });
    counter++;
+
+   
 
    return (
       <div className="card-seperator">
@@ -133,9 +155,6 @@ const ScoreTable = ({ questionID }) => {
 						<Typography className='taking-test-questions-length' align='right' variant='subtitle1' gutterBottom sx={{display: 'inline-flex'}}>
 							Total Score: {totalScore}
 						</Typography>
-					</div>
-					<div className='test-details-button-container'>
-						<ModalsButton color='primary' text='Update' />
 					</div>
 				</Card>
 			</div>
