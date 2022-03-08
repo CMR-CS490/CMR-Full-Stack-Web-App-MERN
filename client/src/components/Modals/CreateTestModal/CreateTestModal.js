@@ -78,7 +78,7 @@ const CreateTestModal = ({questionCheck}) => {
          if(question.question_score.length=== 0 || question.question_score === '') {
             question_score_error = true;    
          }
-         total += question.question_score;
+         total += parseInt(question.question_score);
       });
 
       // Score Validation checking.
@@ -87,8 +87,9 @@ const CreateTestModal = ({questionCheck}) => {
          document.getElementsByClassName("error")[0].style.display = "block";
          return; 
       }
-
+      console.log("TOTAL: ", total)
       if(total != 100) {
+         
          document.getElementsByClassName("error")[0].innerHTML = "Please make sure all scores equal to 100";
          document.getElementsByClassName("error")[0].style.display = "block";
          return;  
@@ -119,11 +120,12 @@ const CreateTestModal = ({questionCheck}) => {
                </Typography>
                <div className="test-modal-questions-container">
                   <QuestionsToBeAdded questionData={questionData} setQuestionData={setQuestionData} questionCheck={questionCheck}  />
-               </div>
-               <div className="create-test-container">
+                  <div className="create-test-container">
                   <ModalsButton text="Create a Test" action={handleSubmit} color="primary"></ModalsButton>
                   <ModalsButton text="Close" action={handleClose} color="secondary"></ModalsButton>
                </div>
+               </div>
+               
             </Box>
          </Modal>
       </div>
