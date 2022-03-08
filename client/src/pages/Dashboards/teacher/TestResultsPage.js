@@ -1,5 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
+import {useDispatch, useSelector} from 'react-redux'
+
+// Redux
+import { getAnswers } from "./../../../actions/answers"
 
 // CSS
 import "./TestResultsPage";
@@ -43,7 +47,17 @@ const rows = [
 ];
 
 const TestResultsPage = ({ answerID }) => {
+   
    console.log("answerID: ", answerID);
+
+   // Get the answer from the DB.
+   const dispatch = useDispatch();
+
+   useEffect(() => {
+      dispatch(getAnswers(answerID));
+   }, [dispatch]);
+
+   const answers = useSelector((state) => state.answers);
 
    return (
       <div style={{ height: "400px", width: "100%" }}>
