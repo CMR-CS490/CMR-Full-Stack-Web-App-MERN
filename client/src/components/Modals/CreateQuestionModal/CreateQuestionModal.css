@@ -79,3 +79,15 @@ input {
    postition: relative;
    float: right;
 }
+
+.easy {
+   color: green;
+}
+
+.medium {
+   color: rgb(212, 212, 0);
+}
+
+.hard {
+   color: red;
+}
