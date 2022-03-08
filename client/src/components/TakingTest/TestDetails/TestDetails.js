@@ -2,7 +2,7 @@ import React from "react";
 import { CircularProgress } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { Card, CardContent, Divider, Container, AppBar, Typography, Grow, Grid } from "@mui/material";
-import {gradeTest} from "../../../actions/scores"
+import {gradeTest, publishScores} from "../../../actions/scores"
 
 // Components
 import ModalsButton from "../../Modals/ModalsButton";
@@ -27,6 +27,16 @@ const TestDetails = ({ setListOfQuestions, showButton }) => {
       setTimeout(function(){
          window.location.reload(); // you can pass true to reload function to ignore the client cache and reload from the server
      },1000); 
+   }
+
+   const onPublish = () => {
+      console.log("PUBLISHING SCORES TEST: ", test._id);
+      dispatch (publishScores(test._id));
+
+   //    setTimeout(function(){
+   //       window.location.reload(); // you can pass true to reload function to ignore the client cache and reload from the server
+   //   },1000); 
+
    }
 
    // This if conditional is a hotfix for the app crashing. At test is initially undefined at runtime and when the component renders, the app crashes.
@@ -69,7 +79,7 @@ const TestDetails = ({ setListOfQuestions, showButton }) => {
                {/* style={{display: }} */}
                <div className="test-details-button-container" style={inputStyle} >
                   <ModalsButton color="primary" text="Autograde" action= {onGrade}/>
-                  <ModalsButton color="secondary" text="Publish Scores"/>
+                  <ModalsButton color="secondary" text="Publish Scores" action={onPublish}/>
                </div>
 
             </Card>

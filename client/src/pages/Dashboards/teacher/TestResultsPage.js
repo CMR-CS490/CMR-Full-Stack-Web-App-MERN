@@ -55,10 +55,14 @@ const TestResultsPage = ({ propsTestID, answerID }) => {
    }, [dispatch]);
 
    const scores = useSelector((state) => state.scores);
-
+   const answers = useSelector((state) => state.answers);
    // dispatch(getScores(username, testID));
+   if(answers.length == 0) return (<p>Please take the test first</p>)
    if(scores.length == 0) {
-      return ( <p>There are currently no scores for this exam.</p>)
+      return ( <p>There are currently no scores for this test.</p>)
+   }
+   if(localStorage.getItem("role") === "student" && !scores[0].isPublished) {
+      return ( <p>Scores aren't published for this test.</p>) 
    }
    return (
       <div>

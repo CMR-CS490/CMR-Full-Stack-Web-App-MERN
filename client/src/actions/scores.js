@@ -35,3 +35,14 @@ export const gradeTest = (testID) => async (dispatch) => {
    }
 }
 
+export const publishScores = (testID) => async (dispatch) => {
+   try {
+      
+      const { data } = await api.publishScores(testID);
+
+      dispatch({ type: 'FETCH_SCORE', payload: data});
+   } catch (error) {
+      console.log(error);
+   }
+}
+
