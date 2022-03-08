@@ -16,7 +16,7 @@ import ScoreTables from "../../../components/ReadingTest/ScoreTables/ScoreTables
 // CSS
 import "./TestResultsPage";
 
-const TestResultsPage = ({ propsTestID, answerID,  }) => {
+const TestResultsPage = ({ propsTestID, answerID }) => {
    const dispatch = useDispatch();
 
    // const [username, setUserName] = useState();
@@ -42,19 +42,28 @@ const TestResultsPage = ({ propsTestID, answerID,  }) => {
    useEffect(() => {
       if (localStorage.getItem("role") === "teacher") {
          // Is a teacher
-         dispatch(getAnswer(answerID))
+         dispatch(getAnswer(answerID));
+         // Set the testID from the answerID
+         console.log("Populating testID");
+         if (true) {
+            // This if statement prevents the app from crashing. (Prevents the dot operator from accessing answers when it)
+            console.log(answers[0].test_id)
+            setTestID(answers[0].test_id);
+         }
       } else {
          // Is a student
          dispatch(getAnswerStudent(username, testID));
-         console.log()
+         console.log();
       }
       dispatch(getTest(testID));
       dispatch(getScores(username, testID));
-      console.log("Dispatching Scores")
+      console.log("Dispatching Scores");
    }, [dispatch]);
 
+   const answers = useSelector((state) => state.answers);
+
    // dispatch(getScores(username, testID));
-   
+
    return (
       <div>
          <TestDetails showButton={true} />
