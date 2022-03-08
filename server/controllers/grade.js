@@ -31,10 +31,12 @@ const gradeQuestion = async (question_id, answer, questionScore) => {
     response.question_id = question_id;
     
     let functionName = question[0].functionName;
+    let functionNameCorrect = true;
     if(answer.includes(`def ${functionName}`)) {
         response.functionNameScore = "5";
     } else {
         response.functionNameScore = "0";
+        functionNameCorrect = false;
     }
     
     
@@ -46,7 +48,11 @@ const gradeQuestion = async (question_id, answer, questionScore) => {
         let testCase1Answer = question[0].testcases[i].output;
         
         const content =  `${answer}\nprint(${functionName}(${testCase1}))`
-        const output = await runTestCase(content);
+        let output = []
+        if( functionNameCorrect) { 
+           output = await runTestCase(content);
+        }
+            
         
         if(output[0] == testCase1Answer) {
             response.testcases[i].testcase = `${functionName}(${testCase1})`
@@ -63,19 +69,9 @@ const gradeQuestion = async (question_id, answer, questionScore) => {
     }) 
 }
 
-const testDetails = async (test) => {
-    
-    return new Promise((resolve, reject) => {
-        let response = [];
 
-    })
-}
+export const gradeTest = async (answerID) => {
 
-export const gradeTest = async (req, res) => {
-   try {
-      const { id: answerID } = req.params;
-      // Get all of the tests/exams in the DB.
-      
       const data = {};
       let answer = await Answer.find({_id: answerID});
       answer = answer[0];
@@ -89,7 +85,7 @@ export const gradeTest = async (req, res) => {
       let answers = answer.questions;
 
       let questionData = []
-      console.log(test[0].questions)
+      //console.log(test[0].questions)
       for(let i = 0; i < answers.length; i++) {
         let holder = {};
         for(let j = 0; j < test[0].questions.length; j++) {
@@ -102,21 +98,42 @@ export const gradeTest = async (req, res) => {
         }
         questionData.push(holder);
       }
-      console.log(questionData);
+      //console.log(questionData);
       for (let i = 0; i < questionData.length; i++) {
+        console.log(questionData[i]);
         let result = await gradeQuestion(questionData[i].question_id, questionData[i].answer, questionData[i].question_score);
+        result.comment = "";
         data.scores.push(result);
       }
       
 
-      console.log("DATA\n", data);
+      //console.log("DATA\n", data);
       const newScore = new Score(data);
-      await newScore.save(); //
+      await newScore.save(); 
       
+      return new Promise((resolve, reject) => {
+        return resolve (data);
+    }) 
       
-      // Send an array of all the tests.
-      res.status(200).json(data);
-   } catch (error) {
-      res.status(404).json({ message: error.message });
-   }
 };
+
+
+export const gradeTests = async (req, res) => {
+    try {
+       const { id: testID } = req.params;
+       // Get all of the tests/exams in the DB.
+       
+       let data = [];
+       let student_answers = await Answer.find({test_id: testID});
+       
+       for (let i = 0; i < student_answers.length; i++) {
+           const resp = await gradeTest(student_answers[i]._id);
+           data.push(resp)
+       }
+       
+       // Send an array of all the tests.
+       res.status(200).json(data);
+    } catch (error) {
+       res.status(404).json({ message: error.message });
+    }
+ };

@@ -12,7 +12,7 @@ const scoreSchema = mongooose.Schema({
             testcases: [
                 {testcase: String, score: String}
             ],
-            comments: String
+            comments: String,
             
         }
     ],
