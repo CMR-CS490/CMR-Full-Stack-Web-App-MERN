@@ -23,9 +23,10 @@ export const getAnswers = (testID) => async (dispatch) => {
 	}
  };
 
- export const getAnswer= (answerID) => async (dispatch) => {
+ export const getAnswer = (answerID) => async (dispatch) => {
 	try {
 		const { data } = await api.getAnswer(answerID);
+		console.log("Sending one answer from the DB from actions: ", data)
  
 		dispatch({ type: "FETCH_ALL_ANSWERS", payload: data });
 	} catch (error) {
