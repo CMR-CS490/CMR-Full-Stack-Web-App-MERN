@@ -23,4 +23,7 @@ export const getAnswer = (id) => axios.get(`${url}api/answers/answer/${id}`);
 export const createAnswer = (newAnswer) => axios.post(`${url}api/answers`, newAnswer);  
 
 
+export const getScores = (username, testID) => axios.get(`${url}api/score/${username}/${testID}`);
+export const updateScores = (username, testID, updatedScore) => axios.get(`${url}api/score/${username}/${testID}`, updatedScore) ;
+
 // export const getQuestions = () => axios.get(`${url}api/questions`); // Getting question specified with specific ids. (For Creating a Test)

@@ -19,3 +19,14 @@ export const getStudentScores = async (req, res) => {
    }
 };
 
+export const updateScore = async (req, res) => {
+   const { id: _id } = req.params; // id is got from URL.
+   const score = req.body; // Sent from the frontend form.
+
+   if (!(mongoose.Types.ObjectId.isValid(_id))) return res.status(404).send('No Score with that id');
+
+   const updatedScore = await Score.findByIdAndUpdate(_id, { ...score, _id }, { new: true });
+
+   res.json(updatedScore);
+}
+

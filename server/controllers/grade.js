@@ -14,7 +14,7 @@ const runTestCase = async (content) => {
     return new Promise((resolve, reject) => {
         PythonShell.run("function.py", null, function(err, results){
             if(err) {
-                return reject(err)
+                return resolve([]);
             }
 
             return resolve(results)
