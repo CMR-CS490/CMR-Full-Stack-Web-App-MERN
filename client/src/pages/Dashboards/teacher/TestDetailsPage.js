@@ -46,7 +46,7 @@ const TestDetailsPage = ({ testID }) => {
       <p>There are currently no exams submitted for this exam.</p>
    ) : (
       <div className="test-details-container">
-         <TestDetails />
+         <TestDetails showButton={false}/>
          <br />
          <Container>
             <Grow in>

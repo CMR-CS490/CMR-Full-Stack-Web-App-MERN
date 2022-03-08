@@ -48,7 +48,7 @@ const TakeTestPage = ({ testID }) => {
    return (
       <div className="taking-test-container">
          <div className="taking-test-details-container">
-            <TestDetails />
+            <TestDetails showButton={true} />
             <br />
             <TakingTestQuestions questionData={questionData} setQuestionData={setQuestionData} />
          </div>

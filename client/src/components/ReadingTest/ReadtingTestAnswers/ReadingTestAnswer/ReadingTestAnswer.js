@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Card, Divider, Typography } from "@mui/material";
 
-// CSS
-import "./ReadingTestAnswer.css";
-
 // Redux
 import { getQuestion } from "../../../../actions/questions";
+
+// Components
+import ScoreTable from "./ScoreTable/ScoreTable"
+
+// CSS
+import "./ReadingTestAnswer.css";
 
 const ReadingTestAnswer = ({ question, index }) => {
    let question_id_value = question.question_id;
@@ -38,6 +41,7 @@ const ReadingTestAnswer = ({ question, index }) => {
 
    let answerData = "";
    // Iterate through the array and find the answerData inputed by the student by matching question_id's from the answerArray and the queestion.
+
 
    // Sending data back to the daddy prop after every input.
    useEffect(() => {
@@ -86,6 +90,7 @@ const ReadingTestAnswer = ({ question, index }) => {
                <textarea disabled className="console" type="text" value={singleQuestionInputData.answer} />
             </div>
          </Card>
+         <ScoreTable questionID={question_id_value} />
       </div>
    );
 };

@@ -16,12 +16,13 @@ const ReadingTestAnswers = () => {
    const [isLoading, setLoading] = useState(true);
 
    const test = useSelector((state) => state.tests[0]); // Obtain the array of questions to be outputed.
+   const answers = useSelector((state) => state.answers);
 
    let questionsArray = [];
    useEffect(() => {
       if (test) {
          // questionsArray = test.questions;
-         console.log("questionsArray: ", questionsArray);
+         // console.log("questionsArray: ", questionsArray);
          setLoading(false);
       }
    }, [isLoading, test]);
