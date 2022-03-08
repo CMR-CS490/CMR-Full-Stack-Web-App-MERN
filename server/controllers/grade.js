@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import Question from "../models/question.js";
 import Test from "../models/test.js";
 import Answer from "../models/answer.js";
+import Score from "../models/scores.js";
 
 import fs from "fs"
 import { PythonShell } from "python-shell";
@@ -21,34 +22,101 @@ const runTestCase = async (content) => {
     })
 }
 
+const gradeQuestion = async (question_id, answer, questionScore) => {
+    
+    let question = await Question.find({_id: question_id});
+    
+    let response = {};
+    response.testcases = [];
+    response.question_id = question_id;
+    
+    let functionName = question[0].functionName;
+    if(answer.includes(`def ${functionName}`)) {
+        response.functionNameScore = "5";
+    } else {
+        response.functionNameScore = "0";
+    }
+    
+    
+    let totalScore = questionScore -5;
+    
+    for (let i = 0; i < question[0].testcases.length; i++) {
+        response.testcases.push({});
+        let testCase1 = question[0].testcases[i].input;
+        let testCase1Answer = question[0].testcases[i].output;
+        
+        const content =  `${answer}\nprint(${functionName}(${testCase1}))`
+        const output = await runTestCase(content);
+        
+        if(output[0] == testCase1Answer) {
+            response.testcases[i].testcase = `${functionName}(${testCase1})`
+            response.testcases[i].score = (totalScore/question[0].testcases.length).toFixed(2);
+        } else {
+            response.testcases[i].testcase = `${functionName}(${testCase1})`
+            response.testcases[i].score = 0;
+        }
+        
+    }
+    return new Promise((resolve, reject) => {
+       
+        return resolve (response);
+    }) 
+}
+
+const testDetails = async (test) => {
+    
+    return new Promise((resolve, reject) => {
+        let response = [];
+
+    })
+}
+
 export const gradeTest = async (req, res) => {
    try {
-      const { id: testID } = req.params;
+      const { id: answerID } = req.params;
       // Get all of the tests/exams in the DB.
-      console.log("testID", testID);
+      
+      const data = {};
+      let answer = await Answer.find({_id: answerID});
+      answer = answer[0];
 
-      // console.log("Sending question with id: ", questionID , ":", {question});
-      const content = "def SUB (num1, num2):\n\treturn num1 - num2\nprint(SUB(5,1))"
-      const output = await runTestCase(content);
-      console.log("OUTPUT: ", output);
-     
+      data.username = answer.username;
+      data.test_id = answer.test_id;
+      data.answer_id = answerID;
+      data.scores = [];
+
+      let test = await Test.find({_id: answer.test_id})
+      let answers = answer.questions;
+
+      let questionData = []
+      console.log(test[0].questions)
+      for(let i = 0; i < answers.length; i++) {
+        let holder = {};
+        for(let j = 0; j < test[0].questions.length; j++) {
+            if(answers[i].question_id == test[0].questions[j].question_id) {
+                holder.question_id = answers[i].question_id;
+                holder.answer = answers[i].answer;
+                holder.question_score = test[0].questions[j].question_score;
+                break;
+            }
+        }
+        questionData.push(holder);
+      }
+      console.log(questionData);
+      for (let i = 0; i < questionData.length; i++) {
+        let result = await gradeQuestion(questionData[i].question_id, questionData[i].answer, questionData[i].question_score);
+        data.scores.push(result);
+      }
+      
+
+      console.log("DATA\n", data);
+      const newScore = new Score(data);
+      await newScore.save(); //
       
       
       // Send an array of all the tests.
-      res.status(200);
+      res.status(200).json(data);
    } catch (error) {
       res.status(404).json({ message: error.message });
    }
 };
-
-
-
-
-
- // const answers = await Answer.find({test_id: testID});
-      // answers.map(answer => {
-      //    let questions = answer.questions;
-      //    questions.map(question => {
-      //      let questionData = await  Question.find({_id: question.question_id}); 
-      //    })
-      // });

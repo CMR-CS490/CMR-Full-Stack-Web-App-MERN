@@ -2,16 +2,18 @@ import mongooose from "mongoose";
 
 const scoreSchema = mongooose.Schema({
     username: String,
+    test_id: String,
     answer_id: String,
     scores: [
         { 
-            question_id : {
-                functionNameScore : String,
-                testcases: [
-                    {testcase: String, score: String}
-                ],
-                comments: String,
-            }
+            
+            question_id: String,
+            functionNameScore : String,
+            testcases: [
+                {testcase: String, score: String}
+            ],
+            comments: String
+            
         }
     ],
     totalScore: String, 
