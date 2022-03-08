@@ -1,4 +1,5 @@
 import React from "react";
+import { CircularProgress } from "@mui/material";
 import { useSelector } from "react-redux";
 import { Card, CardContent, Divider, Container, AppBar, Typography, Grow, Grid } from "@mui/material";
 
@@ -13,7 +14,11 @@ const TestDetails = ({ setListOfQuestions }) => {
    // This if conditional is a hotfix for the app crashing. At test is initially undefined at runtime and when the component renders, the app crashes.
    // With this conditional, the app rerenders successfully and does not access the undefined variable through dot operators.
    if (!test) {
-      return <p>loading</p>;
+      return (
+         <div className="center-container">
+            <CircularProgress />;
+         </div>
+      );
    } else {
       return (
          <div>

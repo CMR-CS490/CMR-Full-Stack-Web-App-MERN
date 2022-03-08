@@ -50,9 +50,7 @@ const TakeTestPage = ({ testID }) => {
          <div className="taking-test-details-container">
             <TestDetails />
             <br />
-            <TakingTestQuestions questionData={questionData} setQuestionData={setQuestionData}
-            // testQuestions={test.questions}
-            />
+            <TakingTestQuestions questionData={questionData} setQuestionData={setQuestionData} />
          </div>
          <ModalsButton text="Submit Test" action={handleSubmit} color="primary"></ModalsButton>
          <ModalsButton text="Cancel" action={handleCancel} color="secondary"></ModalsButton>

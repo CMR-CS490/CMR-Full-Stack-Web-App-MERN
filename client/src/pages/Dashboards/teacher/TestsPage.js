@@ -21,6 +21,7 @@ const TestsPage = () => {
 		dispatch(getTests());
 	}, [dispatch]);
 
+	// testID = Test Object
 	const onVisibilityChange = (testID) => {
 		let newTest = testID;
 		newTest.visible = !newTest.visible;
