@@ -6,17 +6,23 @@ const scoreSchema = mongooose.Schema({
     scores: [
         { 
             question_id : {
-                functionName: Boolean,
+                functionNameScore : String,
                 testcases: [
-                    { testCaseNumber: String, testcase: String, pass: Boolean}
-                ]
+                    {testcase: String, score: String}
+                ],
+                comments: String,
             }
         }
     ],
+    totalScore: String, 
     createdAt: {
         type: Date,
         default: new Date()
-    }},
+    },
+    isPublished: Boolean,
+
+},
+    
     { collection: "scores" }
 );
 

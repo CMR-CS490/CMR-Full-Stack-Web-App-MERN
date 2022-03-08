@@ -19,6 +19,7 @@ export const createQuestion = (newQuestion) => axios.post(`${url}api/questions`,
 
 
 export const getAnswers = (id) => axios.get(`${url}api/answers/${id}`);
+export const getAnswer = (id) => axios.get(`${url}api/answers/answer/${id}`);
 export const createAnswer = (newAnswer) => axios.post(`${url}api/answers`, newAnswer);  
 
 
