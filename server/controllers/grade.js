@@ -131,6 +131,8 @@ export const gradeTests = async (req, res) => {
            data.push(resp)
        }
        
+       fs.writeFileSync('./function.py', "");
+
        // Send an array of all the tests.
        res.status(200).json(data);
     } catch (error) {
