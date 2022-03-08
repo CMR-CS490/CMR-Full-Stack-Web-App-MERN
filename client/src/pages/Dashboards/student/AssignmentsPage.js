@@ -28,7 +28,7 @@ const AssignmentsPage = () => {
 
 	// For viewing the score of the exam.
 	const onButtonClick2 = (test) => {
-		window.location.href = `/student/test/scores/${test._id}`;
+		window.location.href = `/student/test/scores/${localStorage.getItem("username")}/${test._id}`;
 	}
 
 	return (

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 // Redux
 import { getAnswer } from "./../../../actions/answers";
+import { getAnswerStudent } from "./../../../actions/answers";
 import { getTest } from "./../../../actions/tests";
 import { getScores } from "./../../../actions/scores";
 
@@ -15,7 +16,7 @@ import ScoreTables from "../../../components/ReadingTest/ScoreTables/ScoreTables
 // CSS
 import "./TestResultsPage";
 
-const TestResultsPage = ({ answerID }) => {
+const TestResultsPage = ({ propsTestID, answerID,  }) => {
    const dispatch = useDispatch();
 
    // const [username, setUserName] = useState();
@@ -35,14 +36,24 @@ const TestResultsPage = ({ answerID }) => {
 
    // ALL VALUES ARE HARDCODED. (Needs to be passed to this prop in a better way.)
    const [username, setUserName] = useState("student"); // HARDCODED USERNAME.
-   const [stateAnswerID, setstateAnswerID] = useState(answerID); // Get the answerID from the prop.
-   const [testID, setTestID] = useState("621198B552B9AA594FC29C52"); // Get the testID from answerID's redux store.
+   // const [stateAnswerID, setstateAnswerID] = useState(answerID); // Get the answerID from the prop.
+   const [testID, setTestID] = useState(propsTestID); // Get the testID from answerID's redux store.
 
    useEffect(() => {
-      dispatch(getAnswer(stateAnswerID));
+      if (localStorage.getItem("role") === "teacher") {
+         // Is a teacher
+         dispatch(getAnswer(answerID))
+      } else {
+         // Is a student
+         dispatch(getAnswerStudent(username, testID));
+         console.log()
+      }
       dispatch(getTest(testID));
       dispatch(getScores(username, testID));
+      console.log("Dispatching Scores")
    }, [dispatch]);
+
+   // dispatch(getScores(username, testID));
    
    return (
       <div>
