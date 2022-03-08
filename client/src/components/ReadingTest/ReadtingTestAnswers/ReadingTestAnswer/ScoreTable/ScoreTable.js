@@ -80,7 +80,7 @@ const ScoreTable = ({ questionID }) => {
       score: scoreData.functionNameScore,
    });
    counter++;
-   totalScore += scoreData.functionNameScore;
+   totalScore += parseInt(scoreData.functionNameScore);
 
    // 2. Pass all the test cases to the rows.
    for (let i = 0; i < scoreData.testcases.length; i++) {
@@ -91,7 +91,7 @@ const ScoreTable = ({ questionID }) => {
          score: scoreData.testcases[i].score,
       });
       counter++;
-      totalScore += scoreData.testcases[i].score;
+      totalScore += parseInt(scoreData.testcases[i].score);
    }
 
    const [comment, setComment] = useState(" ");
