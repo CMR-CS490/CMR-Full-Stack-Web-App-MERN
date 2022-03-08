@@ -29,7 +29,8 @@ const ReadingTestAnswer = ({ question, index }) => {
 
    // Get question data from the redux store.
    const questionState = useSelector((state) => state.questions);
-   // console.log("questionState: ", questionState);
+
+   // Filter one question matching the ID 
    let questionInfo = questionState.filter((question) => question._id === question_id_value)[0];
 
    // Geting the answer data from the redux store.
@@ -91,7 +92,7 @@ const ReadingTestAnswer = ({ question, index }) => {
                <textarea disabled className="console" type="text" value={singleQuestionInputData.answer} />
             </div>
          </Card>
-         <ScoreTable questionID={question_id_value} />
+         <ScoreTable questionID={question_id_value} questionInfo={questionInfo} />
       </div>
    );
 };
