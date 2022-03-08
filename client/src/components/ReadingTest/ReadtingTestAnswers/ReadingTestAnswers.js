@@ -31,7 +31,7 @@ const ReadingTestAnswers = () => {
    // To avoid crashing.
    if (test) {
       questionsArray = test.questions;
-      questionsArray.map( (question) => {
+      questionsArray.map((question) => {
          dispatch(getQuestion(question.question_id));
       })
    } else {
