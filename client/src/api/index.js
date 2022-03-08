@@ -21,7 +21,7 @@ export const createQuestion = (newQuestion) => axios.post(`${url}api/questions`,
 export const getAnswers = (id) => axios.get(`${url}api/answers/${id}`);
 export const getAnswer = (id) => axios.get(`${url}api/answers/answer/${id}`);
 export const createAnswer = (newAnswer) => axios.post(`${url}api/answers`, newAnswer);  
-
+export const getAnswerStudent = (username, testID) => axios.get(`${url}api/answers/${username}/${testID}`);
 
 export const getScores = (username, testID) => axios.get(`${url}api/score/${username}/${testID}`);
 export const updateScores = (username, testID, updatedScore) => axios.get(`${url}api/score/${username}/${testID}`, updatedScore) ;

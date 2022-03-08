@@ -45,3 +45,20 @@ export const getAnswer = async (req, res) => {
       res.status(404).json({ message: error.message });
    }
 };
+
+
+export const getAnswerStudent = async (req, res) => {
+   try {
+      // Get all of the tests/exams in the DB
+      const { testID: testID } = req.params;
+      const { username: username } = req.params;
+      const studentAnswer= await Answer.find({username: username, test_id: testID});
+
+      console.log("Sending all particular test Answer: ", { studentAnswer });
+
+      // Send an array of all the tests.
+      res.status(200).json(studentAnswer[0]);
+   } catch (error) {
+      res.status(404).json({ message: error.message });
+   }
+};
