@@ -75,6 +75,8 @@ export const gradeTest = async (answerID) => {
       const data = {};
       let answer = await Answer.find({_id: answerID});
       answer = answer[0];
+      //Delete if previous grades exists
+      await Score.findOneAndDelete({answer_id: answer.id});
 
       data.username = answer.username;
       data.test_id = answer.test_id;
@@ -108,6 +110,7 @@ export const gradeTest = async (answerID) => {
       
 
       //console.log("DATA\n", data);
+      data.isPublished = false;
       const newScore = new Score(data);
       await newScore.save(); 
       
@@ -122,9 +125,13 @@ export const gradeTests = async (req, res) => {
     try {
        const { id: testID } = req.params;
        // Get all of the tests/exams in the DB.
-       
        let data = [];
-       let student_answers = await Answer.find({test_id: testID});
+       testID.toUpperCase(); 
+       console.log("GRADE TESTS:", testID.toUpperCase() , " COUNT: ", testID.length);
+
+       const student_answers = await Answer.find({test_id:  testID.toUpperCase()});
+
+       console.log(student_answers);
        
        for (let i = 0; i < student_answers.length; i++) {
            const resp = await gradeTest(student_answers[i]._id);
