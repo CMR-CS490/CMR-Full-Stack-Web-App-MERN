@@ -38,6 +38,8 @@ const Question = (props) => {
 
 	};
 	
+	 const diff = props.question.difficulty;
+
 	return (
 		<Card className = "question-card" display='flex' allignItems='flex-start' elevation='5'>
 			<CardActions sx={{display: 'inline-flex', width:"3%"}}>
@@ -62,7 +64,10 @@ const Question = (props) => {
 					Topic: {props.question.topic}
 				</Typography>
 				<Typography variant='h6' gutterBottom sx={{display: 'inline-flex', width:"50%", justifyContent: 'right'}}>
-					Difficulty: {props.question.difficulty} 
+					Difficulty: 
+					<div className={props.question.difficulty.toLowerCase()}>
+						{props.question.difficulty} 
+					</div>
 				</Typography>
 			</CardContent>
 		</Card>

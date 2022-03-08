@@ -51,8 +51,9 @@ const ScoreTable = ({ questionID }) => {
    // ];
 
    const scores = useSelector((state) => state.scores);
+   console.log("%cscores: ", "color:yellow", scores)
    const scoresArray = scores[0].scores; // Turn the redux state to an array of scores.
-   // console.log(scoresArray)
+   console.log("%cScores Array: ", "color:yellow", scoresArray)
 
    // Find the score that corresponds with this question.
 

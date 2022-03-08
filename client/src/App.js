@@ -30,7 +30,12 @@ const App = () => {
 
                <Route path="/" exact element={<TeacherDashboard />} />
                <Route path="/student/:page" element={<StudentDashboard/>} />
+
+               {/* Taking a Test as a student */}
                <Route path="/student/test/:id" element={<StudentDashboard/>} />
+
+               {/* Viewing Results as a Student */}
+               <Route path={`/student/test/scores/${localStorage.getItem("username")}/:id`} element={<StudentDashboard/>} />
                
                {/* <Route path="/" exact element={<Homepage />} /> */}
             </Routes>
