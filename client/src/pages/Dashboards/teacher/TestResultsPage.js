@@ -35,28 +35,35 @@ const TestResultsPage = ({ propsTestID, answerID }) => {
    // const [testID, setTestID] = useState(null); // Get the testID from answerID's redux store.
 
    // ALL VALUES ARE HARDCODED. (Needs to be passed to this prop in a better way.)
-   const [username, setUserName] = useState("student"); // HARDCODED USERNAME.
-   const [stateAnswerID, setstateAnswerID] = useState(answerID); // Get the answerID from the prop.
-   const [testID, setTestID] = useState("621198B552B9AA594FC29C52"); // Get the testID from answerID's redux store.
+   // const [username, setUserName] = useState("student"); // HARDCODED USERNAME.
+   // const [stateAnswerID, setstateAnswerID] = useState(answerID); // Get the answerID from the prop.
+   // const [testID, setTestID] = useState("621198B552B9AA594FC29C52"); // Get the testID from answerID's redux store.
 
+   console.log("answerID: ", answerID);
    useEffect(() => {
       if (localStorage.getItem("role") === "teacher") {
          // Teacher
-         dispatch(getAnswer(stateAnswerID));
-         dispatch(getTest(testID));
-         dispatch(getScores(username, testID));
+         dispatch(getAnswer(answerID));
+         dispatch(getTest(localStorage.getItem("selectedTestID")));
+         dispatch(getScores(localStorage.getItem("selectedUser"), localStorage.getItem("selectedTestID")));
       } else {
          // Student
          dispatch(getAnswerStudent(localStorage.getItem('username'), propsTestID));
          dispatch(getTest(propsTestID));
-         dispatch(getScores(username, propsTestID));
+         dispatch(getScores(localStorage.getItem('username'), propsTestID));
       }
    }, [dispatch]);
 
+   const scores = useSelector((state) => state.scores);
    const answers = useSelector((state) => state.answers);
-
    // dispatch(getScores(username, testID));
-
+   if(answers.length == 0) return (<p>Please take the test first</p>)
+   if(scores.length == 0) {
+      return ( <p>There are currently no scores for this test.</p>)
+   }
+   if(localStorage.getItem("role") === "student" && !scores[0].isPublished) {
+      return ( <p>Scores aren't published for this test.</p>) 
+   }
    return (
       <div>
          <TestDetails showButton={true} />

@@ -32,25 +32,10 @@ const Student = ({ answer, buttonName1, buttonName2, onButtonClick1, onButtonCli
                   marginBottom: "10px",
                }}
                onClick={() => {
-                  onButtonClick1(answer._id);
+                  onButtonClick1(answer._id, answer.test_id, answer.username);
                }}
             >
                {buttonName1}
-            </Button>
-            <Button
-               variant="contained"
-               color="secondary"
-               size="large"
-               type="submit"
-               fullWidth
-               sx={{
-                  marginBottom: "10px",
-               }}
-               onClick={() => {
-                  onButtonClick2(test);
-               }}
-            >
-               {buttonName2}
             </Button>
          </CardActions>
       </Card>

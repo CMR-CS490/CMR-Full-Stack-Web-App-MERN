@@ -26,6 +26,7 @@ export const getAnswerStudent = (username, testID) => axios.get(`${url}api/answe
 export const getScores = (username, testID) => axios.get(`${url}api/score/${username}/${testID}`);
 export const updateScores = (username, testID, updatedScore) => axios.get(`${url}api/score/${username}/${testID}`, updatedScore) ;
 
-export const gradeTest = (testID) => axios.get(`${url}api/grade/${testID}`) ;
+export const gradeTest = (testID) => axios.get(`${url}api/grade/${testID}`);
+export const publishScores = (testID) => axios.get(`${url}api/score/publish/${testID}`);
 
 // export const getQuestions = () => axios.get(`${url}api/questions`); // Getting question specified with specific ids. (For Creating a Test)

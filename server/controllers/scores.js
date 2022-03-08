@@ -36,7 +36,7 @@ export const updateScore = async (req, res) => {
 export const publishScores = async (req, res) => {
    const { testid: testID } = req.params; // id is got from URL.
 
-   let scores = await Score.find({test_id : testID});
+   let scores = await Score.find({test_id : testID.toUpperCase()});
 
    //const updatedScore = await Score.findByIdAndUpdate(_id, { published : true});
    for (let i = 0; i < scores.length; i++) {
