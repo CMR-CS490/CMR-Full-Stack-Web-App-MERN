@@ -1,113 +1,98 @@
-import React, { useEffect } from "react";
-import { CircularProgress } from "@mui/material"
-import { DataGrid } from "@mui/x-data-grid";
+import React, { useEffect, useState } from "react";
+import { CircularProgress } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 
 // Redux
 import { getAnswer } from "./../../../actions/answers";
 import { getTest } from "./../../../actions/tests";
+import { getScores } from "./../../../actions/scores";
 
 // Components
-import TestDetails from "./../../../components/TakingTest/TestDetails/TestDetails"
-import ReadingTestAnswers from "./../../../components/ReadingTest/ReadtingTestAnswers/ReadingTestAnswers"
+import TestDetails from "./../../../components/TakingTest/TestDetails/TestDetails";
+import ReadingTestAnswers from "./../../../components/ReadingTest/ReadtingTestAnswers/ReadingTestAnswers";
+import ScoreTables from "../../../components/ReadingTest/ScoreTables/ScoreTables";
 
 // CSS
 import "./TestResultsPage";
 
-// This variable makes it so the fields are able to be editable.
-let isEditible = true; // True if the role is a teacher, false if its a student.
-
-const columns = [
-   { field: "id", headerName: "ID", width: 90, hide: true, GridColDef: false },
-   {
-      field: "questionNumber",
-      headerName: "Question Number",
-      flex: 0.2,
-      editable: false,
-      sortable: false,
-   },
-   {
-      field: "questionDescription",
-      headerName: "Question Description",
-      flex: 1,
-      editable: isEditible,
-      sortable: false,
-   },
-   {
-      field: "score",
-      headerName: "Score",
-      type: "number",
-      flex: 0.2,
-      editable: isEditible,
-      sortable: false,
-   },
-];
-
-// The first and and last rows will always be (Function Name) and (Comments/Total Score)
-// The middle columns will be based on the number of test cases.
-const rows = [
-   { id: 1, questionNumber: "Function Name", questionDescription: "The function name is correct.", score: 50 },
-   { id: 2, questionNumber: "Test Case 1", questionDescription: "Testing(2, 3)", score: 25 },
-   { id: 3, questionNumber: "Test Case 2", questionDescription: "Testing(3, 3)", score: 25 },
-   { id: 4, questionNumber: "Comments", questionDescription: "Write comments here", score: "Total" },
-];
-
 const TestResultsPage = ({ answerID }) => {
-   console.log("answerID: ", answerID);
-
-   // Get the answer from the DB.
    const dispatch = useDispatch();
 
-   useEffect(() => {
-      dispatch(getAnswer(answerID));
-   }, [dispatch]);
-
-   const answers = useSelector((state) => state.answers);
-
-   console.log("Answers: ", answers);
-
-   // These variables are derived from the answers variable that we pulled from our redux store. (test_id)
-   let test_id;
-   if (answers.length) { // This if statement prevents the app from crashing.
-      test_id = answers[0].test_id;
-      console.log("Answers.test_id: ", test_id);
-      dispatch(getTest(test_id));
-   }
-
-
-   // // After we got the answer, get the test Details.
-   // if (answers) {
-   //    console.log("Getting Test");
-   //    dispatch(getTest(test_id));
+   // const [username, setUserName] = useState();
+   // // FOR STUDENTS. Their username is be pulled from local storage.
+   // if (localStorage.getItem("role") === "student") {
+   //    // Get the username from local storage.
+   //    setUserName(localStorage.getItem("username"))
+   // } else {
+   //    // FOR TEACHERS. They will be viewing these tests with the username being PASSED as a xxx?
+   //    setUserName("student")
    // }
 
+   // const [username, setUserName] = useState(localStorage.getItem("username")); // Get the username from local storage.
+   // const [username, setUserName] = useState("student"); // HARDCODED USERNAME.
+   // const [stateAnswerID, setstateAnswerID] = useState(answerID); // Get the answerID from the prop.
+   // const [testID, setTestID] = useState(null); // Get the testID from answerID's redux store.
+
+   // ALL VALUES ARE HARDCODED. (Needs to be passed to this prop in a better way.)
+   const [username, setUserName] = useState("student"); // HARDCODED USERNAME.
+   const [stateAnswerID, setstateAnswerID] = useState(answerID); // Get the answerID from the prop.
+   const [testID, setTestID] = useState("621198B552B9AA594FC29C52"); // Get the testID from answerID's redux store.
+
+   useEffect(() => {
+      dispatch(getAnswer(stateAnswerID));
+      dispatch(getTest(testID));
+      dispatch(getScores(username, testID));
+   }, [dispatch]);
+   
    return (
       <div>
-
-         <TestDetails />
+         <TestDetails showButton={true} />
          <br />
+         {/* Renders the Student's test answer AND their score table output.*/}
          <ReadingTestAnswers />
-
-
-
-
-         <div style={{ height: "400px", width: "100%" }}>
-            <DataGrid
-               rows={rows}
-               columns={columns}
-               pageSize={5}
-               rowsPerPageOptions={[5]}
-               // checkboxSelection
-               disableSelectionOnClick
-               sx={{
-                  bgcolor: "white",
-                  boxShadow: 2,
-                  border: 1,
-               }}
-            />
-         </div>
+         {/* <ScoreTables /> */}
       </div>
    );
 };
 
 export default TestResultsPage;
+
+// console.log("answerID: ", answerID);
+// // Get the answer from the DB.
+
+// useEffect(() => {
+//    if (testID == "empty") {
+//       console.log("Populating testID")
+//       if (answers.length) {  // This if statement prevents the app from crashing. (Prevents the dot operator from accessing answers when it)
+//          setTestID(answers[0].test_id);
+//          dispatch(getTest(testID));
+//       }
+//    }
+//    dispatch(getAnswer(answerID));
+//    console.log("From TestResultPage, requesting username: ", username, " and test_id: ", testID);
+//    dispatch(getScores(username, testID));
+// if (answers.length) {
+//    // This if statement prevents the app from crashing.
+//    setTestID(answers[0].test_id);
+//    // console.log("Answers.test_id: ", test_id);
+//    dispatch(getTest(testID));
+// }
+// }, [dispatch]);
+
+// // console.log("Answers: ", answers);
+
+// // let username = localStorage.getItem("username");
+// // console.log({username})
+
+// // These variables are derived from the answers variable that we pulled from our redux store. (test_id)
+
+// // if (username && test_id) {
+// //    console.log("From TestResultPage, requesting username: ", username, " and test_id: ", test_id)
+// // //    dispatch(getScores(username, test_id));
+// // }
+
+// // // After we got the answer, get the test Details.
+// // if (answers) {
+// //    console.log("Getting Test");
+// //    dispatch(getTest(test_id));
+// // }

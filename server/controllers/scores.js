@@ -7,10 +7,12 @@ export const getStudentScores = async (req, res) => {
       // Get all of the tests/exams in the DB
       const { testid: testID } = req.params;
       const { username: username } = req.params;
+      
+      // console.log(req.params)
 
       const studentScores = await Score.find({username: username, test_id: testID});
 
-      console.log("Sending all Visible tests Answers in the DB: ", { studentScores });
+      console.log("Sending all Visible SCORES for Answers in the DB: ", { studentScores });
 
       // Send an array of all the tests.
       res.status(200).json(studentScores);
