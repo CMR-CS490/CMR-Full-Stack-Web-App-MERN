@@ -1,9 +1,15 @@
 import React, { useEffect } from "react";
+import { CircularProgress } from "@mui/material"
 import { DataGrid } from "@mui/x-data-grid";
-import {useDispatch, useSelector} from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
 
 // Redux
-import { getAnswers } from "./../../../actions/answers"
+import { getAnswer } from "./../../../actions/answers";
+import { getTest } from "./../../../actions/tests";
+
+// Components
+import TestDetails from "./../../../components/TakingTest/TestDetails/TestDetails"
+import ReadingTestAnswers from "./../../../components/ReadingTest/ReadtingTestAnswers/ReadingTestAnswers"
 
 // CSS
 import "./TestResultsPage";
@@ -47,33 +53,59 @@ const rows = [
 ];
 
 const TestResultsPage = ({ answerID }) => {
-   
    console.log("answerID: ", answerID);
 
    // Get the answer from the DB.
    const dispatch = useDispatch();
 
    useEffect(() => {
-      dispatch(getAnswers(answerID));
+      dispatch(getAnswer(answerID));
    }, [dispatch]);
 
    const answers = useSelector((state) => state.answers);
 
+   console.log("Answers: ", answers);
+
+   // These variables are derived from the answers variable that we pulled from our redux store. (test_id)
+   let test_id;
+   if (answers.length) { // This if statement prevents the app from crashing.
+      test_id = answers[0].test_id;
+      console.log("Answers.test_id: ", test_id);
+      dispatch(getTest(test_id));
+   }
+
+
+   // // After we got the answer, get the test Details.
+   // if (answers) {
+   //    console.log("Getting Test");
+   //    dispatch(getTest(test_id));
+   // }
+
    return (
-      <div style={{ height: "400px", width: "100%" }}>
-         <DataGrid
-            rows={rows}
-            columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
-            // checkboxSelection
-            disableSelectionOnClick
-            sx={{
-               bgcolor: "white",
-               boxShadow: 2,
-               border: 1,
-            }}
-         />
+      <div>
+
+         <TestDetails />
+         <br />
+         <ReadingTestAnswers />
+
+
+
+
+         <div style={{ height: "400px", width: "100%" }}>
+            <DataGrid
+               rows={rows}
+               columns={columns}
+               pageSize={5}
+               rowsPerPageOptions={[5]}
+               // checkboxSelection
+               disableSelectionOnClick
+               sx={{
+                  bgcolor: "white",
+                  boxShadow: 2,
+                  border: 1,
+               }}
+            />
+         </div>
       </div>
    );
 };

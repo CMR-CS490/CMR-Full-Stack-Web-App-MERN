@@ -14,7 +14,6 @@ import { Button } from "@mui/material";
 import "./TestDetailsPage.css";
 
 const TestDetailsPage = ({ testID }) => {
-   console.log("testid", testID)
    const dispatch = useDispatch();
    useEffect(() => {
       dispatch(getTest(testID));
