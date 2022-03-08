@@ -127,9 +127,9 @@ const CreateQuestionModal = () => {
                                 onChange = {(e) => setQuestionData({...questionData, difficulty: e.target.value})}
                                 className="browser-default custom-select">
                                 <option value="">-</option>
-                                <option value="Easy">Easy</option>
-                                <option value="Medium">Medium</option>
-                                <option value="Hard">Hard</option>
+                                <option class='easy' value="Easy">Easy</option>
+                                <option class="medium" value="Medium">Medium</option>
+                                <option class="hard" value="Hard">Hard</option>
                             </select>
                      </div>
                      <div className="functionName">
