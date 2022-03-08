@@ -54,10 +54,12 @@ const TestResultsPage = ({ propsTestID, answerID }) => {
       }
    }, [dispatch]);
 
-   //const answers = useSelector((state) => state.answers);
+   const scores = useSelector((state) => state.scores);
 
    // dispatch(getScores(username, testID));
-
+   if(scores.length == 0) {
+      return ( <p>There are currently no scores for this exam.</p>)
+   }
    return (
       <div>
          <TestDetails showButton={true} />
