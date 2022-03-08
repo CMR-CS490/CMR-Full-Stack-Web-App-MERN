@@ -12,6 +12,7 @@ import { getScores } from "./../../../actions/scores";
 import TestDetails from "./../../../components/TakingTest/TestDetails/TestDetails";
 import ReadingTestAnswers from "./../../../components/ReadingTest/ReadtingTestAnswers/ReadingTestAnswers";
 import ScoreTables from "../../../components/ReadingTest/ScoreTables/ScoreTables";
+import ModalsButton from "../../../components/Modals/ModalsButton";
 
 // CSS
 import "./TestResultsPage";
@@ -19,25 +20,15 @@ import "./TestResultsPage";
 const TestResultsPage = ({ propsTestID, answerID }) => {
    const dispatch = useDispatch();
 
-   // const [username, setUserName] = useState();
-   // // FOR STUDENTS. Their username is be pulled from local storage.
-   // if (localStorage.getItem("role") === "student") {
-   //    // Get the username from local storage.
-   //    setUserName(localStorage.getItem("username"))
-   // } else {
-   //    // FOR TEACHERS. They will be viewing these tests with the username being PASSED as a xxx?
-   //    setUserName("student")
-   // }
+   const onClickCancel = (e) => {
+      window.history.back()
+   }
 
-   // const [username, setUserName] = useState(localStorage.getItem("username")); // Get the username from local storage.
-   // const [username, setUserName] = useState("student"); // HARDCODED USERNAME.
-   // const [stateAnswerID, setstateAnswerID] = useState(answerID); // Get the answerID from the prop.
-   // const [testID, setTestID] = useState(null); // Get the testID from answerID's redux store.
+   const submitScores = () => {
+      // When the user clicks Update at the bottom of Test Results page, all the updated comments are posted to the API.
+   }
 
-   // ALL VALUES ARE HARDCODED. (Needs to be passed to this prop in a better way.)
-   // const [username, setUserName] = useState("student"); // HARDCODED USERNAME.
-   // const [stateAnswerID, setstateAnswerID] = useState(answerID); // Get the answerID from the prop.
-   // const [testID, setTestID] = useState("621198B552B9AA594FC29C52"); // Get the testID from answerID's redux store.
+   const [scoreObject, setScoreObject ] = useState({})
 
    console.log("answerID: ", answerID);
    useEffect(() => {
@@ -70,49 +61,10 @@ const TestResultsPage = ({ propsTestID, answerID }) => {
          <br />
          {/* Renders the Student's test answer AND their score table output.*/}
          <ReadingTestAnswers />
-         {/* <ScoreTables /> */}
+         {localStorage.getItem("role") === "teacher" ? <ModalsButton color='primary' text='Update' action={submitScores} /> : <></>}
+         <ModalsButton color='primary' text='Cancel' action={onClickCancel} />
       </div>
    );
 };
 
 export default TestResultsPage;
-
-// console.log("answerID: ", answerID);
-// // Get the answer from the DB.
-
-// useEffect(() => {
-//    if (testID == "empty") {
-//       console.log("Populating testID")
-//       if (answers.length) {  // This if statement prevents the app from crashing. (Prevents the dot operator from accessing answers when it)
-//          setTestID(answers[0].test_id);
-//          dispatch(getTest(testID));
-//       }
-//    }
-//    dispatch(getAnswer(answerID));
-//    console.log("From TestResultPage, requesting username: ", username, " and test_id: ", testID);
-//    dispatch(getScores(username, testID));
-// if (answers.length) {
-//    // This if statement prevents the app from crashing.
-//    setTestID(answers[0].test_id);
-//    // console.log("Answers.test_id: ", test_id);
-//    dispatch(getTest(testID));
-// }
-// }, [dispatch]);
-
-// // console.log("Answers: ", answers);
-
-// // let username = localStorage.getItem("username");
-// // console.log({username})
-
-// // These variables are derived from the answers variable that we pulled from our redux store. (test_id)
-
-// // if (username && test_id) {
-// //    console.log("From TestResultPage, requesting username: ", username, " and test_id: ", test_id)
-// // //    dispatch(getScores(username, test_id));
-// // }
-
-// // // After we got the answer, get the test Details.
-// // if (answers) {
-// //    console.log("Getting Test");
-// //    dispatch(getTest(test_id));
-// // }
