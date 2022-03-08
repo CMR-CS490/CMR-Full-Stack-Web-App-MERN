@@ -59,7 +59,8 @@ const QuestionToBeAdded = ({question, questionData, setQuestionData}) => {
          </CardActions>
             </Typography>
             <Typography variant="h6" gutterBottom sx={{ display: "inline-flex", width: "50%", justifyContent: "right" }}>
-               Difficulty: {question.difficulty}
+               Difficulty: 
+               <div className={question.difficulty.toLowerCase()}>{question.difficulty}</div>
                {question.question_ids}
             </Typography>
          </CardContent>
