@@ -8,6 +8,7 @@ import TopNav from '../../components/Navbars/TopNav/TopNav';
 // Pages
 import AssignmentsPage from './student/AssignmentsPage'
 import TakeTestPage from "./student/TakeTestPage";
+import TestResultsPage from './teacher/TestResultsPage';
 // CSS
 import './dashboard.css'
 
@@ -28,9 +29,20 @@ const Homepage = () => {
 	let page = currentRoute.substring(currentRoute.indexOf("/student") + 9).toUpperCase();
 	if(page.length == 0) page = "DASHBOARD";
 
+
+	// Username Length
+	let usernameLength = (localStorage.getItem("username")).length
+	console.log(usernameLength)
+
 	let pageComponent
 	if (page === "ASSIGNMENTS") {
 		pageComponent = <AssignmentsPage />
+	} else if (page.includes("TEST/SCORES")) {
+		console.log("student url page: ", page);
+		let testID = page.substring(page.indexOf("/")+9 + (usernameLength))
+		console.log("student testID: ", testID);
+		page = "TEST RESULTS"
+		pageComponent = <TestResultsPage propsTestID={testID} />
 	} else if (page.includes("TEST/")) {
 		let testID = page.substring(page.indexOf("/")+1);
 		page = ""
