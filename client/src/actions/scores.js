@@ -22,3 +22,16 @@ export const updateScore = (username, testID, newScore) => async (dispatch) => {
       console.log(error);
    }
 }
+
+
+export const gradeTest = (testID) => async (dispatch) => {
+   try {
+      
+      const { data } = await api.gradeTest(testID);
+
+      dispatch({ type: 'FETCH_SCORE', payload: data});
+   } catch (error) {
+      console.log(error);
+   }
+}
+

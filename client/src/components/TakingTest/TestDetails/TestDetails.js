@@ -1,7 +1,8 @@
 import React from "react";
 import { CircularProgress } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Card, CardContent, Divider, Container, AppBar, Typography, Grow, Grid } from "@mui/material";
+import {gradeTest} from "../../../actions/scores"
 
 // Components
 import ModalsButton from "../../Modals/ModalsButton";
@@ -18,7 +19,15 @@ const TestDetails = ({ setListOfQuestions, showButton }) => {
    console.log("Showbutton prop: ", showButton)
    let inputStyle;
    showButton ? inputStyle = {display: "none"} : inputStyle = {display: "flex"}; // Hide the buttons if showButton is false.
-
+   const dispatch = useDispatch();
+   const onGrade = () => {
+      console.log("GRADING TEST: ", test._id);
+      dispatch(gradeTest(test._id));
+      
+      setTimeout(function(){
+         window.location.reload(); // you can pass true to reload function to ignore the client cache and reload from the server
+     },1000); 
+   }
 
    // This if conditional is a hotfix for the app crashing. At test is initially undefined at runtime and when the component renders, the app crashes.
    // With this conditional, the app rerenders successfully and does not access the undefined variable through dot operators.
@@ -59,8 +68,8 @@ const TestDetails = ({ setListOfQuestions, showButton }) => {
                </div>
                {/* style={{display: }} */}
                <div className="test-details-button-container" style={inputStyle} >
-                  <ModalsButton color="primary" text="Autograde" />
-                  <ModalsButton color="secondary" text="Publish"/>
+                  <ModalsButton color="primary" text="Autograde" action= {onGrade}/>
+                  <ModalsButton color="secondary" text="Publish Scores"/>
                </div>
 
             </Card>
