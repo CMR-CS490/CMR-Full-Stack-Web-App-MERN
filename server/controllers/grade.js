@@ -104,7 +104,7 @@ export const gradeTest = async (answerID) => {
       for (let i = 0; i < questionData.length; i++) {
         console.log(questionData[i]);
         let result = await gradeQuestion(questionData[i].question_id, questionData[i].answer, questionData[i].question_score);
-        result.comment = "";
+        result.comments = "";
         data.scores.push(result);
       }
       
