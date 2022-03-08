@@ -47,9 +47,9 @@ const TestResultsPage = ({ propsTestID, answerID }) => {
          dispatch(getScores(username, testID));
       } else {
          // Student
-         dispatch(getAnswerStudent(username, testID));
-         dispatch(getTest(testID));
-         dispatch(getScores(username, testID));
+         dispatch(getAnswerStudent(localStorage.getItem('username'), propsTestID));
+         dispatch(getTest(propsTestID));
+         dispatch(getScores(username, propsTestID));
       }
    }, [dispatch]);
 
