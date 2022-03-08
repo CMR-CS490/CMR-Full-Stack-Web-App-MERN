@@ -1,18 +1,17 @@
-import React, {useState, useEffect} from 'react';
-import {Card, Typography, TextField} from '@mui/material';
-import {DataGrid} from '@mui/x-data-grid';
+import React, { useState } from "react";
+import { DataGrid } from "@mui/x-data-grid";
+import {Card, Typography, TextField} from "@mui/material"
+
+// Components
+import ModalsButton from "../../../../Modals/ModalsButton";
 
 //Redux
-import {useSelector} from 'react-redux';
-
-//Components
-import ModalsButton from './../../../../Modals/ModalsButton';
+import { useSelector } from "react-redux";
 
 // CSS
-import './ScoreTable.css';
+import "./ScoreTable.css";
 
 // questionID is passed from ReadtingTestAsnwer.js
-
 const ScoreTable = ({ questionID }) => {
    // This variable makes it so the fields are able to be editable.
    let isEditible = true; // True if the role is a teacher, false if its a student.
@@ -102,7 +101,7 @@ const ScoreTable = ({ questionID }) => {
    const [comment, setComment] = useState(" ");
    // 3. Pass in the comment and total score
 
-   rows.push({ id: counter, questionNumber: "Comments", questionDescription: comment, score: totalScore });
+   rows.push({ id: counter, questionNumber: "Total Scores", questionDescription: " ", score: totalScore });
    counter++;
 
    return (
@@ -122,6 +121,24 @@ const ScoreTable = ({ questionID }) => {
                }}
             />
          </div>
+         <div className='comment-total-score-container'>
+				<Card>
+					<div className='taking-test-description-container'>
+						<Typography className='taking-test-description' variant='body1' display='inline'>
+							Comments: 
+						</Typography>
+						<TextField name='comments' variant='outlined' label='Comments' value={comment} onChange={(e) => setComment(e.target.value)} />
+					</div>
+					<div className='creator-question-length-container'>
+						<Typography className='taking-test-questions-length' align='right' variant='subtitle1' gutterBottom sx={{display: 'inline-flex'}}>
+							Total Score: {totalScore}
+						</Typography>
+					</div>
+					<div className='test-details-button-container'>
+						<ModalsButton color='primary' text='Update' />
+					</div>
+				</Card>
+			</div>
       </div>
    );
 };
