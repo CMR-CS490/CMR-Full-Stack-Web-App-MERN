@@ -12,10 +12,9 @@ import { useSelector } from "react-redux";
 import "./ScoreTable.css";
 
 // questionID is passed from ReadtingTestAsnwer.js
-const ScoreTable = ({ questionID, questionInfo}) => {
+const ScoreTable = ({ questionID, questionInfo, setScoreObject}) => {
 
    console.log("qinfo: ", questionInfo)
-   
    
    // This variable makes it so the fields are able to be editable.
    let isEditible = (localStorage.getItem("role") === "teacher") // True if the role is a teacher, false if its a student.
@@ -23,6 +22,7 @@ const ScoreTable = ({ questionID, questionInfo}) => {
 
    useEffect(() => {
       // setComment(comment)
+      setScoreObject({scores})
    }, [])
    
    // const [scoreData, setScoreData] = useState()

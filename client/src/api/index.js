@@ -3,7 +3,7 @@ import axios from 'axios'
 // Local: http://localhost:5002/
 // Production: https://cmr-autograder.herokuapp.com/
 // URL pointing to backend route.
-export const url = 'http://localhost:5002/';
+export const url = 'https://cmr-autograder-2.herokuapp.com/';
 
 export const fetchTest = (id) => axios.get(`${url}api/tests/${id}`);
 export const fetchTests = () => axios.get(`${url}api/tests`);

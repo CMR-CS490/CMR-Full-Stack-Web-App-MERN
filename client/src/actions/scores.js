@@ -15,6 +15,7 @@ export const getScores = (username, testID) => async (dispatch) => {
 
 export const updateScore = (username, testID, newScore) => async (dispatch) => {
    try {
+      console.log("updatescore", data)
       const { data } = await api.updateScores(username, testID, newScore);
 
       dispatch({ type: 'UPDATE_SCORE', payload: data});

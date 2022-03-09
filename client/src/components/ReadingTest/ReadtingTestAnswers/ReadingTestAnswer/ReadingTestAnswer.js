@@ -11,7 +11,7 @@ import ScoreTable from "./ScoreTable/ScoreTable"
 // CSS
 import "./ReadingTestAnswer.css";
 
-const ReadingTestAnswer = ({ question, index }) => {
+const ReadingTestAnswer = ({ question, index, setScoreObject}) => {
    let question_id_value = question.question_id;
 
    // State for keeping track of the user's input for one question.
@@ -92,7 +92,7 @@ const ReadingTestAnswer = ({ question, index }) => {
                <textarea disabled className="console" type="text" value={singleQuestionInputData.answer} />
             </div>
          </Card>
-         <ScoreTable questionID={question_id_value} questionInfo={questionInfo} />
+         <ScoreTable questionID={question_id_value} questionInfo={questionInfo} setScoreObject={setScoreObject} />
       </div>
    );
 };
