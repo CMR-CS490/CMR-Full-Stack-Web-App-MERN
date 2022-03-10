@@ -36,3 +36,12 @@
    padding-top: 50px;
    padding-bottom: 50px;
 }
+
+.test-details-button-container {
+   display: flex;
+   justify-content: center;
+   width: 50%;
+   margin: auto;
+   padding: 10px;
+   /* display: none; */
+}

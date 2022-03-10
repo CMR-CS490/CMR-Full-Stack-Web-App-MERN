@@ -47,11 +47,18 @@ const gradeQuestion = async (question_id, answer, questionScore) => {
         let testCase1 = question[0].testcases[i].input;
         let testCase1Answer = question[0].testcases[i].output;
         
+   
+        let endIndex = answer.indexOf('(');
+        let startIndex = answer.indexOf("def") + 4;
+        console.log("BEFORE", answer);
+        answer = answer.replace(answer.substring(startIndex, endIndex), functionName + " ");
+        console.log("ANSWER:", answer);
+        
         const content =  `${answer}\nprint(${functionName}(${testCase1}))`
         let output = []
-        if( functionNameCorrect) { 
-           output = await runTestCase(content);
-        }
+        
+        output = await runTestCase(content);
+        
             
         
         if(output[0] == testCase1Answer) {
@@ -75,6 +82,8 @@ export const gradeTest = async (answerID) => {
       const data = {};
       let answer = await Answer.find({_id: answerID});
       answer = answer[0];
+      //Delete if previous grades exists
+      await Score.findOneAndDelete({answer_id: answer.id});
 
       data.username = answer.username;
       data.test_id = answer.test_id;
@@ -102,12 +111,13 @@ export const gradeTest = async (answerID) => {
       for (let i = 0; i < questionData.length; i++) {
         console.log(questionData[i]);
         let result = await gradeQuestion(questionData[i].question_id, questionData[i].answer, questionData[i].question_score);
-        result.comment = "";
+        result.comments = "";
         data.scores.push(result);
       }
       
 
       //console.log("DATA\n", data);
+      data.isPublished = false;
       const newScore = new Score(data);
       await newScore.save(); 
       
@@ -122,9 +132,13 @@ export const gradeTests = async (req, res) => {
     try {
        const { id: testID } = req.params;
        // Get all of the tests/exams in the DB.
-       
        let data = [];
-       let student_answers = await Answer.find({test_id: testID});
+       testID.toUpperCase(); 
+       console.log("GRADE TESTS:", testID.toUpperCase() , " COUNT: ", testID.length);
+
+       const student_answers = await Answer.find({test_id:  testID.toUpperCase()});
+
+       console.log(student_answers);
        
        for (let i = 0; i < student_answers.length; i++) {
            const resp = await gradeTest(student_answers[i]._id);

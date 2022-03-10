@@ -7,10 +7,12 @@ export const getStudentScores = async (req, res) => {
       // Get all of the tests/exams in the DB
       const { testid: testID } = req.params;
       const { username: username } = req.params;
+      
+      // console.log(req.params)
 
       const studentScores = await Score.find({username: username, test_id: testID});
 
-      console.log("Sending all Visible tests Answers in the DB: ", { studentScores });
+      console.log("Sending all Visible SCORES for Answers in the DB: ", { studentScores });
 
       // Send an array of all the tests.
       res.status(200).json(studentScores);
@@ -30,3 +32,19 @@ export const updateScore = async (req, res) => {
    res.json(updatedScore);
 }
 
+
+export const publishScores = async (req, res) => {
+   const { testid: testID } = req.params; // id is got from URL.
+
+   let scores = await Score.find({test_id : testID.toUpperCase()});
+
+   //const updatedScore = await Score.findByIdAndUpdate(_id, { published : true});
+   for (let i = 0; i < scores.length; i++) {
+      await Score.findByIdAndUpdate(scores[i]._id, { isPublished : true});
+   }
+   scores = await Score.find({test_id : testID}); 
+   
+   
+
+   res.status(200).json(scores);
+}

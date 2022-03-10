@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Card, Divider, Typography } from "@mui/material";
 
-// CSS
-import "./ReadingTestAnswer.css";
-
 // Redux
 import { getQuestion } from "../../../../actions/questions";
+
+// Components
+import ScoreTable from "./ScoreTable/ScoreTable"
+
+// CSS
+import "./ReadingTestAnswer.css";
 
 const ReadingTestAnswer = ({ question, index }) => {
    let question_id_value = question.question_id;
@@ -26,18 +29,21 @@ const ReadingTestAnswer = ({ question, index }) => {
 
    // Get question data from the redux store.
    const questionState = useSelector((state) => state.questions);
-   // console.log("questionState: ", questionState);
+
+   // Filter one question matching the ID 
    let questionInfo = questionState.filter((question) => question._id === question_id_value)[0];
 
    // Geting the answer data from the redux store.
    const answerState = useSelector((state) => state.answers);
-   const answerArray = answerState[0].questions;
+   console.log("ReadingTestAsnwer: ", answerState)
+   const answerArray = answerState.questions;
    // if (answerArray) {
    //    console.log(answerArray)
    // }
 
    let answerData = "";
    // Iterate through the array and find the answerData inputed by the student by matching question_id's from the answerArray and the queestion.
+
 
    // Sending data back to the daddy prop after every input.
    useEffect(() => {
@@ -86,6 +92,7 @@ const ReadingTestAnswer = ({ question, index }) => {
                <textarea disabled className="console" type="text" value={singleQuestionInputData.answer} />
             </div>
          </Card>
+         <ScoreTable questionID={question_id_value} questionInfo={questionInfo} />
       </div>
    );
 };
