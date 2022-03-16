@@ -13,7 +13,7 @@ const SideNav = () => {
                 <span className="icon-caption">Dashboard</span>
                 <HomeIcon className="icon" />
             </a>
-            <a href="/teacher/tests" className="icon-block">
+            <a href="/teacher/createtests" className="icon-block">
                 <span className="icon-caption">Assignment</span>
                 <AssignmentIcon className="icon" />
             </a>

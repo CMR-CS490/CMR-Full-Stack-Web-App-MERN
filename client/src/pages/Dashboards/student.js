@@ -35,7 +35,7 @@ const Homepage = () => {
 	console.log(usernameLength)
 
 	let pageComponent
-	if (page === "ASSIGNMENTS") {
+	if (page === "DASHBOARD") {
 		pageComponent = <AssignmentsPage />
 	} else if (page.includes("TEST/SCORES")) {
 		console.log("student url page: ", page);
