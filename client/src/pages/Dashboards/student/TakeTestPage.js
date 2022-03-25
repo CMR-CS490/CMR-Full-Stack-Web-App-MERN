@@ -42,7 +42,7 @@ const TakeTestPage = ({ testID }) => {
 
    }
    function handleCancel() {
-      window.location.href = "/student/assignments";
+      window.history.back()
    }
 
    return (

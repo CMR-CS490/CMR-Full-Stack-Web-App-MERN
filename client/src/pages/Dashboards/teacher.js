@@ -47,8 +47,10 @@ const Homepage = () => {
 	let pageComponent
 	if (page === "QUESTIONS") {
 		pageComponent = <QuestionsPage />
-	} else if (page === "TESTS") {
+	} else if (page === "DASHBOARD") {
 		pageComponent = <TestsPage />
+	} else if (page === "CREATETESTS") {
+		page = "CREATE TEST";
 	} else if (page.includes("TESTS/RESULTS")) {
 		page = "TEST RESULTS"
 		pageComponent = <TestResultsPage answerID = {answerID} />
