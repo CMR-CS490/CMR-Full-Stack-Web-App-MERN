@@ -160,7 +160,7 @@ const CreateQuestionModal = () => {
                            <div className="constraintName">
                                  <select defaultValue={questionData.constraintName} onChange={(e) => setQuestionData({...questionData, constraintName: e.target.value})}>
                                     <option selected value="None">None</option>
-                                    <option value="For loop">For loop</option>
+                                    <option value="For Loop">For Loop</option>
                                     <option value="Recursion">Recursion</option>
                                     <option value="While Loop">While Loop</option>
                                  </select>

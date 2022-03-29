@@ -38,9 +38,33 @@ const gradeQuestion = async (question_id, answer, questionScore) => {
         response.functionNameScore = "0";
         functionNameCorrect = false;
     }
-    
-    
+
     let totalScore = questionScore -5;
+
+    //Check for constraints
+    if(question[0].constraintName && question[0].constraintName !== 'None') {
+        console.log('IN HERE')
+        if(question[0].constraintName === 'Recursion') {
+            if(answer.count(functionName) > 1) {
+                response.constraintScore = 5;
+            }
+        } else if (question[0].constraintName === 'For Loop') {
+            console.log('IN FOR LOOP')
+            if(answer.includes('for')) {
+                response.constraintScore = 5;
+            }
+        } else if (question[0].constraintName === 'While Loop') {
+            if(answer.includes('while')) {
+                response.constraintScore = 5;
+            }
+        }
+
+        totalScore = totalScore - 5; 
+        
+    }
+    
+    
+
     
     for (let i = 0; i < question[0].testcases.length; i++) {
         response.testcases.push({});

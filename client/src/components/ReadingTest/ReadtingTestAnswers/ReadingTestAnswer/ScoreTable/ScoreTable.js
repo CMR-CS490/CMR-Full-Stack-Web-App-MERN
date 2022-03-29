@@ -106,6 +106,20 @@ const ScoreTable = ({ questionID, questionInfo}) => {
    counter++;
    totalScore += parseInt(scoreData.functionNameScore);
 
+   //If there is a constraint for the question, add the row, and the details.
+   if(scoreData.constraintScore) {
+      rows.push({
+         id: counter,
+         questionNumber: "Constraint Check",
+         questionDescription: scoreData.constraintScore == 5 ? "The constraint shown in the code" : "The function name is NOT in the code.",
+         score: scoreData.constraintScore,
+         updatedScore: scoreData.constraintScore,
+      });
+
+      counter++;
+      totalScore += parseInt(scoreData.constraintScore);
+   }
+
    // 2. Pass all the test cases to the rows.
    for (let i = 0; i < scoreData.testcases.length; i++) {
       rows.push({
