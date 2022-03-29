@@ -18,13 +18,15 @@ const Homepage = () => {
 
 	const dispatch = useDispatch();
 
-	
-	if(localStorage.getItem("role") !== "teacher" ) {
-		window.location.href = '/login';
-		return;
-	} 
-	if(localStorage.getItem("role") === "student") {
+	let role = localStorage.getItem('role')
+	if(role === 'teacher') {
+
+	}
+	else if (role === 'student') {
 		window.location.href = '/student';
+		return;
+	} else {
+		window.location.href = '/login';
 		return;
 	}
 

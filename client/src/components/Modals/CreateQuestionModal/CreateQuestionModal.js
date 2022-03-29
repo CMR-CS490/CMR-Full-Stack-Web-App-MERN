@@ -30,13 +30,14 @@ const CreateQuestionModal = () => {
    // States for Modal opening and closing.
    const [open, setOpen] = React.useState(false);
    const handleOpen = () => setOpen(true);
+   const [checkConstraint, setCheckConstraint] = useState(false);
 
   
    const dispatch = useDispatch();
    //input fields
 
    const [questionData, setQuestionData] = useState ({
-		topic: '', question: '', difficulty: '', functionName: '', testcases: []
+		topic: '', question: '', difficulty: '', functionName: '', constraintName: 'None', testcases: []
 	})
 
    const [testcases, setTestcases] = useState ([])
@@ -46,6 +47,7 @@ const CreateQuestionModal = () => {
       setQuestionData({topic: '', question: '', difficulty: '', functionName: ''})
       setTestcases([]);
       setTestcase({input: "", output: ""});
+      setCheckConstraint(false);
    }
    const handleClose = () => {
       clearForm();
@@ -81,6 +83,12 @@ const CreateQuestionModal = () => {
 
    };
 
+   const handleConstraintCheck = (e) => {
+      setCheckConstraint(!checkConstraint);
+      setQuestionData({...questionData, constraintName: "None"});
+
+   }
+
    return (
       <div>
 
@@ -113,7 +121,7 @@ const CreateQuestionModal = () => {
                         </Typography>
                         <br></br>
 
-                        <textarea required type="text" cols="40" rows="5" required value={questionData.question} onChange={(e) => setQuestionData({...questionData, question: e.target.value})}/>
+                        <textarea required type="text" cols="40" rows="5" value={questionData.question} onChange={(e) => setQuestionData({...questionData, question: e.target.value})}/>
 
                      </div>
                      <div className="difficulty">
@@ -139,6 +147,32 @@ const CreateQuestionModal = () => {
                         <br></br>
                         <input type="text" required value={questionData.functionName} onChange={(e) => setQuestionData({...questionData, functionName: e.target.value})}/>
                      </div>
+
+                     <div className="setConstaint">
+                              <Typography variant="h5" sx={{ mt: 2 }} display = "inline">
+                                    Constraint? 
+                              </Typography>
+                              <span>   </span>
+                              <input style={{cursor: 'pointer'}} type='checkbox' value={checkConstraint} onChange={handleConstraintCheck}></input>
+                             
+                     </div> 
+                     {(checkConstraint? 
+                           <div className="constraintName">
+                                 <select defaultValue={questionData.constraintName} onChange={(e) => setQuestionData({...questionData, constraintName: e.target.value})}>
+                                    <option selected value="None">None</option>
+                                    <option value="For loop">For loop</option>
+                                    <option value="Recursion">Recursion</option>
+                                    <option value="While Loop">While Loop</option>
+                                 </select>
+                              <br></br>
+                             
+                           </div> : <></>
+                     )
+                     
+                       
+                     }
+                    
+
 
                      <div className="test-case">
                          <Typography variant="h5" sx={{ mt: 2 }}>
