@@ -9,6 +9,7 @@ import QuestionsPage from './teacher/QuestionsPage';
 import TestsPage from './teacher/TestsPage'
 import TestDetailsPage from './teacher/TestDetailsPage'
 import TestResultsPage from './teacher/TestResultsPage';
+import CreateTestPage from './teacher/CreateTestPage';
 // CSS
 import './dashboard.css'
 
@@ -53,6 +54,7 @@ const Homepage = () => {
 		pageComponent = <TestsPage />
 	} else if (page === "CREATETESTS") {
 		page = "CREATE TEST";
+		pageComponent = <CreateTestPage />
 	} else if (page.includes("TESTS/RESULTS")) {
 		page = "TEST RESULTS"
 		pageComponent = <TestResultsPage answerID = {answerID} />
