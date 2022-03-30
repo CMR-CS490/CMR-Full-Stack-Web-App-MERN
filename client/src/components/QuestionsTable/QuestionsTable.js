@@ -5,7 +5,7 @@ import { useDispatch, useSelector} from "react-redux";
 import { DataGrid } from "@mui/x-data-grid";
 import { cyan } from "@mui/material/colors";
 
-const QuestionsTable = ( {questions, isSelectTable, handleSelect}) => {
+const QuestionsTable = ( {questions, isSelectTable, handleSelect, questionData, setQuestionData}) => {
 
    const dispatch = useDispatch();
    useEffect(() => {
@@ -40,19 +40,43 @@ const QuestionsTable = ( {questions, isSelectTable, handleSelect}) => {
 		}
  	];
    if(!isSelectTable) {
-      columns.push({ field: "Score", headerName: "Score", type: 'number', editable: true, sortable: false})
+      columns.push({ field: "score", headerName: "Score", type: 'number', editable: true, sortable: false})
    }
+   const handleTestScoreInput = (e) => {
+      //console.log(e);
+      const temp = []
+      questionData.forEach((data) => {
+         if(data.question_id !== e.id) { 
+            temp.push(data)
+         }
+      })
+
+      temp.push({question_id: e.id, question_score: e.value})
+      setQuestionData(temp); 
+    
+   }
+
    const rows = [];
-   console.log("TESTING: ", questions);
    questions.forEach((question) => {
+      let score = 0
+      if(!isSelectTable && questionData)
+         questionData.forEach((data) => {
+            if(data.question_id === question._id) {
+               score = data.question_score;
+            }
+         })
+
       rows.push({
          id: question._id,
          topic: question.topic,
          questionDescription: question.question,
          difficulty: question.difficulty,
+         score: score,
       }); 
 
    });
+
+
 
 
    return (
@@ -63,10 +87,12 @@ const QuestionsTable = ( {questions, isSelectTable, handleSelect}) => {
                columns={columns}
                pageSize={5}
                rowsPerPageOptions={[5]}
-               
-               checkboxSelection
+               disableColumnFilter = {!isSelectTable}
+               checkboxSelection = {isSelectTable}
                disableSelectionOnClick
-               onSelectionModelChange = {item => handleSelect(item)}
+               disableColumnSelector
+               onSelectionModelChange = {handleSelect}
+               onCellEditCommit = {handleTestScoreInput}
                sx={{
                   bgcolor: "white",
                   boxShadow: 2,

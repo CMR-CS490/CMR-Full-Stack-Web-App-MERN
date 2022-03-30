@@ -35,7 +35,7 @@ const Homepage = () => {
 
 	let currentRoute = window.location.href;
 	let page = currentRoute.substring(currentRoute.indexOf("/teacher") + 9).toUpperCase();
-	console.log(page)
+	
 	if(page.length == 0) page = "DASHBOARD";
 
 	let testID = "";

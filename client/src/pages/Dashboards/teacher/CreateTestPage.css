@@ -13,3 +13,14 @@
 .css-1oqqzyl-MuiContainer-root {
     max-width: 90%;
 }
+
+
+.error {
+    padding: 0.5em;
+    color: red;
+    font-weight: bold;
+    display: none;
+    font-size: 20px;
+    text-align: center;
+    background-color: white;
+ }
