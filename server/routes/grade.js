@@ -4,7 +4,7 @@ import { gradeTests } from '../controllers/grade.js'
 
 const router = express.Router();
 
-// localhost:5000/posts
-router.get('/:id', gradeTests); // Get all the tests in the DB.
+// localhost:5000/api/grade
+router.get('/:id', gradeTests); // Grade all the tests from DB for the testID
 
 export default router;

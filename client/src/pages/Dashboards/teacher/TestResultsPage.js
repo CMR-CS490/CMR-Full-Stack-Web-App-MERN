@@ -7,12 +7,10 @@ import { getAnswer } from "./../../../actions/answers";
 import { getAnswerStudent } from "./../../../actions/answers";
 import { getTest } from "./../../../actions/tests";
 import { getScores } from "./../../../actions/scores";
-import { updateScore } from "./../../../actions/scores"
 
 // Components
 import TestDetails from "./../../../components/TakingTest/TestDetails/TestDetails";
 import ReadingTestAnswers from "./../../../components/ReadingTest/ReadtingTestAnswers/ReadingTestAnswers";
-import ScoreTables from "../../../components/ReadingTest/ScoreTables/ScoreTables";
 import ModalsButton from "../../../components/Modals/ModalsButton";
 
 // CSS
@@ -21,20 +19,15 @@ import "./TestResultsPage";
 const TestResultsPage = ({ propsTestID, answerID }) => {
    const dispatch = useDispatch();
 
-   const [scoreObject, setScoreObject ] = useState({})
-   
    const onClickCancel = (e) => {
       window.history.back()
    }
-   // const [scoreObject, setScoreObject] = useState({})
-
 
    const submitScores = () => {
       // When the user clicks Update at the bottom of Test Results page, all the updated comments are posted to the API.
-      console.log("%cUpdate: score", "student", propsTestID, scoreObject )
-      updateScore("student" ,propsTestID, scoreObject)
    }
 
+   const [scoreObject, setScoreObject ] = useState({})
 
    console.log("answerID: ", answerID);
    useEffect(() => {
@@ -67,7 +60,7 @@ const TestResultsPage = ({ propsTestID, answerID }) => {
          <br />
          {/* Renders the Student's test answer AND their score table output.*/}
          <ReadingTestAnswers />
-         {localStorage.getItem("role") === "teacher" ? <ModalsButton color='primary' text='Update' action={submitScores} /> : <></>}
+         {/*{localStorage.getItem("role") === "teacher" ? <ModalsButton color='primary' text='Update' action={submitScores} /> : <></>} */}
          <ModalsButton color='primary' text='Cancel' action={onClickCancel} />
       </div>
    );

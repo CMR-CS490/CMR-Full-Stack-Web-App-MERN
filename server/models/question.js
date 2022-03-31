@@ -5,6 +5,7 @@ const questionSchema = mongooose.Schema({
     question: String,
     difficulty: String,
     functionName: String,
+    constraintName: String,
     testcases: [{ input: String, output: String}],
 }, { collection: "questions" }
 );

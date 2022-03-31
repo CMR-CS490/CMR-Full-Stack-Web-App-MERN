@@ -24,7 +24,8 @@ export const createAnswer = (newAnswer) => axios.post(`${url}api/answers`, newAn
 export const getAnswerStudent = (username, testID) => axios.get(`${url}api/answers/${username}/${testID}`);
 
 export const getScores = (username, testID) => axios.get(`${url}api/score/${username}/${testID}`);
-export const updateScores = (username, testID, updatedScore) => axios.get(`${url}api/score/${username}/${testID}`, updatedScore) ;
+export const updateScores = (username, testID, updatedScore) => axios.get(`${url}api/score/${username}/${testID}`, updatedScore);
+export const updateIndividualScores = (scoreID, questionID, updatedIndividualScore) => axios.post(`${url}api/score/${scoreID}/${questionID}`, updatedIndividualScore);
 
 export const gradeTest = (testID) => axios.get(`${url}api/grade/${testID}`);
 export const publishScores = (testID) => axios.get(`${url}api/score/publish/${testID}`);

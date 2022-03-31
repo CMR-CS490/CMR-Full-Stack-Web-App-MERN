@@ -60,6 +60,10 @@ const TestForm = ({ currentId, setCurrentId, testData, setTestData}) => {
                // value={testData.title}
                onChange={(e) => setTestData({ ...testData, title: e.target.value })}
                // className="textfield-title"
+               sx={{
+                     width: "25%",
+                     margin: "10px 0",
+               }}
             />
             <TextField
                name="creator"
@@ -69,6 +73,10 @@ const TestForm = ({ currentId, setCurrentId, testData, setTestData}) => {
                // value={testData.creator}
                onChange={(e) => setTestData({ ...testData, creator: e.target.value })}
                // className="textfield-creator"
+               sx={{
+                     width: "25%",
+                     margin: "10px 0",
+               }}
             />
             <TextField
                name="description"
@@ -78,6 +86,10 @@ const TestForm = ({ currentId, setCurrentId, testData, setTestData}) => {
                // value={testData.description}
                onChange={(e) => setTestData({ ...testData, description: e.target.value })}
                // className="textfield-description"
+               sx={{
+                     width: "50%",
+                     margin: "10px 0",
+               }}
             />
             <div>
                <FileBase
