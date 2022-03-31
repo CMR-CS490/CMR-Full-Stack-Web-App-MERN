@@ -110,7 +110,7 @@ const ScoreTable = ({ questionID, questionInfo}) => {
    });
    counter++;
    totalScore += parseInt(score.functionNameScore);
-   updatedTotalScore += parseInt(score.functionNameScore)
+   updatedTotalScore += parseInt(score.updatedFunctionNameScore)
 
 
    // 2. Pass all the test cases to the rows.
@@ -136,12 +136,13 @@ const ScoreTable = ({ questionID, questionInfo}) => {
          questionNumber: "Constraint Check",
          questionDescription: score.constraintScore == 5 ? "The constraint shown in the code" : "The function name is NOT in the code.",
          score: score.constraintScore,
-         updatedScore: score.constraintScore,
+         updatedScore: score.updatedConstraintScore,
       });
 
       counter++;
+   
       totalScore += parseInt(score.constraintScore);
-      updatedTotalScore += parseInt(score.constraintScore);
+      updatedTotalScore += parseInt(score.updatedConstraintScore);
    }
 
    // 3. Pass in the comment and total score
@@ -153,7 +154,7 @@ const ScoreTable = ({ questionID, questionInfo}) => {
 
      //Changing function Name score
      if(e.id == 1) {
-         setScore({...score, functionNameScore : e.value})
+         setScore({...score, updatedFunctionNameScore : e.value})
          return;
      }
 
@@ -177,7 +178,7 @@ const ScoreTable = ({ questionID, questionInfo}) => {
 
       //We are changing constraint score
      if(e.id > 1+score.testcases.length) {
-         setScore({...score, constraintScore : e.value})
+         setScore({...score, updatedConstraintScore : e.value})
      }
     
      
@@ -230,8 +231,8 @@ const ScoreTable = ({ questionID, questionInfo}) => {
 						<TextField name='comments' variant='outlined' label='Comments' value={score.comments} onChange={e => handleCommentChanges(e)} />
 					</div>
 					<div className='creator-question-length-container'>
-						<Typography className='taking-test-questions-length' align='right' variant='subtitle1' gutterBottom sx={{display: 'inline-flex'}}>
-							Total Score: {totalScore}
+						<Typography className='taking-test-questions-length' align='right' variant='subtitle1' gutterBottom sx={{display: 'inline-flex', fontWeight: 'bold'}}>
+							Total Score: {updatedTotalScore}
 						</Typography>
 					</div>
 				</Card>
