@@ -106,7 +106,7 @@ const ScoreTable = ({ questionID, questionInfo}) => {
       questionNumber: "Function Name",
       questionDescription: score.functionNameScore == 5 ? "The function name is correct." : "The function name is incorrect.",
       score: score.functionNameScore,
-      updatedScore: score.functionNameScore,
+      updatedScore: score.updatedFunctionNameScore,
    });
    counter++;
    totalScore += parseInt(score.functionNameScore);
