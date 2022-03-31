@@ -22,14 +22,33 @@ export const getStudentScores = async (req, res) => {
 };
 
 export const updateScore = async (req, res) => {
-   const { id: _id } = req.params; // id is got from URL.
+   const { scoreid: score_id } = req.params; // id is got from URL.
    const score = req.body; // Sent from the frontend form.
 
-   if (!(mongoose.Types.ObjectId.isValid(_id))) return res.status(404).send('No Score with that id');
+   if (!(mongoose.Types.ObjectId.isValid(score_id))) return res.status(404).send('No Score with that id');
 
-   const updatedScore = await Score.findByIdAndUpdate(_id, { ...score, _id }, { new: true });
+   const updatedScore = await Score.findByIdAndUpdate(score_id, { ...score, score_id }, { new: true });
 
-   res.json(updatedScore);
+   res.json(updateScore);
+}
+
+export const updateEachScore = async (req, res) => {
+   const { scoreid: score_id } = req.params; // scoreid is got from URL.
+   const {questionid: question_id} = req.params
+
+   const score = req.body; // Sent from the frontend form.
+
+   //const updatedScore = await Score.find({}: "62450c1250cbecbbb5a0b242"})
+   console.log(score)
+   console.log("QUESTION ID: ", question_id)
+   const updateScore = await Score.findByIdAndUpdate(score_id, 
+      {$set: {'scores.$[i]': score}},
+      {arrayFilters: [{'i.question_id': question_id}]}   
+   )
+
+   const updatedScore = await Score.find({_id: score_id})
+
+   res.status(201).json(updatedScore);
 }
 
 
