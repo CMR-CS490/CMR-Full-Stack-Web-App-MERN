@@ -9,6 +9,7 @@ import QuestionsPage from './teacher/QuestionsPage';
 import TestsPage from './teacher/TestsPage'
 import TestDetailsPage from './teacher/TestDetailsPage'
 import TestResultsPage from './teacher/TestResultsPage';
+import CreateTestPage from './teacher/CreateTestPage';
 // CSS
 import './dashboard.css'
 
@@ -18,13 +19,15 @@ const Homepage = () => {
 
 	const dispatch = useDispatch();
 
-	
-	if(localStorage.getItem("role") !== "teacher" ) {
-		window.location.href = '/login';
-		return;
-	} 
-	if(localStorage.getItem("role") === "student") {
+	let role = localStorage.getItem('role')
+	if(role === 'teacher') {
+
+	}
+	else if (role === 'student') {
 		window.location.href = '/student';
+		return;
+	} else {
+		window.location.href = '/login';
 		return;
 	}
 
@@ -32,7 +35,7 @@ const Homepage = () => {
 
 	let currentRoute = window.location.href;
 	let page = currentRoute.substring(currentRoute.indexOf("/teacher") + 9).toUpperCase();
-	console.log(page)
+	
 	if(page.length == 0) page = "DASHBOARD";
 
 	let testID = "";
@@ -51,6 +54,7 @@ const Homepage = () => {
 		pageComponent = <TestsPage />
 	} else if (page === "CREATETESTS") {
 		page = "CREATE TEST";
+		pageComponent = <CreateTestPage />
 	} else if (page.includes("TESTS/RESULTS")) {
 		page = "TEST RESULTS"
 		pageComponent = <TestResultsPage answerID = {answerID} />

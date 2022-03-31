@@ -16,3 +16,7 @@
     color: white;
     font-size: 30px;
   }
+
+  .MuiContainer-root {
+      min-width: 90%;
+  }
