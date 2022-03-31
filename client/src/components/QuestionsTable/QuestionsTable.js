@@ -80,27 +80,28 @@ const QuestionsTable = ( {questions, isSelectTable, handleSelect, questionData, 
 
 
    return (
-      <div className="questions-table">
-         <div style={{ height: "400px", width: "100%" }}>
-            <DataGrid
-               rows={rows}
-               columns={columns}
-               pageSize={5}
-               rowsPerPageOptions={[5]}
-               disableColumnFilter = {!isSelectTable}
-               checkboxSelection = {isSelectTable}
-               disableSelectionOnClick
-               disableColumnSelector
-               onSelectionModelChange = {handleSelect}
-               onCellEditCommit = {handleTestScoreInput}
-               sx={{
-                  bgcolor: "white",
-                  boxShadow: 2,
-                  border: 1,
-               }}
-            />
-         </div>
-      </div>
+         <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSize={10}
+            rowsPerPageOptions={[10]}
+            disableColumnFilter = {!isSelectTable}
+            checkboxSelection = {isSelectTable}
+            disableSelectionOnClick
+            disableColumnSelector
+            onSelectionModelChange = {handleSelect}
+            onCellEditCommit = {handleTestScoreInput}
+            sx={{
+               boxShadow: 2,
+               border: 1,
+               height: "600px", 
+               width: "50%",
+               margin: "10px",
+               className: "question-table"
+            }}
+
+         />
+  
    );
 };
 

@@ -8,6 +8,7 @@ import QuestionsTable from "../../../components/QuestionsTable/QuestionsTable";
 import ModalsButton from "../../../components/Modals/ModalsButton";
 //Request
 import {createTest} from "../../../actions/tests"
+import { Grid, Paper} from '@mui/material';
 //CSS
 import "./CreateTestPage.css";
 
@@ -108,12 +109,26 @@ const QuestionsPage = () => {
 	// 	</div>
    <div>
       <TestForm testData={testData} setTestData={setTestData}/>
-      <div className="error">
-            <h3>Error</h3>
-      </div>
-      <QuestionsTable questions = {questions} isSelectTable={true} handleSelect={handleSelection}></QuestionsTable>
-      <QuestionsTable questions = {questionCheck}  isSelectTable={false} questionData={questionData} setQuestionData={setQuestionData}></QuestionsTable>
+      
+      <Paper
+      
+         elevation={8}
+         variant="outlined"
+         sx={{
+            padding: 2,
+         }}
+      >
+         
+         <h3 className="error">Error</h3>
+         
+         <Grid container spacing={2}>
+            <QuestionsTable questions = {questions} isSelectTable={true} handleSelect={handleSelection}></QuestionsTable>
+            <QuestionsTable questions = {questionCheck}  isSelectTable={false} questionData={questionData} setQuestionData={setQuestionData}></QuestionsTable>
+         </Grid>
 
+      </Paper>
+    
+     
       
       <ModalsButton text="Create a Test" action={handleSubmit} color="primary"></ModalsButton>
    </div>
