@@ -2,7 +2,6 @@ import axios from 'axios'
 
 // Local: http://localhost:5002/
 // Production: https://cmr-autograder.herokuapp.com/
-// New Production URL: https://cmr-autograder-2.herokuapp.com/
 // URL pointing to backend route.
 export const url = 'http://localhost:5002/';
 
