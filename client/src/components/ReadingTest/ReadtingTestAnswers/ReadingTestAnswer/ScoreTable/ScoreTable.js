@@ -58,7 +58,6 @@ const ScoreTable = ({ questionID, questionInfo, setScoreObject}) => {
          flex: 0.2,
          editable: isEditible,
          sortable: false,
-         hide: !isEditible
       },
    ];
    
@@ -150,8 +149,9 @@ const ScoreTable = ({ questionID, questionInfo, setScoreObject}) => {
 						<Typography className='taking-test-description' variant='body1' display='inline'>
 							Comments: 
 						</Typography>
-                  {localStorage.getItem("role") === "teacher" ? <TextField name='comments' variant='outlined' label='Comments' value={comment} onChange={(e) => setComment(e.target.value)} /> : <span>{comment === "" ? "No comments available." : comment}</span> }
-						
+
+						<TextField disabled={!isEditible} name='comments' variant='outlined' label='Comments' value={score.comments} onChange={e => handleCommentChanges(e)} />
+
 					</div>
 					<div className='creator-question-length-container'>
 						<Typography className='taking-test-questions-length' align='right' variant='subtitle1' gutterBottom sx={{display: 'inline-flex'}}>
