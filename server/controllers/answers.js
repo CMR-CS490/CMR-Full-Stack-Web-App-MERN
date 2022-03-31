@@ -40,7 +40,7 @@ export const getAnswer = async (req, res) => {
       console.log("Sending all particular test Answer: ", { studentAnswer });
 
       // Send an array of all the tests.
-      res.status(200).json(studentAnswer);
+      res.status(200).json(studentAnswer[0]);
    } catch (error) {
       res.status(404).json({ message: error.message });
    }

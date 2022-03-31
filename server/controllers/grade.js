@@ -47,11 +47,18 @@ const gradeQuestion = async (question_id, answer, questionScore) => {
         let testCase1 = question[0].testcases[i].input;
         let testCase1Answer = question[0].testcases[i].output;
         
+   
+        let endIndex = answer.indexOf('(');
+        let startIndex = answer.indexOf("def") + 4;
+        console.log("BEFORE", answer);
+        answer = answer.replace(answer.substring(startIndex, endIndex), functionName + " ");
+        console.log("ANSWER:", answer);
+        
         const content =  `${answer}\nprint(${functionName}(${testCase1}))`
         let output = []
-        if( functionNameCorrect) { 
-           output = await runTestCase(content);
-        }
+        
+        output = await runTestCase(content);
+        
             
         
         if(output[0] == testCase1Answer) {
@@ -104,7 +111,7 @@ export const gradeTest = async (answerID) => {
       for (let i = 0; i < questionData.length; i++) {
         console.log(questionData[i]);
         let result = await gradeQuestion(questionData[i].question_id, questionData[i].answer, questionData[i].question_score);
-        result.comment = "";
+        result.comments = "";
         data.scores.push(result);
       }
       
