@@ -149,9 +149,7 @@ const ScoreTable = ({ questionID, questionInfo, setScoreObject}) => {
 						<Typography className='taking-test-description' variant='body1' display='inline'>
 							Comments: 
 						</Typography>
-
 						<TextField disabled={!isEditible} name='comments' variant='outlined' label='Comments' value={score.comments} onChange={e => handleCommentChanges(e)} />
-
 					</div>
 					<div className='creator-question-length-container'>
 						<Typography className='taking-test-questions-length' align='right' variant='subtitle1' gutterBottom sx={{display: 'inline-flex'}}>
