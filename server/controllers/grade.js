@@ -30,17 +30,50 @@ const gradeQuestion = async (question_id, answer, questionScore) => {
     response.testcases = [];
     response.question_id = question_id;
     
+    //check function name
     let functionName = question[0].functionName;
     let functionNameCorrect = true;
     if(answer.includes(`def ${functionName}`)) {
         response.functionNameScore = "5";
+        response.updatedFunctionNameScore = "5";
     } else {
         response.functionNameScore = "0";
+        response.updatedFunctionNameScore = "0";
         functionNameCorrect = false;
+    }
+
+    let totalScore = questionScore -5;
+
+    //Check for constraints
+    if(question[0].constraintName && question[0].constraintName !== 'None') {
+        console.log('IN HERE')
+        if(question[0].constraintName === 'Recursion') {
+            if(answer.count(functionName) > 1) {
+                response.constraintScore = 5;
+                response.updatedConstraintScore = 5;
+            }
+        } else if (question[0].constraintName === 'For Loop') {
+            console.log('IN FOR LOOP')
+            if(answer.includes('for')) {
+                response.constraintScore = 5;
+                response.updatedConstraintScore = 5;
+            }
+        } else if (question[0].constraintName === 'While Loop') {
+            if(answer.includes('while')) {
+                response.constraintScore = 5;
+                response.updatedConstraintScore = 5;
+            }
+        } else {
+            response.constraintScore = 0;
+            response.updatedConstraintScore = 0; 
+        }
+
+        totalScore = totalScore - 5; 
+        
     }
     
     
-    let totalScore = questionScore -5;
+
     
     for (let i = 0; i < question[0].testcases.length; i++) {
         response.testcases.push({});
@@ -64,10 +97,13 @@ const gradeQuestion = async (question_id, answer, questionScore) => {
         if(output[0] == testCase1Answer) {
             response.testcases[i].testcase = `${functionName}(${testCase1})`
             response.testcases[i].score = (totalScore/question[0].testcases.length).toFixed(2);
+            response.testcases[i].teacherScore = (totalScore/question[0].testcases.length).toFixed(2);
         } else {
             response.testcases[i].testcase = `${functionName}(${testCase1})`
             response.testcases[i].score = 0;
+            response.testcases[i].teacherScore = 0;
         }
+        
         
     }
     return new Promise((resolve, reject) => {

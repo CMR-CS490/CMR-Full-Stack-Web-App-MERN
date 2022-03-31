@@ -12,7 +12,6 @@ import { updateScore } from "./../../../actions/scores"
 // Components
 import TestDetails from "./../../../components/TakingTest/TestDetails/TestDetails";
 import ReadingTestAnswers from "./../../../components/ReadingTest/ReadtingTestAnswers/ReadingTestAnswers";
-import ScoreTables from "../../../components/ReadingTest/ScoreTables/ScoreTables";
 import ModalsButton from "../../../components/Modals/ModalsButton";
 
 // CSS
@@ -66,8 +65,8 @@ const TestResultsPage = ({ propsTestID, answerID }) => {
          <TestDetails showButton={true} />
          <br />
          {/* Renders the Student's test answer AND their score table output.*/}
-         <ReadingTestAnswers setScoreObject={setScoreObject} />
-         {localStorage.getItem("role") === "teacher" ? <ModalsButton color='primary' text='Update' action={submitScores} /> : <></>}
+         <ReadingTestAnswers />
+         {/*{localStorage.getItem("role") === "teacher" ? <ModalsButton color='primary' text='Update' action={submitScores} /> : <></>} */}
          <ModalsButton color='primary' text='Cancel' action={onClickCancel} />
       </div>
    );

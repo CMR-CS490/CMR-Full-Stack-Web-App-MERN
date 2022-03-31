@@ -6,20 +6,24 @@ import {Card, Typography, TextField} from "@mui/material"
 import ModalsButton from "../../../../Modals/ModalsButton";
 
 //Redux
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // CSS
 import "./ScoreTable.css";
 
+//api
+import {updateIndividualScores} from "../../../../../actions/scores"
+
+
 // questionID is passed from ReadtingTestAsnwer.js
 const ScoreTable = ({ questionID, questionInfo, setScoreObject}) => {
 
-   console.log("qinfo: ", questionInfo)
+   //console.log("qinfo: ", questionInfo)
    
    // This variable makes it so the fields are able to be editable.
    let isEditible = (localStorage.getItem("role") === "teacher") // True if the role is a teacher, false if its a student.
     
-
+   const dispatch = useDispatch();
    useEffect(() => {
       // setComment(comment)
       setScoreObject({scores})
@@ -64,18 +68,12 @@ const ScoreTable = ({ questionID, questionInfo, setScoreObject}) => {
    
    // The first and and last rows will always be (Function Name) and (Comments/Total Score)
    // The middle columns will be based on the number of test cases.
-   
-   // const rows = [
-   //    { id: 1, questionNumber: "Function Name", questionDescription: "The function name is correct.", score: 50 },
-   //    { id: 2, questionNumber: "Test Case 1", questionDescription: "Testing(2, 3)", score: 25 },
-   //    { id: 3, questionNumber: "Test Case 2", questionDescription: "Testing(3, 3)", score: 25 },
-   //    { id: 4, questionNumber: "Comments", questionDescription: "Write comments here", score: "Total" },
-   // ];
+
    
    const scores = useSelector((state) => state.scores);
-   console.log("%cscores: ", "color:yellow", scores)
+   //console.log("%cscores: ", "color:yellow", scores)
    const scoresArray = scores[0].scores; // Turn the redux state to an array of scores.
-   console.log("%cScores Array: ", "color:yellow", scoresArray)
+   //console.log("%cScores Array: ", "color:yellow", scoresArray)
 
    // Find the score that corresponds with this question.
 
@@ -88,44 +86,122 @@ const ScoreTable = ({ questionID, questionInfo, setScoreObject}) => {
       }
    }
 
-   const [comment, setComment] = useState(`${scoreData.comments}`);
+
+   const [score, setScore] = useState(scoreData)
+
+   if(score.length == 0) {
+      return <></>
+   }
+
    
    let counter = 1;
    const rows = [];
 
    // const [totalScore, setTotalScore] = useState(0)
    let totalScore = 0;
+   let updatedTotalScore = 0;
 
    // 1. Pass the function name test to the row.
    rows.push({
       id: counter,
       questionNumber: "Function Name",
-      questionDescription: scoreData.functionNameScore == 5 ? "The function name is correct." : "The function name is incorrect.",
-      score: scoreData.functionNameScore,
-      updatedScore: scoreData.functionNameScore,
+      questionDescription: score.functionNameScore == 5 ? "The function name is correct." : "The function name is incorrect.",
+      score: score.functionNameScore,
+      updatedScore: score.updatedFunctionNameScore,
    });
    counter++;
-   totalScore += parseInt(scoreData.functionNameScore);
+   totalScore += parseInt(score.functionNameScore);
+   updatedTotalScore += parseInt(score.updatedFunctionNameScore)
+
 
    // 2. Pass all the test cases to the rows.
-   for (let i = 0; i < scoreData.testcases.length; i++) {
+   for (let i = 0; i < score.testcases.length; i++) {
       rows.push({
          id: counter,
          questionNumber: `Test Case ${i + 1}`,
-         questionDescription: scoreData.testcases[i].testcase,
-         score: scoreData.testcases[i].score,
-         updatedScore: scoreData.testcases[i].score
+         questionDescription: score.testcases[i].testcase,
+         score: score.testcases[i].score,
+         updatedScore: score.testcases[i].teacherScore
       });
       counter++;
-      totalScore += parseInt(scoreData.testcases[i].score);
+   
+      totalScore += parseInt(score.testcases[i].score);
+      updatedTotalScore += parseInt(score.testcases[i].teacherScore);
+      
+   }
+
+     //3. If there is a constraint for the question, add the row, and the details.
+     if(score.constraintScore) {
+      rows.push({
+         id: counter,
+         questionNumber: "Constraint Check",
+         questionDescription: score.constraintScore == 5 ? "The constraint shown in the code" : "The function name is NOT in the code.",
+         score: score.constraintScore,
+         updatedScore: score.updatedConstraintScore,
+      });
+
+      counter++;
+   
+      totalScore += parseInt(score.constraintScore);
+      updatedTotalScore += parseInt(score.updatedConstraintScore);
    }
 
    // 3. Pass in the comment and total score
 
-   rows.push({ id: counter, questionNumber: "Total Scores", questionDescription: " ", score: totalScore, updatedScore: totalScore });
+   rows.push({ id: counter, questionNumber: "Total Scores", questionDescription: " ", score: totalScore, updatedScore: updatedTotalScore });
    counter++;
+   const handleTestScoreChanges = (e) => {
+     console.log(e)
 
-   
+     //Changing function Name score
+     if(e.id == 1) {
+         setScore({...score, updatedFunctionNameScore : e.value})
+         return;
+     }
+
+     //We are changing testcase score
+     if(e.id > 1 && e.id <= 1+score.testcases.length) {
+        let testcases = [];
+        let i = 2;
+        score.testcases.forEach((testCase) => {
+            if(e.id == i) {
+               testcases.push({...testCase, teacherScore: e.value})
+            } else {
+               testcases.push(testCase)
+            }
+            i++;
+           
+        })
+
+        setScore({...score, testcases: testcases})
+
+     }
+
+      //We are changing constraint score
+     if(e.id > 1+score.testcases.length) {
+         setScore({...score, updatedConstraintScore : e.value})
+     }
+    
+     
+   }
+   const handleCommentChanges =(e) => {
+      setScore({...score, comments: e.target.value})
+   }
+
+   const handleSubmit = (e) => {
+      e.preventDefault()
+      let scoreSent = {...score};
+
+      delete scoreSent['_id'];
+      scoreSent.testcases.forEach((testcase)=> {
+         delete testcase['_id'];
+      })
+      //console.log(score)
+
+      dispatch(updateIndividualScores(scores[0]._id, questionID, scoreSent))
+
+      
+   }
 
    return (
       <div className="card-seperator">
@@ -136,12 +212,16 @@ const ScoreTable = ({ questionID, questionInfo, setScoreObject}) => {
                pageSize={5}
                rowsPerPageOptions={[5]}
                // checkboxSelection
+               disableColumnFilter
                disableSelectionOnClick
+               disableColumnSelector
+               onCellEditCommit = {handleTestScoreChanges}
                sx={{
                   bgcolor: "white",
                   boxShadow: 2,
                   border: 1,
                }}
+               isCellEditable={(params) => params.row.questionNumber != "Total Scores"}
             />
          </div>
          <div className='comment-total-score-container'>
@@ -150,15 +230,19 @@ const ScoreTable = ({ questionID, questionInfo, setScoreObject}) => {
 						<Typography className='taking-test-description' variant='body1' display='inline'>
 							Comments: 
 						</Typography>
-                  {localStorage.getItem("role") === "teacher" ? <TextField name='comments' variant='outlined' label='Comments' value={comment} onChange={(e) => setComment(e.target.value)} /> : <span>{comment === "" ? "No comments available." : comment}</span> }
-						
+
+						<TextField disabled={!isEditible} name='comments' variant='outlined' label='Comments' value={score.comments} onChange={e => handleCommentChanges(e)} />
+
 					</div>
 					<div className='creator-question-length-container'>
-						<Typography className='taking-test-questions-length' align='right' variant='subtitle1' gutterBottom sx={{display: 'inline-flex'}}>
-							Total Score: {totalScore}
+						<Typography className='taking-test-questions-length' align='right' variant='subtitle1' gutterBottom sx={{display: 'inline-flex', fontWeight: 'bold'}}>
+							Total Score: {updatedTotalScore}
 						</Typography>
 					</div>
 				</Card>
+
+
+            {isEditible? <ModalsButton text="Save Changes" action={handleSubmit} color="primary"></ModalsButton>: <></> }
 			</div>
       </div>
    );
