@@ -8,7 +8,7 @@ import ReadingTestAnswer from "./ReadingTestAnswer/ReadingTestAnswer";
 import { useDispatch, useSelector } from "react-redux";
 import { getQuestion } from "../../../actions/questions";
 
-const ReadingTestAnswers = () => {
+const ReadingTestAnswers = ({setScoreObject}) => {
    // const dispatch = useDispatch();
    const dispatch = useDispatch();
    // Getting question from the store.
@@ -48,7 +48,7 @@ const ReadingTestAnswers = () => {
          ) : (
             // true
             questionsArray.map((question, index) => (
-               <ReadingTestAnswer index={index} question={question} />
+               <ReadingTestAnswer index={index} question={question} setScoreObject={setScoreObject}/>
             ))
          )}
       </div>

@@ -15,17 +15,8 @@ export const getScores = (username, testID) => async (dispatch) => {
 
 export const updateScore = (username, testID, newScore) => async (dispatch) => {
    try {
+      console.log("updatescore", data)
       const { data } = await api.updateScores(username, testID, newScore);
-
-      dispatch({ type: 'UPDATE_SCORE', payload: data});
-   } catch (error) {
-      console.log(error);
-   }
-}
-
-export const updateIndividualScores = (scoreID, questionID, updatedIndividualScore) => async (dispatch) => {
-   try {
-      const { data } = await api.updateIndividualScores(scoreID, questionID, updatedIndividualScore);
 
       dispatch({ type: 'UPDATE_SCORE', payload: data});
    } catch (error) {
