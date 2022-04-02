@@ -1,0 +1,6 @@
+.taking-test-question-navigation-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 1.1rem;
+}

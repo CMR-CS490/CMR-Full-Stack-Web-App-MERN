@@ -14,7 +14,7 @@ export const getAnswers = (testID) => async (dispatch) => {
  export const createAnswer= (answer) => async (dispatch) => {
 	try {
 	   
-	   console.log(answer);
+	   console.log("Submitting an answer: ", answer);
 	   const { data } = await api.createAnswer(answer);
  
 	   dispatch({ type: "CREATE_ANSWER", payload: data });

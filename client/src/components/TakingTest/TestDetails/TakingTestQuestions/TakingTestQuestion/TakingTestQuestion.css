@@ -72,6 +72,10 @@ textarea.console::after {
     text-shadow: none;
 }
 
+/* Used to the hide question */
+.hidden {
+    display: none;
+}
 
 pre {
     margin: 0;
