@@ -8,7 +8,7 @@ import ReadingTestAnswer from "./ReadingTestAnswer/ReadingTestAnswer";
 import { useDispatch, useSelector } from "react-redux";
 import { getQuestion } from "../../../actions/questions";
 
-const ReadingTestAnswers = () => {
+const ReadingTestAnswers = ({setTotalQuestions}) => {
    // const dispatch = useDispatch();
    const dispatch = useDispatch();
    // Getting question from the store.
@@ -35,6 +35,8 @@ const ReadingTestAnswers = () => {
       questionsArray.map((question) => {
          dispatch(getQuestion(question.question_id));
       })
+      // Set the number of question in the test.
+      setTotalQuestions(questionsArray.length);
    } else {
       questionsArray= []
    }

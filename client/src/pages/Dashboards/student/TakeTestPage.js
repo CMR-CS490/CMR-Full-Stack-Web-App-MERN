@@ -42,10 +42,16 @@ const TakeTestPage = ({ testID }) => {
    function handleSubmit() {
       let testAnswers = {test_id : testID, username: localStorage.getItem('username'), questions: questionData}
       dispatch(createAnswer(testAnswers));
-      window.location.href = "/student";
-     
+
+      // Redirect to the student's dashboard. (setTimeout is used to allow the API to finish creating the answer.)
+      setTimeout(() => {window.location.href = "/student"} , 1000);
+
 
    }
+
+   
+
+
    function handleCancel() {
       window.history.back()
    }
