@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Card, CardContent, Divider, Container, AppBar, Typography, Grow, Grid } from "@mui/material";
 
+
 // axios
 import axios from "axios";
 
@@ -15,6 +16,7 @@ import { createAnswer } from "../../../actions/answers";
 import ModalsButton from "../../../components/Modals/ModalsButton";
 import TakingTestQuestions from "../../../components/TakingTest/TestDetails/TakingTestQuestions/TakingTestQuestions";
 import TestDetails from "../../../components/TakingTest/TestDetails/TestDetails";
+import TakingTestQuestionNavigation from "../../../components/TakingTest/TestDetails/TakingTestQuestionNavigation/TakingTestQuestionNavigation";
 
 // CSS
 import "./TakeTestPage.css";
@@ -28,6 +30,9 @@ const TakeTestPage = ({ testID }) => {
 
    // State for keeping track of the user's input for each question.
    const [questionData, setQuestionData] = useState([]);
+
+   // State that indicates how many question there are in a test. This is needed for the pagintation component and the question navigation functionality.
+   const [totalQuestions, setTotalQuestions] = useState(0);
    
 
    console.log("%cComponent: TakeTestPage", "color:blue", "testID: ", testID);
@@ -50,7 +55,9 @@ const TakeTestPage = ({ testID }) => {
          <div className="taking-test-details-container">
             <TestDetails showButton={true} />
             <br />
-            <TakingTestQuestions questionData={questionData} setQuestionData={setQuestionData} />
+            <TakingTestQuestions questionData={questionData} setQuestionData={setQuestionData} setTotalQuestions={setTotalQuestions} />
+            <br />
+            <TakingTestQuestionNavigation totalQuestions={totalQuestions} />
          </div>
          <ModalsButton text="Submit Test" action={handleSubmit} color="primary"></ModalsButton>
          <ModalsButton text="Cancel" action={handleCancel} color="secondary"></ModalsButton>
