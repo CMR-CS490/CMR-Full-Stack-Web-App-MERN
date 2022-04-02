@@ -14,7 +14,7 @@ export const getAnswers = (testID) => async (dispatch) => {
  export const createAnswer= (answer) => async (dispatch) => {
 	try {
 	   
-	   console.log("Submitting an answer: ", answer);
+	//    console.log("Submitting an answer: ", answer);
 	   const { data } = await api.createAnswer(answer);
  
 	   dispatch({ type: "CREATE_ANSWER", payload: data });
@@ -26,7 +26,7 @@ export const getAnswers = (testID) => async (dispatch) => {
  export const getAnswer = (answerID) => async (dispatch) => {
 	try {
 		const { data } = await api.getAnswer(answerID);
-		console.log("Sending one answer from the DB from actions: ", data)
+		// console.log("Sending one answer from the DB from actions: ", data)
  
 		dispatch({ type: "FETCH_ALL_ANSWERS", payload: data });
 	} catch (error) {
@@ -38,7 +38,7 @@ export const getAnswers = (testID) => async (dispatch) => {
  export const getAnswerStudent = (username, testID) => async (dispatch) => {
 	try {
 		const { data } = await api.getAnswerStudent(username, testID);
-		console.log("Sending one answer from the DB from actions: ", data)
+		// console.log("Sending one answer from the DB from actions: ", data)
  
 		dispatch({ type: "FETCH_ALL_ANSWERS", payload: data });
 	} catch (error) {

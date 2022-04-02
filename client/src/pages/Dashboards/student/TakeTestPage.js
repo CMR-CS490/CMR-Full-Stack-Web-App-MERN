@@ -35,7 +35,7 @@ const TakeTestPage = ({ testID }) => {
    const [totalQuestions, setTotalQuestions] = useState(0);
    
 
-   console.log("%cComponent: TakeTestPage", "color:blue", "testID: ", testID);
+   // console.log("%cComponent: TakeTestPage", "color:blue", "testID: ", testID);
 
    // A student clicks submit when they have answered all the questions. (Or left some blank.)
 

@@ -32,7 +32,7 @@ const TestDetailsPage = ({ testID }) => {
 
    // View Results Button
    const onButtonClick1 = (answerID, testID, username) => {
-      console.log("Answer_ID:", answerID, "Test_ID:", testID, "Username:", username);
+      // console.log("Answer_ID:", answerID, "Test_ID:", testID, "Username:", username);
       localStorage.setItem("selectedUser", username);
       localStorage.setItem("selectedTestID", testID);
       window.location.href = `/teacher/tests/results/${answerID}`;

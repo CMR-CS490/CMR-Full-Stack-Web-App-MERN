@@ -26,7 +26,7 @@ export const getQuestion = (questionID) => async (dispatch) => {
 export const createQuestion = (question, testcases) => async (dispatch) => {
    try {
       question.testcases = testcases;
-      console.log(question);
+      // console.log(question);
       const { data } = await api.createQuestion(question);
 
       dispatch({ type: "CREATE_QUESTION", payload: data });

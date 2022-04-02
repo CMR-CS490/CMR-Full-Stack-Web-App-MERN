@@ -22,12 +22,12 @@ const TakingTestQuestions = ({ questionData, setQuestionData, setTotalQuestions 
    useEffect(() => {
       if (test) {
          // questionsArray = test.questions;
-         console.log("questionsArray: ", questionsArray);
+         // console.log("questionsArray: ", questionsArray);
          setLoading(false);
       }
    }, [isLoading, test]);
 
-   console.log("Test from store: ", test);
+   // console.log("Test from store: ", test);
 
    // To avoid crashing.
    if (test) {

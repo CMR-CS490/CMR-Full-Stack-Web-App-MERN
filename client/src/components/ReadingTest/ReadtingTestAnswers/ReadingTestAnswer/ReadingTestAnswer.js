@@ -35,7 +35,7 @@ const ReadingTestAnswer = ({ question, index }) => {
 
    // Geting the answer data from the redux store.
    const answerState = useSelector((state) => state.answers);
-   console.log("ReadingTestAsnwer: ", answerState)
+   // console.log("ReadingTestAsnwer: ", answerState)
    const answerArray = answerState.questions;
    // if (answerArray) {
    //    console.log(answerArray)

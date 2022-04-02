@@ -33,7 +33,7 @@ const TestResultsPage = ({ propsTestID, answerID }) => {
    // State that indicates how many question there are in a test. This is needed for the pagintation component and the question navigation functionality.
    const [totalQuestions, setTotalQuestions] = useState(0);
 
-   console.log("answerID: ", answerID);
+   // console.log("answerID: ", answerID);
    useEffect(() => {
       if (localStorage.getItem("role") === "teacher") {
          // Teacher

@@ -27,7 +27,7 @@ const ReadingTestAnswers = ({setTotalQuestions}) => {
       }
    }, [isLoading, test]);
 
-   console.log("Test from store: ", test);
+   // console.log("Test from store: ", test);
 
    // To avoid crashing.
    if (test) {
