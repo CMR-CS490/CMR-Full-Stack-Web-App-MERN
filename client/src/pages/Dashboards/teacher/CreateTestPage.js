@@ -17,8 +17,13 @@ const QuestionsPage = () => {
    const dispatch = useDispatch();
    useEffect(() => {
       dispatch(getQuestions());
+      
+
    }, [dispatch]);
 
+   var r = document.querySelector('.MuiContainer-root');
+   if(r)
+      r.style.setProperty('min-width', "100%"); 
 
    //Test Data
    const [testData, setTestData] = useState({
@@ -116,7 +121,7 @@ const QuestionsPage = () => {
          elevation={8}
          variant="outlined"
          sx={{
-            padding: 2,
+            padding: 1,
          }}
       >
          

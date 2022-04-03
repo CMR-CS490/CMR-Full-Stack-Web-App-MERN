@@ -21,14 +21,14 @@ const QuestionsTable = ( {questions, isSelectTable, handleSelect, questionData, 
 		{
 			field: "topic",
 			headerName: "Topic",
-			flex: 0.2,
+			flex: 0.20,
 			editable: false,
 			sortable: false,
 		},
 		{
 			field: "questionDescription",
 			headerName: "Question Description",
-			flex: 0.9,
+			flex: 0.88,
 			sortable: false,
       renderCell: (params) => (
         <div>
@@ -38,6 +38,13 @@ const QuestionsTable = ( {questions, isSelectTable, handleSelect, questionData, 
         </div>
        )
          
+		},
+      {
+			field: "constraint",
+			headerName: "Constraint",
+			flex: 0.2,
+			editable: false,
+			sortable: false,
 		},
 		{
 			field: "difficulty",
@@ -73,12 +80,18 @@ const QuestionsTable = ( {questions, isSelectTable, handleSelect, questionData, 
                score = data.question_score;
             }
          })
+      
+      let part1Split = ( question.question.indexOf(' ', 58) == -1) ? 58 : question.question.indexOf(' ', 58);
+
+      let part2Split = (question.question.indexOf(' ', part1Split+58 == -1)? part1Split+58 : question.question.indexOf(' ', part1Split + 58) );
+      let part3Split = (question.question.indexOf(' ', part2Split+58 == -1)? part2Split+58 : question.question.indexOf(' ', part2Split + 58) );
 
       rows.push({
          id: question._id,
          topic: question.topic,
-         questionDescription: {part1: question.question.substring(0, 55), part2: question.question.substring(55, 110), part3: question.question.substring(110, 165)},
+         questionDescription: {part1: question.question.substring(0, part1Split), part2: question.question.substring(part1Split, part2Split), part3: question.question.substring(part2Split, part3Split)},
          difficulty: question.difficulty,
+         constraint: question.constraintName,
          score: score,
       }); 
 
@@ -100,13 +113,14 @@ const QuestionsTable = ( {questions, isSelectTable, handleSelect, questionData, 
             onSelectionModelChange = {handleSelect}
             onCellEditCommit = {handleTestScoreInput}
             rowHeight={100}
+            
             sx={{
                boxShadow: 2,
                border: 1,
                height: "600px", 
                width: "50%",
                margin: "10px",
-               className: "question-table"
+               className: "question-table",
             }}
 
          />
