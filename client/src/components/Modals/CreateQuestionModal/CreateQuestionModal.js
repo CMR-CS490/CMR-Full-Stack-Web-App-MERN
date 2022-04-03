@@ -56,6 +56,9 @@ const CreateQuestionModal = () => {
 
    const addTestCase = () => {
       //console.log("Input: %s, Output: %s", testcase.input, testcase.output);
+      if(testcase.input.length *  testcase.output.length === 0) {
+         return
+      }
       setTestcases([...testcases, testcase]);
       setTestcase({input: "", output: ""});
 
@@ -192,7 +195,7 @@ const CreateQuestionModal = () => {
                      
                      </div>
                      <div className="test-case-action">
-                        <button onClick={addTestCase}>Add Test Case</button>
+                        <Button onClick={addTestCase}>Add Test Case</Button>
                         <>
                            {testcases.map((testcase) => (
                               <h4>Input: {testcase.input} Output: {testcase.output}</h4>

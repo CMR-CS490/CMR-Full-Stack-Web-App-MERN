@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector} from "react-redux";
 // Components
 import { DataGrid } from "@mui/x-data-grid";
+import Typography from "@mui/material/Typography";
 import { cyan } from "@mui/material/colors";
 
 const QuestionsTable = ( {questions, isSelectTable, handleSelect, questionData, setQuestionData}) => {
@@ -27,9 +28,16 @@ const QuestionsTable = ( {questions, isSelectTable, handleSelect, questionData, 
 		{
 			field: "questionDescription",
 			headerName: "Question Description",
-			flex: 1,
-         wordwrap: true,
+			flex: 0.9,
 			sortable: false,
+      renderCell: (params) => (
+        <div>
+          <Typography>{params.value.part1}</Typography>
+          <Typography>{params.value.part2}</Typography>
+          <Typography >{params.value.part3}</Typography>
+        </div>
+       )
+         
 		},
 		{
 			field: "difficulty",
@@ -40,7 +48,7 @@ const QuestionsTable = ( {questions, isSelectTable, handleSelect, questionData, 
 		}
  	];
    if(!isSelectTable) {
-      columns.push({ field: "score", headerName: "Score", type: 'number', editable: true, sortable: false})
+      columns.push({ field: "score", headerName: "Score", type: 'number', editable: true, sortable: false, flex: 0.15})
    }
    const handleTestScoreInput = (e) => {
       //console.log(e);
@@ -69,7 +77,7 @@ const QuestionsTable = ( {questions, isSelectTable, handleSelect, questionData, 
       rows.push({
          id: question._id,
          topic: question.topic,
-         questionDescription: question.question,
+         questionDescription: {part1: question.question.substring(0, 55), part2: question.question.substring(55, 110), part3: question.question.substring(110, 165)},
          difficulty: question.difficulty,
          score: score,
       }); 
@@ -83,14 +91,15 @@ const QuestionsTable = ( {questions, isSelectTable, handleSelect, questionData, 
          <DataGrid
             rows={rows}
             columns={columns}
-            pageSize={10}
-            rowsPerPageOptions={[10]}
+            pageSize={7}
+            rowsPerPageOptions={[7]}
             disableColumnFilter = {!isSelectTable}
             checkboxSelection = {isSelectTable}
             disableSelectionOnClick
             disableColumnSelector
             onSelectionModelChange = {handleSelect}
             onCellEditCommit = {handleTestScoreInput}
+            rowHeight={100}
             sx={{
                boxShadow: 2,
                border: 1,
