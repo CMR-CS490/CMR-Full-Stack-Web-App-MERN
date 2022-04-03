@@ -81,7 +81,7 @@ const ScoreTable = ({ questionID, questionInfo}) => {
       // console.log(scoresArray[scr].question_id)
       if (questionID === scoresArray[scr].question_id) {
          scoreData = scoresArray[scr];
-         console.log("scoreData: ", scoreData);
+         // console.log("scoreData: ", scoreData);
       }
    }
 

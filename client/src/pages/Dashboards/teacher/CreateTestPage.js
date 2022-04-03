@@ -81,7 +81,8 @@ const QuestionsPage = () => {
          document.getElementsByClassName("error")[0].style.display = "block";
          return; 
       }
-      console.log("TOTAL: ", total)
+      // console.log("TOTAL: ", total)
+
       if(total != 100) {
          
          document.getElementsByClassName("error")[0].innerHTML = "Please make sure all scores equal to 100";

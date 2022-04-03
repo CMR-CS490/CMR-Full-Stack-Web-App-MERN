@@ -16,12 +16,12 @@ const TestDetails = ({ setListOfQuestions, showButton }) => {
    console.log("%cComponent: TestDetails", "color:red", "testObject: ", test);
 
    // Check if the showButton prop is true.
-   console.log("Showbutton prop: ", showButton)
+   // console.log("Showbutton prop: ", showButton)
    let inputStyle;
    showButton ? inputStyle = {display: "none"} : inputStyle = {display: "flex"}; // Hide the buttons if showButton is false.
    const dispatch = useDispatch();
    const onGrade = () => {
-      console.log("GRADING TEST: ", test._id);
+      // console.log("GRADING TEST: ", test._id);
       dispatch(gradeTest(test._id));
       
       setTimeout(function(){
@@ -30,7 +30,7 @@ const TestDetails = ({ setListOfQuestions, showButton }) => {
    }
 
    const onPublish = () => {
-      console.log("PUBLISHING SCORES TEST: ", test._id);
+      // console.log("PUBLISHING SCORES TEST: ", test._id);
       dispatch (publishScores(test._id));
 
    //    setTimeout(function(){

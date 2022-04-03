@@ -30,13 +30,13 @@ const QuestionsTable = ( {questions, isSelectTable, handleSelect, questionData, 
 			headerName: "Question Description",
 			flex: 0.9,
 			sortable: false,
-         renderCell: (params) => (
-            <div>
-              <Typography>{params.value.part1}</Typography>
-              <Typography>{params.value.part2}</Typography>
-              <Typography >{params.value.part3}</Typography>
-            </div>
-          )
+      renderCell: (params) => (
+        <div>
+          <Typography>{params.value.part1}</Typography>
+          <Typography>{params.value.part2}</Typography>
+          <Typography >{params.value.part3}</Typography>
+        </div>
+       )
          
 		},
 		{
@@ -107,7 +107,6 @@ const QuestionsTable = ( {questions, isSelectTable, handleSelect, questionData, 
                width: "50%",
                margin: "10px",
                className: "question-table"
-               
             }}
 
          />

@@ -85,9 +85,9 @@ const Register = () => {
             </form>
          </div>
 
-         <div>
+         {/* <div>
             <button hidden onClick={() => console.log( {username, password, role} )}>debugging button</button>
-         </div>
+         </div> */}
       </div>
    );
 };

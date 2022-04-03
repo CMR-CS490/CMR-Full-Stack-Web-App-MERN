@@ -16,7 +16,7 @@ export const getTest = (testID) => async (dispatch) => {
    try {
       const { data } = await api.fetchTest(testID);
 
-      console.log("/actions/test.js | getTest data:", data);
+      // console.log("/actions/test.js | getTest data:", data);
 
       dispatch({ type: "FETCH_ALL_TEST", payload: data }); // payload is all our tests
    } catch (error) {

@@ -35,7 +35,7 @@ const ReadingTestAnswer = ({ question, index }) => {
 
    // Geting the answer data from the redux store.
    const answerState = useSelector((state) => state.answers);
-   console.log("ReadingTestAsnwer: ", answerState)
+   // console.log("ReadingTestAsnwer: ", answerState)
    const answerArray = answerState.questions;
    // if (answerArray) {
    //    console.log(answerArray)
@@ -77,8 +77,8 @@ const ReadingTestAnswer = ({ question, index }) => {
       return <p>loading</p>;
    }
    return (
-      <div className="card-seperator">
-         <Card className="taking-test-question-card" display="flex" allignItems="flex-start" elevation="5">
+      <div id={`taking-test-question-card-number-${index}`} className={"card-seperator " + (index === 0 ? "" : "hidden")}>
+         <Card className="taking-test-question-card " display="flex" allignItems="flex-start" elevation="5">
             <div className="question-number-points-container">
                <p className="question-number">Question {index + 1}</p>
                <p className="question-points">{`${question.question_score} pts`}</p>

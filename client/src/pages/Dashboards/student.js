@@ -32,15 +32,15 @@ const Homepage = () => {
 
 	// Username Length
 	let usernameLength = (localStorage.getItem("username")).length
-	console.log(usernameLength)
+	// console.log(usernameLength)
 
 	let pageComponent
 	if (page === "DASHBOARD") {
 		pageComponent = <AssignmentsPage />
 	} else if (page.includes("TEST/SCORES")) {
-		console.log("student url page: ", page);
+		// console.log("student url page: ", page);
 		let testID = page.substring(page.indexOf("/")+9 + (usernameLength))
-		console.log("student testID: ", testID);
+		// console.log("student testID: ", testID);
 		page = "TEST RESULTS"
 		pageComponent = <TestResultsPage propsTestID={testID} />
 	} else if (page.includes("TEST/")) {

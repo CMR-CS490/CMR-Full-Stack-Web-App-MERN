@@ -12,6 +12,7 @@ import { getScores } from "./../../../actions/scores";
 import TestDetails from "./../../../components/TakingTest/TestDetails/TestDetails";
 import ReadingTestAnswers from "./../../../components/ReadingTest/ReadtingTestAnswers/ReadingTestAnswers";
 import ModalsButton from "../../../components/Modals/ModalsButton";
+import TakingTestQuestionNavigation from "../../../components/TakingTest/TestDetails/TakingTestQuestionNavigation/TakingTestQuestionNavigation";
 
 // CSS
 import "./TestResultsPage";
@@ -29,7 +30,10 @@ const TestResultsPage = ({ propsTestID, answerID }) => {
 
    const [scoreObject, setScoreObject ] = useState({})
 
-   console.log("answerID: ", answerID);
+   // State that indicates how many question there are in a test. This is needed for the pagintation component and the question navigation functionality.
+   const [totalQuestions, setTotalQuestions] = useState(0);
+
+   // console.log("answerID: ", answerID);
    useEffect(() => {
       if (localStorage.getItem("role") === "teacher") {
          // Teacher
@@ -59,8 +63,10 @@ const TestResultsPage = ({ propsTestID, answerID }) => {
          <TestDetails showButton={true} />
          <br />
          {/* Renders the Student's test answer AND their score table output.*/}
-         <ReadingTestAnswers />
+         <ReadingTestAnswers setTotalQuestions={setTotalQuestions} />
          {/*{localStorage.getItem("role") === "teacher" ? <ModalsButton color='primary' text='Update' action={submitScores} /> : <></>} */}
+         <br />
+         <TakingTestQuestionNavigation totalQuestions={totalQuestions}/>
          <ModalsButton color='primary' text='Cancel' action={onClickCancel} />
       </div>
    );

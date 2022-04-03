@@ -21,6 +21,8 @@ export const getStudentAnswers = async (req, res) => {
 export const createAnswer = async (req, res) => {
    const testAnswer = req.body;
 
+   console.log("Submitting an answer to the DB: ", {testAnswer});
+
    // Create a new Test object from req.body's data.
    const newTestAnswer = new Answer(testAnswer);
    try {

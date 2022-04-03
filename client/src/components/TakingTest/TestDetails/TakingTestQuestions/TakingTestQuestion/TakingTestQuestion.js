@@ -51,9 +51,11 @@ const TakingTestQuestion = ({ question, index, questionData, setQuestionData }) 
    if (!questionInfo) {
       return <p>loading</p>;
    } 
+
+   // console.log(index);
    return (
       <div className="card-seperator">
-         <Card className="taking-test-question-card" display="flex" allignItems="flex-start" elevation="5">
+         <Card id={`taking-test-question-card-number-${index}`} className={"taking-test-question-card " + (index === 0 ? "" : "hidden") } display="flex" allignItems="flex-start" elevation="5">
             <div className="question-number-points-container">
                <p className="question-number">Question {index + 1}</p>
                <p className="question-points">{`${question.question_score} pts`}</p>
