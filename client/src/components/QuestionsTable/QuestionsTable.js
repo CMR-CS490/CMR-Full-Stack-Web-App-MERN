@@ -31,10 +31,12 @@ const QuestionsTable = ( {questions, isSelectTable, handleSelect, questionData, 
 			flex: 0.88,
 			sortable: false,
       renderCell: (params) => (
+         
+         //Splitting the question description
         <div>
-          <Typography>{params.value.part1}</Typography>
-          <Typography>{params.value.part2}</Typography>
-          <Typography >{params.value.part3}</Typography>
+          <p>{params.value.substring(0, (params.value.indexOf(' ', 58) == -1) ? 58 : params.value.indexOf(' ', 58)) }</p>
+          <p>{params.value.substring( (params.value.indexOf(' ', 58) == -1) ? 58 : params.value.indexOf(' ', 58) ,   (params.value.indexOf(' ', ((params.value.indexOf(' ', 58) == -1) ? 58 : params.value.indexOf(' ', 58))+58) == -1? ((params.value.indexOf(' ', 58) == -1) ? 58 : params.value.indexOf(' ', 58))+58 : params.value.indexOf(' ', ((params.value.indexOf(' ', 58) == -1) ? 58 : params.value.indexOf(' ', 58)) + 58) ) )}</p>
+          <p>{params.value.substring( ((params.value.indexOf(' ', ((params.value.indexOf(' ', 58) == -1) ? 58 : params.value.indexOf(' ', 58))+58) == -1? ((params.value.indexOf(' ', 58) == -1) ? 58 : params.value.indexOf(' ', 58))+58 : params.value.indexOf(' ', ((params.value.indexOf(' ', 58) == -1) ? 58 : params.value.indexOf(' ', 58)) + 58) )) )}</p>
         </div>
        )
          
@@ -81,15 +83,15 @@ const QuestionsTable = ( {questions, isSelectTable, handleSelect, questionData, 
             }
          })
       
-      let part1Split = ( question.question.indexOf(' ', 58) == -1) ? 58 : question.question.indexOf(' ', 58);
-
-      let part2Split = (question.question.indexOf(' ', part1Split+58 == -1)? part1Split+58 : question.question.indexOf(' ', part1Split + 58) );
-      let part3Split = (question.question.indexOf(' ', part2Split+58 == -1)? part2Split+58 : question.question.indexOf(' ', part2Split + 58) );
+      //Had to comment this split in order for the sort to work
+      // let part1Split = (question.question.indexOf(' ', 58) == -1) ? 58 : question.question.indexOf(' ', 58);
+      // let part2Split = (question.question.indexOf(' ', part1Split+58) == -1? part1Split+58 : question.question.indexOf(' ', part1Split + 58) );
 
       rows.push({
          id: question._id,
          topic: question.topic,
-         questionDescription: {part1: question.question.substring(0, part1Split), part2: question.question.substring(part1Split, part2Split), part3: question.question.substring(part2Split, part3Split)},
+         //questionDescription: { part1: question.question.substring(0, part1Split), part2: question.question.substring(part1Split, part2Split), part3: question.question.substring(part2Split)},
+         questionDescription: question.question,
          difficulty: question.difficulty,
          constraint: question.constraintName,
          score: score,
