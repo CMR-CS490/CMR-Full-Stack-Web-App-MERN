@@ -109,8 +109,8 @@ const ScoreTable = ({ questionID, questionInfo}) => {
       updatedScore: score.updatedFunctionNameScore,
    });
    counter++;
-   totalScore += parseInt(score.functionNameScore);
-   updatedTotalScore += parseInt(score.updatedFunctionNameScore)
+   totalScore += parseFloat(score.functionNameScore);
+   updatedTotalScore += parseFloat(score.updatedFunctionNameScore)
 
 
    // 2. Pass all the test cases to the rows.
@@ -124,8 +124,8 @@ const ScoreTable = ({ questionID, questionInfo}) => {
       });
       counter++;
    
-      totalScore += parseInt(score.testcases[i].score);
-      updatedTotalScore += parseInt(score.testcases[i].teacherScore);
+      totalScore += parseFloat(score.testcases[i].score);
+      updatedTotalScore += parseFloat(score.testcases[i].teacherScore);
       
    }
 
@@ -141,8 +141,8 @@ const ScoreTable = ({ questionID, questionInfo}) => {
 
       counter++;
    
-      totalScore += parseInt(score.constraintScore);
-      updatedTotalScore += parseInt(score.updatedConstraintScore);
+      totalScore += parseFloat(score.constraintScore);
+      updatedTotalScore += parseFloat(score.updatedConstraintScore);
    }
 
    // 3. Pass in the comment and total score
