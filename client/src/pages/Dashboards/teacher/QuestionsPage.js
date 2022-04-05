@@ -30,7 +30,9 @@ const QuestionsPage = () => {
    return (
       <div className="button-questions-container">
          <div className="button-container">
-            <CreateTestModal questionCheck={questionCheck} />
+            <div className="question-page-create-a-test">
+               <CreateTestModal questionCheck={questionCheck} />
+            </div>
             <CreateQuestionModal/>
          </div>
          <div className="questions-container">
