@@ -143,7 +143,14 @@ const ScoreTable = ({ questionID, questionInfo}) => {
    
       totalScore += parseFloat(score.constraintScore);
       updatedTotalScore += parseFloat(score.updatedConstraintScore);
+
    }
+
+   // Remove rounding errors from total score. For example: 3.33 + 3.33 + 3.33 = 10.0.
+   totalScore = Math.round(totalScore * 100) / 100;
+   totalScore = totalScore.toFixed(2);
+   updatedTotalScore = Math.round(updatedTotalScore * 100) / 100;
+   updatedTotalScore = (updatedTotalScore.toFixed(2));
 
    // 3. Pass in the comment and total score
 
