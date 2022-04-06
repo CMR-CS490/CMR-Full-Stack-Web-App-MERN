@@ -6,7 +6,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import Typography from "@mui/material/Typography";
 import { cyan } from "@mui/material/colors";
 
-const QuestionsTable = ( {questions, isSelectTable, handleSelect, questionData, setQuestionData}) => {
+const QuestionsTable = ( {questions, isSelectTable, isScoreTable,  handleSelect, questionData, setQuestionData}) => {
 
    const dispatch = useDispatch();
    useEffect(() => {
@@ -56,7 +56,7 @@ const QuestionsTable = ( {questions, isSelectTable, handleSelect, questionData, 
 			sortable: false,
 		}
  	];
-   if(!isSelectTable) {
+   if(!isSelectTable && isScoreTable) {
       columns.push({ field: "score", headerName: "Score", type: 'number', editable: true, sortable: false, flex: 0.15})
    }
    const handleTestScoreInput = (e) => {
@@ -119,10 +119,12 @@ const QuestionsTable = ( {questions, isSelectTable, handleSelect, questionData, 
             sx={{
                boxShadow: 2,
                border: 1,
+               borderRadius: 2,
                height: "600px", 
                width: "50%",
                margin: "10px",
                className: "question-table",
+               backgroundColor: "white"
             }}
 
          />

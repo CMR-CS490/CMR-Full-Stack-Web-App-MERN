@@ -129,7 +129,7 @@ const QuestionsPage = () => {
          
          <Grid container spacing={2}>
             <QuestionsTable questions = {questions} isSelectTable={true} handleSelect={handleSelection}></QuestionsTable>
-            <QuestionsTable questions = {questionCheck}  isSelectTable={false} questionData={questionData} setQuestionData={setQuestionData}></QuestionsTable>
+            <QuestionsTable questions = {questionCheck}  isSelectTable={false} isScoreTable={true} questionData={questionData} setQuestionData={setQuestionData}></QuestionsTable>
          </Grid>
 
       </Paper>
