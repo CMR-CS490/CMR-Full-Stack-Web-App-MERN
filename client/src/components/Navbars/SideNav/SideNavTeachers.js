@@ -2,6 +2,7 @@ import React from 'react';
 import HomeIcon from '@mui/icons-material/Home';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import CreateIcon from '@mui/icons-material/Create';
+import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import './SideNav.css';
 
 const SideNav = () => {
@@ -17,9 +18,14 @@ const SideNav = () => {
                 <span className="icon-caption">Assignment</span>
                 <AssignmentIcon className="icon" />
             </a>
+            <a href="/teacher/createquestions" className="icon-block">
+                <span className="icon-caption">CreateQs</span>
+                <CreateIcon className="icon" />
+            </a>
+
             <a href="/teacher/questions" className="icon-block">
                 <span className="icon-caption">Questions</span>
-                <CreateIcon className="icon" />
+                <QuestionMarkIcon className="icon" />
             </a>
             
         </div>

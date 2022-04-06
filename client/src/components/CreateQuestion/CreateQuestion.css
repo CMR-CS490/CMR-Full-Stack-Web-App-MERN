@@ -1,0 +1,93 @@
+ .create-question-container {
+	margin-top: 20px;
+	margin-left: 70px;
+	height: 90%;
+	margin-bottom: 20px;
+ }
+ 
+ select {
+	width: 90%;
+	min-width: 15ch;
+	
+	border: 1px solid var(--select-border);
+	border-radius: 0.25em;
+	padding: 0.5em 0.5em;
+	font-size: 1.25rem;
+	cursor: pointer;
+	line-height: 1.1;
+	background-color: #fff;
+	background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+  }
+ 
+ .question textarea {
+	height: 150px;
+	width: 90%;
+	resize: none;
+	padding-left: 0px;
+	font-size: 18px;
+ }
+ 
+ .question {
+	padding: 0;
+ }
+ 
+ input{
+	font-weight: bold;
+ }
+ 
+ .input, .output {
+	 padding-top: 1em;
+	 width: 40%
+ }
+ .buttons {
+	width: 90%;
+ }
+ 
+ .error {
+	
+	padding-top: 1.5em;
+	color: red;
+	font-weight: bold;
+	display: none;
+	font-size: 20px;
+ }
+ .test-case {
+	width: 90%;
+ }
+ .test-case input{
+	all: unset;
+	font-weight: bold;
+	font-size:20px;
+	background-color: #f6f6f6;
+	padding: 0.5em 0.5em;
+	margin: 0.5em 1em;
+ }
+ 
+ .test-case .input{
+	postition: relative;
+	float: left;
+ }
+ 
+ .test-case-action {
+	display: block;
+ }
+ 
+ .test-case {
+	display: inline-block;
+ }
+ .test-case .output{
+	postition: relative;
+	float: right;
+ }
+ 
+ .easy {
+	color: green;
+ }
+ 
+ .medium {
+	color: rgb(212, 212, 0);
+ }
+ 
+ .hard {
+	color: red;
+ }

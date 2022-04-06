@@ -10,6 +10,7 @@ import TestsPage from './teacher/TestsPage'
 import TestDetailsPage from './teacher/TestDetailsPage'
 import TestResultsPage from './teacher/TestResultsPage';
 import CreateTestPage from './teacher/CreateTestPage';
+import CreateQuestionPage from './teacher/CreateQuestionPage';
 // CSS
 import './dashboard.css'
 
@@ -55,6 +56,9 @@ const Homepage = () => {
 	} else if (page === "CREATETESTS") {
 		page = "CREATE TEST";
 		pageComponent = <CreateTestPage />
+	} else if (page === "CREATEQUESTIONS") {
+		page = "CREATE QUESTIONS";
+		pageComponent = <CreateQuestionPage />
 	} else if (page.includes("TESTS/RESULTS")) {
 		page = "TEST RESULTS"
 		pageComponent = <TestResultsPage answerID = {answerID} />
