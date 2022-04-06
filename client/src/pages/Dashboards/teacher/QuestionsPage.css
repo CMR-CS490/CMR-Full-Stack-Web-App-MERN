@@ -2,3 +2,7 @@
     height: fit-content;
     padding-bottom: 10px;
 }
+
+.question-page-create-a-test {
+    display: none;
+ }
