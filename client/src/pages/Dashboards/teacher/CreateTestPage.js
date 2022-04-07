@@ -6,6 +6,8 @@ import { getQuestions } from "../../../actions/questions";
 import TestForm from "../../../components/TestForm/TestForm"
 import QuestionsTable from "../../../components/QuestionsTable/QuestionsTable";
 import ModalsButton from "../../../components/Modals/ModalsButton";
+import QuestionFilter from "../../../components/QuestionFilter/QuestionFilter";
+
 //Request
 import {createTest} from "../../../actions/tests"
 import { Grid, Paper} from '@mui/material';
@@ -39,6 +41,13 @@ const QuestionsPage = () => {
 
    // State for keep track of the selected checkboxed questions.
    const [questionCheck, setQuestionCheck] = useState([]);
+
+   // State to hold the question filter parameters. Keyword is a string in the question description.
+   const [filterData, setFilterData] = useState({
+      topic: "",
+      keyword: "",
+      difficulty: "",
+   })
   
    const questions = useSelector((state) => state.questions); 
    const handleSelection = (selected) => {
@@ -115,6 +124,7 @@ const QuestionsPage = () => {
 	// 	</div>
    <div>
       <TestForm testData={testData} setTestData={setTestData}/>
+      <QuestionFilter setFilterData={setFilterData}/>
       
       <Paper
       
@@ -128,8 +138,8 @@ const QuestionsPage = () => {
          <h3 className="error">Error</h3>
          
          <Grid container spacing={2}>
-            <QuestionsTable questions = {questions} isSelectTable={true} handleSelect={handleSelection}></QuestionsTable>
-            <QuestionsTable questions = {questionCheck}  isSelectTable={false} isScoreTable={true} questionData={questionData} setQuestionData={setQuestionData}></QuestionsTable>
+            <QuestionsTable filterData={filterData} questions = {questions} isSelectTable={true} handleSelect={handleSelection}></QuestionsTable>
+            <QuestionsTable filterData={filterData} questions = {questionCheck}  isSelectTable={false} isScoreTable={true} questionData={questionData} setQuestionData={setQuestionData}></QuestionsTable>
          </Grid>
 
       </Paper>

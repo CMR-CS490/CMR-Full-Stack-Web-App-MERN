@@ -6,7 +6,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import Typography from "@mui/material/Typography";
 import { cyan } from "@mui/material/colors";
 
-const QuestionsTable = ( {questions, isSelectTable, isScoreTable,  handleSelect, questionData, setQuestionData}) => {
+const QuestionsTable = ( {filterData, questions, isSelectTable, isScoreTable,  handleSelect, questionData, setQuestionData}) => {
 
    const dispatch = useDispatch();
    useEffect(() => {
@@ -87,15 +87,23 @@ const QuestionsTable = ( {questions, isSelectTable, isScoreTable,  handleSelect,
       // let part1Split = (question.question.indexOf(' ', 58) == -1) ? 58 : question.question.indexOf(' ', 58);
       // let part2Split = (question.question.indexOf(' ', part1Split+58) == -1? part1Split+58 : question.question.indexOf(' ', part1Split + 58) );
 
-      rows.push({
-         id: question._id,
-         topic: question.topic,
-         //questionDescription: { part1: question.question.substring(0, part1Split), part2: question.question.substring(part1Split, part2Split), part3: question.question.substring(part2Split)},
-         questionDescription: question.question,
-         difficulty: question.difficulty,
-         constraint: question.constraintName,
-         score: score,
-      }); 
+      // console.log(filterData.keyword);
+      // console.log(question.question);
+      // console.log(question.question.toLowerCase().includes(filterData.keyword.toLowerCase()));
+      // Before we push the question to a row, we want to make sure that the question passes the question filterData.
+      if( (filterData.topic.length === 0 || filterData.topic.includes(question.topic)) && (filterData.difficulty.length === 0 || filterData.difficulty.includes(question.difficulty)) && (filterData.keyword.length === 0 || question.question.toLowerCase().includes(filterData.keyword.toLowerCase())  ) ) {      
+         rows.push({
+            id: question._id,
+            topic: question.topic,
+            //questionDescription: { part1: question.question.substring(0, part1Split), part2: question.question.substring(part1Split, part2Split), part3: question.question.substring(part2Split)},
+            questionDescription: question.question,
+            difficulty: question.difficulty,
+            constraint: question.constraintName,
+            score: score,
+         }); 
+      }
+
+
 
    });
 

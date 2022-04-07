@@ -5,6 +5,7 @@ import { getQuestions } from "../../../actions/questions";
 // Components
 import QuestionsTable from "../../../components/QuestionsTable/QuestionsTable";
 import CreateQuestion from "../../../components/CreateQuestion/CreateQuestion"
+import QuestionFilter from "../../../components/QuestionFilter/QuestionFilter";
 //Request
 import {createTest} from "../../../actions/tests"
 import { Grid, Paper} from '@mui/material';
@@ -29,8 +30,16 @@ const QuestionsPage = () => {
 
    const questions = useSelector((state) => state.questions); 
 
-   return (
+   // State to hold the question filter parameters. Keyword is a string in the question description.
+   const [filterData, setFilterData] = useState({
+      topic: "",
+      keyword: "",
+      difficulty: "",
+   })
 
+   return (
+      <>
+         <QuestionFilter setFilterData={setFilterData} />
          <Grid container spacing={2} className="split-container">
             <Grid  className= "create-question-form" sx={{
                boxShadow: 2,
@@ -46,9 +55,10 @@ const QuestionsPage = () => {
             >
                <CreateQuestion></CreateQuestion>
             </Grid>
-            <QuestionsTable questions = {questions} isSelectTable={false}></QuestionsTable>
+            <QuestionsTable filterData={filterData} questions = {questions} isSelectTable={false}></QuestionsTable>
          </Grid>
   
+      </>
    );
 };
 
