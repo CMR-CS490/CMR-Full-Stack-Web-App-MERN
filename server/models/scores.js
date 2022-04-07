@@ -13,7 +13,7 @@ const scoreSchema = mongooose.Schema({
             constraintScore: String,
             updatedConstraintScore: String,
             testcases: [
-                {testcase: String, score: String, teacherScore: String}
+                {testcase: String, score: String, teacherScore: String, expectedAnswer: String, actualAnswer: String}
             ],
             comments: String,
             
