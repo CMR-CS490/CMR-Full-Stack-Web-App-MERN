@@ -98,10 +98,14 @@ const gradeQuestion = async (question_id, answer, questionScore) => {
             response.testcases[i].testcase = `${functionName}(${testCase1})`
             response.testcases[i].score = (totalScore/question[0].testcases.length).toFixed(2);
             response.testcases[i].teacherScore = (totalScore/question[0].testcases.length).toFixed(2);
+            response.testcases[i].expectedAnswer = testCase1Answer;
+            response.testcases[i].actualAnswer = output[0];
         } else {
             response.testcases[i].testcase = `${functionName}(${testCase1})`
             response.testcases[i].score = 0;
             response.testcases[i].teacherScore = 0;
+            response.testcases[i].expectedAnswer = testCase1Answer;
+            response.testcases[i].actualAnswer = output[0];
         }
         
         

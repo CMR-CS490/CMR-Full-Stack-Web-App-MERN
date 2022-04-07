@@ -118,7 +118,7 @@ const ScoreTable = ({ questionID, questionInfo}) => {
       rows.push({
          id: counter,
          questionNumber: `Test Case ${i + 1}`,
-         questionDescription: score.testcases[i].testcase,
+         questionDescription:   `Testing ${score.testcases[i].testcase} => ${score.testcases[i].expectedAnswer}, and recieved  ${score.testcases[i].actualAnswer} `,
          score: score.testcases[i].score,
          updatedScore: score.testcases[i].teacherScore
       });
