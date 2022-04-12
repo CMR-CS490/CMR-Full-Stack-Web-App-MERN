@@ -6,12 +6,12 @@ import { DataGrid } from "@mui/x-data-grid";
 import Typography from "@mui/material/Typography";
 import { cyan } from "@mui/material/colors";
 
-const QuestionsTable = ( {filterData, questions, isSelectTable, isScoreTable,  handleSelect, questionData, setQuestionData}) => {
+const QuestionsTable = ( { filterData, questions, isSelectTable, isScoreTable,  handleSelect, questionData, setQuestionData}) => {
 
    const dispatch = useDispatch();
    useEffect(() => {
 
-   }, []);
+   }, [filterData]);
   
    //const questions = useSelector((state) => state.questions);
    
@@ -74,6 +74,7 @@ const QuestionsTable = ( {filterData, questions, isSelectTable, isScoreTable,  h
    }
 
    const rows = [];
+   if (!(questions.length === 0)) {
    questions.forEach((question) => {
       let score = 0
       if(!isSelectTable && questionData)
@@ -90,22 +91,61 @@ const QuestionsTable = ( {filterData, questions, isSelectTable, isScoreTable,  h
       // console.log(filterData.keyword);
       // console.log(question.question);
       // console.log(question.question.toLowerCase().includes(filterData.keyword.toLowerCase()));
-      // Before we push the question to a row, we want to make sure that the question passes the question filterData.
-      if( (filterData.topic.length === 0 || filterData.topic.includes(question.topic)) && (filterData.difficulty.length === 0 || filterData.difficulty.includes(question.difficulty)) && (filterData.keyword.length === 0 || question.question.toLowerCase().includes(filterData.keyword.toLowerCase())  ) ) {      
-         rows.push({
-            id: question._id,
-            topic: question.topic,
-            //questionDescription: { part1: question.question.substring(0, part1Split), part2: question.question.substring(part1Split, part2Split), part3: question.question.substring(part2Split)},
-            questionDescription: question.question,
-            difficulty: question.difficulty,
-            constraint: question.constraintName,
-            score: score,
-         }); 
+      // console.log({filterData})
+
+      // Push the row into the MUI DataGrid.
+      rows.push({
+         id: question._id,
+         topic: question.topic,
+         //questionDescription: { part1: question.question.substring(0, part1Split), part2: question.question.substring(part1Split, part2Split), part3: question.question.substring(part2Split)},
+         questionDescription: question.question,
+         difficulty: question.difficulty,
+         constraint: question.constraintName,
+         score: score,
+      });
+
+
+      // Check it see if filterData is empty.
+
+      if (filterData !== undefined) {
+         // Check if question._id is not null. (Needed for initial render of the component when questions are not fetched by Redux State.)
+         if(question._id !== null) {
+   
+            // Get questionID element in MUI DATAGRID. MUI Datagrid add's an attribute called data-id="question._id" to each row. 
+            // console.log(`[data-id="${question._id}"]`)
+            let filterElement = document.querySelector(`[data-id="${question._id}"]`);
+            
+            if (filterElement !== null) { // Check if element exists. (Prevents APP from crashing.)
+               filterElement.classList.remove("hidden"); //Reset the class to show the question.
+            }
+   
+            // If the filter is empty, show all questions. (.length === 0) Otherwise, check each filter field to see if it passes the filter. (.includes)
+            // console.log({filterData});
+            if( (filterData.topic.length === 0 || filterData.topic.includes(question.topic)) && (filterData.difficulty.length === 0 || filterData.difficulty.includes(question.difficulty)) && (filterData.keyword.length === 0 || question.question.toLowerCase().includes(filterData.keyword.toLowerCase())  ) ) {
+               // console.log("removing a filter to question:" + question.question)
+               // Show the question.
+               if (filterElement !== null) {
+                  filterElement.classList.remove("hidden");
+               }
+            } else {
+               // console.log("adding a filter to question id:" + question.question)
+               // Do not show the question.
+               if (filterElement !== null) {
+                  filterElement.classList.add("hidden");
+               }
+            }
+   
+         }
+
+
       }
+
+         
 
 
 
    });
+}
 
 
 
@@ -114,8 +154,8 @@ const QuestionsTable = ( {filterData, questions, isSelectTable, isScoreTable,  h
          <DataGrid
             rows={rows}
             columns={columns}
-            pageSize={7}
-            rowsPerPageOptions={[7]}
+            pageSize={10}
+            rowsPerPageOptions={[10]}
             disableColumnFilter = {!isSelectTable}
             checkboxSelection = {isSelectTable}
             disableSelectionOnClick

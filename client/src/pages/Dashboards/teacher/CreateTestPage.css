@@ -23,3 +23,7 @@
     text-align: center;
     padding-bottom: 30px;
  }
+
+ .hidden {
+    display: none!important;
+ }
