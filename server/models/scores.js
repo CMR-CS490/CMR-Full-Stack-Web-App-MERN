@@ -11,6 +11,7 @@ const scoreSchema = mongooose.Schema({
             functionNameScore : String,
             updatedFunctionNameScore: String,
             constraintScore: String,
+            constraintName: String,
             updatedConstraintScore: String,
             testcases: [
                 {testcase: String, score: String, teacherScore: String, expectedAnswer: String, actualAnswer: String}

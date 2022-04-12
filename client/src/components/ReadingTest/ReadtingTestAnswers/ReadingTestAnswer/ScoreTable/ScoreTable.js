@@ -134,7 +134,7 @@ const ScoreTable = ({ questionID, questionInfo}) => {
       rows.push({
          id: counter,
          questionNumber: "Constraint Check",
-         questionDescription: score.constraintScore == 5 ? "The constraint shown in the code" : "The function name is NOT in the code.",
+         questionDescription: score.constraintScore == 5 ? `The constraint "${score.constraintName}" shown in the code` : `The constraint "${score.constraintName}" is NOT shown in the code`,
          score: score.constraintScore,
          updatedScore: score.updatedConstraintScore,
       });

@@ -33,7 +33,7 @@ const QuestionsPage = () => {
             <div className="question-page-create-a-test">
                <CreateTestModal questionCheck={questionCheck} />
             </div>
-            <CreateQuestionModal/>
+               {/* <CreateQuestionModal/> */}
          </div>
          <div className="questions-container">
             <Questions questionCheck={questionCheck} setQuestionCheck={setQuestionCheck}/>
