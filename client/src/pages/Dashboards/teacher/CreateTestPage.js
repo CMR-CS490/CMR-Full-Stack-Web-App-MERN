@@ -14,7 +14,7 @@ import { Grid, Paper} from '@mui/material';
 //CSS
 import "./CreateTestPage.css";
 
-const QuestionsPage = () => {
+const CreateTestPage = () => {
 
    const dispatch = useDispatch();
    useEffect(() => {
@@ -31,7 +31,7 @@ const QuestionsPage = () => {
    const [testData, setTestData] = useState({
       creator: "",
       title: "",
-      description: "",
+      description: "", 
       selectedFile: "",
       questions:[],
       visible: false
@@ -48,6 +48,12 @@ const QuestionsPage = () => {
       keyword: "",
       difficulty: "",
    })
+
+   // State to hold the question's to be filtered. If the question ID is in the filter array, the question will not be shown. Otherwise, it will be shown.
+   // const [filterQuestionByIDs, setFilterQuestionByIDs] = useState({
+   //    shownQuestionIds: [],
+   //    unshownQuestionIds: [],
+   // });
   
    const questions = useSelector((state) => state.questions); 
    const handleSelection = (selected) => {
@@ -138,8 +144,9 @@ const QuestionsPage = () => {
          <h3 className="error">Error</h3>
          
          <Grid container spacing={2}>
+            {/* <QuestionsTable filterQuestionByIDs={filterQuestionByIDs} setFilterQuestionByIDs={setFilterQuestionByIDs} filterData={filterData} questions = {questions} isSelectTable={true} handleSelect={handleSelection}></QuestionsTable> */}
             <QuestionsTable filterData={filterData} questions = {questions} isSelectTable={true} handleSelect={handleSelection}></QuestionsTable>
-            <QuestionsTable filterData={filterData} questions = {questionCheck}  isSelectTable={false} isScoreTable={true} questionData={questionData} setQuestionData={setQuestionData}></QuestionsTable>
+            <QuestionsTable questions = {questionCheck}  isSelectTable={false} isScoreTable={true} questionData={questionData} setQuestionData={setQuestionData}></QuestionsTable>
          </Grid>
 
       </Paper>
@@ -153,4 +160,4 @@ const QuestionsPage = () => {
    );
 };
 
-export default QuestionsPage;
+export default CreateTestPage;

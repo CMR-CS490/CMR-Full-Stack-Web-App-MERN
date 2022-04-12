@@ -146,11 +146,28 @@ const ScoreTable = ({ questionID, questionInfo}) => {
 
    }
 
-   // Remove rounding errors from total score. For example: 3.33 + 3.33 + 3.33 = 10.0.
+   console.log(totalScore)
    totalScore = Math.round(totalScore * 100) / 100;
    totalScore = totalScore.toFixed(2);
+   // Remove rounding errors from total score. For example: 3.33 + 3.33 + 3.33 = 10.0.
+   // if totalScore has a decimal .99, it will be rounded to 1.00.
+   let totalScoreString = totalScore;
+   if (totalScoreString.toString().includes(".99")) {
+      console.log(totalScore)
+      totalScore = Math.ceil(totalScore);
+      totalScore = totalScore.toFixed(2);
+   }
+
+
    updatedTotalScore = Math.round(updatedTotalScore * 100) / 100;
    updatedTotalScore = (updatedTotalScore.toFixed(2));
+
+   // if updatedTotalScore has a decimal .99, it will be rounded to 1.00.
+   let updatedTotalScoreString = updatedTotalScore;
+   if (updatedTotalScoreString.toString().includes(".99")) {
+      updatedTotalScore = Math.ceil(updatedTotalScore);
+      updatedTotalScore = updatedTotalScore.toFixed(2);
+   }
 
    // 3. Pass in the comment and total score
 
@@ -211,12 +228,12 @@ const ScoreTable = ({ questionID, questionInfo}) => {
 
    return (
       <div className="card-seperator">
-         <div style={{ height: "400px", width: "100%" }}>
+         <div style={{ height: "500px", width: "100%" }}>
             <DataGrid
                rows={rows}
                columns={columns}
-               pageSize={5}
-               rowsPerPageOptions={[5]}
+               pageSize={10}
+               rowsPerPageOptions={[10]}
                // checkboxSelection
                disableColumnFilter
                disableSelectionOnClick
