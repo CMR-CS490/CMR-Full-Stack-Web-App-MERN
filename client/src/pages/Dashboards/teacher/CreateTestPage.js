@@ -146,7 +146,7 @@ const CreateTestPage = () => {
          <Grid container spacing={2}>
             {/* <QuestionsTable filterQuestionByIDs={filterQuestionByIDs} setFilterQuestionByIDs={setFilterQuestionByIDs} filterData={filterData} questions = {questions} isSelectTable={true} handleSelect={handleSelection}></QuestionsTable> */}
             <QuestionsTable filterData={filterData} questions = {questions} isSelectTable={true} handleSelect={handleSelection}></QuestionsTable>
-            <QuestionsTable filterData={{topic: "", keyword: "", difficulty: "",}} questions = {questionCheck}  isSelectTable={false} isScoreTable={true} questionData={questionData} setQuestionData={setQuestionData}></QuestionsTable>
+            <QuestionsTable questions = {questionCheck}  isSelectTable={false} isScoreTable={true} questionData={questionData} setQuestionData={setQuestionData}></QuestionsTable>
          </Grid>
 
       </Paper>

@@ -11,7 +11,7 @@ const QuestionsTable = ( { filterData, questions, isSelectTable, isScoreTable,  
    const dispatch = useDispatch();
    useEffect(() => {
 
-   }, []);
+   }, [filterData]);
   
    //const questions = useSelector((state) => state.questions);
    
@@ -104,33 +104,42 @@ const QuestionsTable = ( { filterData, questions, isSelectTable, isScoreTable,  
          score: score,
       });
 
-      // Check if question._id is not null. (Needed for initial render of the component when questions are not fetched by Redux State.)
-      if(question._id !== null) {
 
-         // Get questionID element in MUI DATAGRID. MUI Datagrid add's an attribute called data-id="question._id" to each row. 
-         console.log(`[data-id="${question._id}"]`)
-         let filterElement = document.querySelector(`[data-id="${question._id}"]`);
-         
-         if (filterElement !== null) { // Check if element exists. (Prevents APP from crashing.)
-            filterElement.classList.remove("hidden"); //Reset the class to show the question.
+      // Check it see if filterData is empty.
+
+      if (filterData !== undefined) {
+         // Check if question._id is not null. (Needed for initial render of the component when questions are not fetched by Redux State.)
+         if(question._id !== null) {
+   
+            // Get questionID element in MUI DATAGRID. MUI Datagrid add's an attribute called data-id="question._id" to each row. 
+            // console.log(`[data-id="${question._id}"]`)
+            let filterElement = document.querySelector(`[data-id="${question._id}"]`);
+            
+            if (filterElement !== null) { // Check if element exists. (Prevents APP from crashing.)
+               filterElement.classList.remove("hidden"); //Reset the class to show the question.
+            }
+   
+            // If the filter is empty, show all questions. (.length === 0) Otherwise, check each filter field to see if it passes the filter. (.includes)
+            // console.log({filterData});
+            if( (filterData.topic.length === 0 || filterData.topic.includes(question.topic)) && (filterData.difficulty.length === 0 || filterData.difficulty.includes(question.difficulty)) && (filterData.keyword.length === 0 || question.question.toLowerCase().includes(filterData.keyword.toLowerCase())  ) ) {
+               // console.log("removing a filter to question:" + question.question)
+               // Show the question.
+               if (filterElement !== null) {
+                  filterElement.classList.remove("hidden");
+               }
+            } else {
+               // console.log("adding a filter to question id:" + question.question)
+               // Do not show the question.
+               if (filterElement !== null) {
+                  filterElement.classList.add("hidden");
+               }
+            }
+   
          }
 
-         // If the filter is empty, show all questions. (.length === 0) Otherwise, check each filter field to see if it passes the filter. (.includes)
-         if( (filterData.topic.length === 0 || filterData.topic.includes(question.topic)) && (filterData.difficulty.length === 0 || filterData.difficulty.includes(question.difficulty)) && (filterData.keyword.length === 0 || question.question.toLowerCase().includes(filterData.keyword.toLowerCase())  ) ) {
-            console.log("removing a filter to question id:" + question._id)
-            // Show the question.
-            if (filterElement !== null) {
-               filterElement.classList.remove("hidden");
-            }
-         } else {
-            console.log("adding a filter to question id:" + question._id)
-            // Do not show the question.
-            if (filterElement !== null) {
-               filterElement.classList.add("hidden");
-            }
-         }
 
       }
+
          
 
 
