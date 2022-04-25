@@ -52,6 +52,11 @@ const gradeQuestion = async (question_id, answer, questionScore) => {
                 response.constraintScore = 5;
                 response.updatedConstraintScore = 5;
                 response.constraintName = "Recursion";
+            } else {
+                response.constraintScore = 0;
+                response.updatedConstraintScore = 0;
+                response.constraintName = "Recursion";
+
             }
         } else if (question[0].constraintName === 'For Loop') {
             console.log('IN FOR LOOP')
@@ -59,11 +64,20 @@ const gradeQuestion = async (question_id, answer, questionScore) => {
                 response.constraintScore = 5;
                 response.updatedConstraintScore = 5;
                 response.constraintName = "For Loop";
+            } else {
+                response.constraintScore = 0;
+                response.updatedConstraintScore = 0;
+                response.constraintName = "For Loop";
+
             }
         } else if (question[0].constraintName === 'While Loop') {
             if(answer.includes('while')) {
                 response.constraintScore = 5;
                 response.updatedConstraintScore = 5;
+                response.constraintName = "While Loop";
+            } else {
+                response.constraintScore = 0;
+                response.updatedConstraintScore = 0;
                 response.constraintName = "While Loop";
             }
         } else {
