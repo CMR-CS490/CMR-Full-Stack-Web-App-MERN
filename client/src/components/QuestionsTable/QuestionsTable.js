@@ -113,22 +113,24 @@ const QuestionsTable = ( { filterData, questions, isSelectTable, isScoreTable,  
    
             // Get questionID element in MUI DATAGRID. MUI Datagrid add's an attribute called data-id="question._id" to each row. 
             // console.log(`[data-id="${question._id}"]`)
+            // console.log(" new ... ")
             let filterElement = document.querySelector(`[data-id="${question._id}"]`);
+            // console.log("element to filter: ", filterElement);
             
             if (filterElement !== null) { // Check if element exists. (Prevents APP from crashing.)
                filterElement.classList.remove("hidden"); //Reset the class to show the question.
             }
    
             // If the filter is empty, show all questions. (.length === 0) Otherwise, check each filter field to see if it passes the filter. (.includes)
-            // console.log({filterData});
+            // console.log({...filterData}); // {keyword: "", topic: "", difficulty: "", constraint: ""}
             if( (filterData.topic.length === 0 || filterData.topic.includes(question.topic)) && (filterData.difficulty.length === 0 || filterData.difficulty.includes(question.difficulty)) && (filterData.keyword.length === 0 || question.question.toLowerCase().includes(filterData.keyword.toLowerCase())  ) ) {
-               // console.log("removing a filter to question:" + question.question)
+               // console.log("removing a filter to question: " + question.question)
                // Show the question.
                if (filterElement !== null) {
                   filterElement.classList.remove("hidden");
                }
             } else {
-               // console.log("adding a filter to question id:" + question.question)
+               // console.log("adding a filter to question: " + question.question)
                // Do not show the question.
                if (filterElement !== null) {
                   filterElement.classList.add("hidden");
@@ -137,6 +139,8 @@ const QuestionsTable = ( { filterData, questions, isSelectTable, isScoreTable,  
    
          }
 
+
+         // console.log(" new ... ")
 
       }
 
@@ -162,13 +166,13 @@ const QuestionsTable = ( { filterData, questions, isSelectTable, isScoreTable,  
             disableColumnSelector
             onSelectionModelChange = {handleSelect}
             onCellEditCommit = {handleTestScoreInput}
-            rowHeight={100}
+            rowHeight={70}
             
             sx={{
                boxShadow: 2,
                border: 1,
                borderRadius: 2,
-               height: "600px", 
+               height: "650px", 
                width: "50%",
                margin: "10px",
                className: "question-table",

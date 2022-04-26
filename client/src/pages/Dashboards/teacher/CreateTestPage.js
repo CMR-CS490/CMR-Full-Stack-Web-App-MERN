@@ -55,7 +55,8 @@ const CreateTestPage = () => {
    //    unshownQuestionIds: [],
    // });
   
-   const questions = useSelector((state) => state.questions); 
+   const questions = useSelector((state) => state.questions);
+   // console.log({questions});
    const handleSelection = (selected) => {
       let temp = []
       let temp2 = []
